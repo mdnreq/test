@@ -1,0 +1,61 @@
+{
+  "name": "Municipal DAO - Democratic Governance Platform",
+  "short_name": "Municipal DAO",
+  "description": "Next-generation democratic governance platform with quadratic voting, town halls, and youth assembly",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Town Hall",
+      "short_name": "Town Hall",
+      "description": "View and participate in town hall discussions",
+      "url": "/governance/town-hall",
+      "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Vote Now",
+      "short_name": "Vote",
+      "description": "Cast your votes on active proposals",
+      "url": "/governance/consensus",
+      "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Calendar",
+      "short_name": "Calendar",
+      "description": "View upcoming governance events",
+      "url": "/governance/calendar",
+      "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    }
+  ],
+  "categories": ["government", "social", "productivity"],
+  "screenshots": [
+    {
+      "src": "/screenshots/dashboard.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Governance Dashboard"
+    },
+    {
+      "src": "/screenshots/mobile-townhall.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Town Hall on Mobile"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

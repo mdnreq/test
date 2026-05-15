@@ -1,0 +1,22 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @media (prefers-color-scheme: light) {
+      .card { fill: #0a1220; }
+      .accent { fill: #3b82f6; }
+      .line { fill: #f8fafc; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .card { fill: #f8fafc; }
+      .accent { fill: #2563eb; }
+      .line { fill: #0f172a; }
+    }
+  </style>
+  <rect class="card" width="180" height="180" rx="40" />
+  <rect class="accent" x="34" y="34" width="112" height="112" rx="28" opacity="0.18" />
+  <path class="line" d="M56 53C56 48.5817 59.5817 45 64 45H116C120.418 45 124 48.5817 124 53V127C124 131.418 120.418 135 116 135H64C59.5817 135 56 131.418 56 127V53Z" />
+  <path class="card" d="M68 59H112V121H68V59Z" />
+  <rect class="accent" x="77" y="72" width="26" height="8" rx="4" />
+  <rect class="accent" x="77" y="88" width="35" height="8" rx="4" />
+  <rect class="accent" x="77" y="104" width="22" height="8" rx="4" />
+  <path class="accent" d="M111.406 78.2071C112.187 77.4261 113.453 77.4261 114.234 78.2071L120.793 84.7658C121.574 85.5468 121.574 86.8131 120.793 87.5942L96.7145 111.672C96.3394 112.047 95.8307 112.258 95.3003 112.258H88.7416C87.637 112.258 86.7416 111.363 86.7416 110.258V103.699C86.7416 103.169 86.9523 102.66 87.3274 102.285L111.406 78.2071Z" />
+</svg>
