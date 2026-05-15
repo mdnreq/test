@@ -225,13 +225,18 @@ async function readProvinceMunicipalities(province: ProvinceName) {
   const seenNames = new Set(parsedMunicipalities.map((item) => item.name.toLowerCase()))
 
   for (const scriptName of PROVINCE_SCRIPTS[province]) {
-    const scriptPath = path.join(process.cwd(), "scripts", scriptName)
-    const scriptText = await readFile(scriptPath, "utf8")
-    for (const municipality of parseMunicipalityRows(scriptText, province)) {
-      const key = municipality.name.toLowerCase()
-      if (seenNames.has(key)) continue
-      seenNames.add(key)
-      parsedMunicipalities.push(municipality)
+    try {
+      const scriptPath = path.join(process.cwd(), "scripts", scriptName)
+      const scriptText = await readFile(scriptPath, "utf8")
+      for (const municipality of parseMunicipalityRows(scriptText, province)) {
+        const key = municipality.name.toLowerCase()
+        if (seenNames.has(key)) continue
+        seenNames.add(key)
+        parsedMunicipalities.push(municipality)
+      }
+    } catch (error) {
+      // Scripts folder may not be available in production - skip gracefully
+      console.debug(`Could not read script ${scriptName}: ${error instanceof Error ? error.message : String(error)}`)
     }
   }
 

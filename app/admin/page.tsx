@@ -193,9 +193,9 @@ export default function AdminDashboard() {
       setElections(electionsData || [])
       
       // Calculate stats
-      const verified = (usersData || []).filter(u => u.identity_verified === "verified").length
-      const pending = (usersData || []).filter(u => u.identity_verified === "pending").length
-      const active = (electionsData || []).filter(e => ["nomination_open", "voting_open"].includes(e.status)).length
+      const verified = (usersData || []).filter((u: any) => u.identity_verified === "verified").length
+      const pending = (usersData || []).filter((u: any) => u.identity_verified === "pending").length
+      const active = (electionsData || []).filter((e: any) => ["nomination_open", "voting_open"].includes(e.status)).length
       
       setStats({
         totalUsers: usersData?.length || 0,
