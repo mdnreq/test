@@ -37,9 +37,10 @@ export function MobileMenu({ user, isAdmin = false }: MobileMenuProps) {
         }`}
         style={{
           backgroundColor: "#0f172a",
-          backgroundImage: "linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)",
-          backdropFilter: "blur(10px)",
+          backgroundImage: "none",
+          backdropFilter: "none",
           borderLeft: "1px solid #475569",
+          opacity: 1,
         }}
       >
         {/* Header */}
