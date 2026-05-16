@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/button"
 
 interface MobileMenuProps {
   user: any
+  isAdmin?: boolean
+  isDev?: boolean
 }
 
-export function MobileMenu({ user }: MobileMenuProps) {
+export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleMenu = () => setIsOpen(!isOpen)
@@ -128,6 +130,19 @@ export function MobileMenu({ user }: MobileMenuProps) {
               </form>
             )}
           </div>
+
+          {/* Dev-only Admin Link */}
+          {isDev && (
+            <div className="mt-3 pt-3 border-t" style={{ borderColor: "rgba(71, 85, 105, 0.15)" }}>
+              <Link
+                href="/admin/login"
+                onClick={closeMenu}
+                className="px-3 py-2 text-xs text-slate-600 hover:text-slate-500 transition opacity-50 hover:opacity-100"
+              >
+                [Admin Access]
+              </Link>
+            </div>
+          )}
         </nav>
       </div>
     </>

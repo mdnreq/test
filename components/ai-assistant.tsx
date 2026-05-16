@@ -12,7 +12,7 @@ interface Message {
 }
 
 const suggestedQuestions = [
-  { icon: Vote, text: "How does Votes at 16 work?", category: "Education" },
+  { icon: Users, text: "How to engage Gen Z & Millennials?", category: "Education" },
   { icon: Users, text: "How do I register as a candidate?", category: "Platform" },
   { icon: Scale, text: "What are campaign finance rules?", category: "Legal" },
   { icon: MapPin, text: "Find municipalities in Ontario", category: "Navigation" },

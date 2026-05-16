@@ -6,10 +6,27 @@ import { MobileMenu } from "@/components/mobile-menu"
 
 export async function Header() {
   let user = null
+  let isAdmin = false
+  const isDev = process.env.NODE_ENV === "development"
+  
   try {
     const supabase = await createClient()
     const { data } = await supabase.auth.getUser()
     user = data?.user
+    
+    // Check if user is admin (only detect in development)
+    if (isDev && user) {
+      const { data: profile } = await supabase
+        .from("user_profiles")
+        .select("primary_role, secondary_roles")
+        .eq("id", user.id)
+        .single()
+      
+      if (profile) {
+        isAdmin = profile.primary_role === "admin" || 
+          (profile.secondary_roles && profile.secondary_roles.includes("admin"))
+      }
+    }
   } catch (error) {
     console.warn("[v0] Failed to get user in header:", error)
   }
@@ -50,6 +67,11 @@ export async function Header() {
               <Link href="/dashboard" className="text-sm hover:text-primary transition">
                 Dashboard
               </Link>
+              {isAdmin && (
+                <Link href="/admin" className="text-sm font-medium text-amber-400 hover:text-amber-300 transition">
+                  Admin
+                </Link>
+              )}
             </>
           )}
           {!user ? (
@@ -65,6 +87,11 @@ export async function Header() {
               <Link href="/auth/demo-login" className="text-xs text-blue-400 hover:text-blue-300 transition ml-2">
                 Demo
               </Link>
+              {isDev && (
+                <Link href="/admin/login" className="text-xs text-white/30 hover:text-amber-400 transition ml-2">
+                  Admin
+                </Link>
+              )}
             </>
           ) : (
             <form action="/auth/sign-out" method="post">
@@ -76,7 +103,7 @@ export async function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <MobileMenu user={user} />
+          <MobileMenu user={user} isAdmin={isAdmin} isDev={isDev} />
         </div>
       </div>
     </header>
