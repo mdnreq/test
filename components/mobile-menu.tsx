@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Menu, X, Vote } from "lucide-react"
+import { Menu, X, Vote, User, Briefcase } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface MobileMenuProps {
@@ -22,10 +22,15 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
       {/* Hamburger Button - Only visible on mobile */}
       <button
         onClick={toggleMenu}
-        className="md:hidden p-2 hover:bg-accent rounded-lg transition"
+        className="md:hidden p-2 hover:bg-accent rounded-lg transition group"
         aria-label="Toggle menu"
       >
-        <Menu className="h-6 w-6" />
+        <Menu 
+          className="h-6 w-6 text-white stroke-[1.5] group-hover:text-cyan-300 transition" 
+          style={{
+            filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.5))'
+          }}
+        />
       </button>
 
       {/* Overlay */}
@@ -58,8 +63,13 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
             borderColor: "rgba(71, 85, 105, 0.3)",
           }}
         >
-          <div className="flex items-center gap-2">
-            <Vote className="h-5 w-5 text-blue-400" />
+          <div className="flex items-center gap-3">
+            <Vote 
+              className="h-6 w-6 text-cyan-300 stroke-[1.5]" 
+              style={{
+                filter: 'drop-shadow(0 0 12px rgba(34, 211, 238, 0.8))'
+              }}
+            />
             <span className="font-semibold text-white text-sm">Navigation</span>
           </div>
           <button onClick={closeMenu} className="p-1 hover:bg-slate-700/30 rounded-lg transition" aria-label="Close menu">
@@ -72,37 +82,68 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
           <Link
             href="/auth/demo-login?role=candidate"
             onClick={closeMenu}
-            className="px-4 py-3 hover:bg-blue-500/10 rounded-xl transition text-sm text-blue-200 font-semibold border border-blue-500/20 hover:border-blue-400/40"
+            className="px-4 py-3 hover:bg-blue-500/10 rounded-xl transition text-sm text-blue-200 font-semibold border border-blue-500/20 hover:border-blue-400/40 flex items-center gap-3 group"
           >
-            👤 Candidate Demo
+            <div className="relative">
+              <User 
+                className="h-8 w-8 text-white stroke-[1.5] group-hover:text-cyan-300 transition" 
+                style={{
+                  filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.6))',
+                  textShadow: '0 0 8px rgba(34, 211, 238, 0.5)'
+                }}
+              />
+            </div>
+            <span>Candidate Demo</span>
           </Link>
+
           <Link
             href="/auth/demo-login?role=voter"
             onClick={closeMenu}
-            className="px-4 py-3 hover:bg-blue-500/10 rounded-xl transition text-sm text-blue-200 font-semibold border border-blue-500/20 hover:border-blue-400/40"
+            className="px-4 py-3 hover:bg-purple-500/10 rounded-xl transition text-sm text-purple-200 font-semibold border border-purple-500/20 hover:border-purple-400/40 flex items-center gap-3 group"
           >
-            🗳️ Voter Demo
+            <div className="relative">
+              <Vote 
+                className="h-8 w-8 text-white stroke-[1.5] group-hover:text-purple-300 transition" 
+                style={{
+                  filter: 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.6))',
+                  textShadow: '0 0 8px rgba(168, 85, 247, 0.5)'
+                }}
+              />
+            </div>
+            <span>Voter Demo</span>
           </Link>
 
           <div className="my-1 border-t" style={{ borderColor: "rgba(71, 85, 105, 0.3)" }} />
 
           <div className="px-2 py-3">
-            <p className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-2">Account</p>
+            <p className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-3">Account</p>
             <div className="flex flex-col gap-2">
 
               <Link
                 href="/account"
                 onClick={closeMenu}
-                className="px-3 py-2 hover:bg-slate-700/40 rounded-lg transition text-sm text-slate-300 border border-slate-700/30 hover:border-slate-600/50"
+                className="px-4 py-2.5 hover:bg-blue-500/10 rounded-lg transition text-sm text-slate-300 border border-slate-700/30 hover:border-blue-500/30 flex items-center gap-3 group"
               >
-                👤 Client Account
+                <Briefcase 
+                  className="h-6 w-6 text-white stroke-[1.5] group-hover:text-cyan-300 transition" 
+                  style={{
+                    filter: 'drop-shadow(0 0 6px rgba(34, 211, 238, 0.4))'
+                  }}
+                />
+                Client Account
               </Link>
               <Link
                 href="/account"
                 onClick={closeMenu}
-                className="px-3 py-2 hover:bg-slate-700/40 rounded-lg transition text-sm text-slate-300 border border-slate-700/30 hover:border-slate-600/50"
+                className="px-4 py-2.5 hover:bg-purple-500/10 rounded-lg transition text-sm text-slate-300 border border-slate-700/30 hover:border-purple-500/30 flex items-center gap-3 group"
               >
-                🗳️ Voter Account
+                <User 
+                  className="h-6 w-6 text-white stroke-[1.5] group-hover:text-purple-300 transition" 
+                  style={{
+                    filter: 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.4))'
+                  }}
+                />
+                Voter Account
               </Link>
             </div>
           </div>
