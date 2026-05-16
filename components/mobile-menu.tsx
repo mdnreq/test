@@ -38,16 +38,19 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
 
       {/* Floating Menu Panel */}
       <div
-        className={`fixed top-16 right-2 max-h-[75vh] w-72 max-w-[90vw] rounded-2xl shadow-xl z-50 transform transition-all duration-300 ease-in-out md:hidden ${
+        className={`fixed top-16 right-2 max-h-[75vh] w-72 max-w-[90vw] rounded-2xl shadow-2xl z-50 transform transition-all duration-300 ease-in-out md:hidden backdrop-blur-md ${
           isOpen ? "scale-100 opacity-100 origin-top-right" : "scale-95 opacity-0 pointer-events-none origin-top-right"
         }`}
         style={{
-          backgroundColor: "#1a1f2e",
-          border: "1px solid rgba(71, 85, 105, 0.4)",
+          backgroundColor: "rgba(26, 31, 46, 0.7)",
+          border: "1.5px solid rgba(34, 211, 238, 0.4)",
+          borderLeft: "4px solid rgba(34, 211, 238, 0.8)",
+          boxShadow: "0 8px 32px rgba(34, 211, 238, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.1)",
           opacity: isOpen ? 1 : 0,
           overflowY: "auto",
           overflowX: "hidden",
           scrollbarWidth: "none",
+          backdropFilter: "blur(16px)",
         }}
       >
         <style>{`
@@ -59,8 +62,10 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
         <div 
           className="flex items-center justify-between p-4 border-b rounded-t-2xl sticky top-0"
           style={{
-            backgroundColor: "#1a1f2e",
-            borderColor: "rgba(71, 85, 105, 0.3)",
+            backgroundColor: "rgba(26, 31, 46, 0.5)",
+            borderColor: "rgba(34, 211, 238, 0.3)",
+            backdropFilter: "blur(10px)",
+            borderBottom: "1px solid rgba(34, 211, 238, 0.2)",
           }}
         >
           <div className="flex items-center gap-3">
@@ -82,7 +87,11 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
           <Link
             href="/auth/demo-login?role=candidate"
             onClick={closeMenu}
-            className="px-4 py-3 hover:bg-blue-500/10 rounded-xl transition text-sm text-blue-200 font-semibold border border-blue-500/20 hover:border-blue-400/40 flex items-center gap-3 group"
+            className="px-4 py-3 hover:bg-blue-500/10 rounded-xl transition text-sm text-blue-200 font-semibold border-2 border-cyan-400/30 hover:border-cyan-400/60 flex items-center gap-3 group backdrop-blur-sm"
+            style={{
+              backgroundColor: "rgba(34, 211, 238, 0.05)",
+              boxShadow: "inset 0 1px 2px rgba(34, 211, 238, 0.1)"
+            }}
           >
             <div className="relative">
               <User 
@@ -99,7 +108,11 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
           <Link
             href="/auth/demo-login?role=voter"
             onClick={closeMenu}
-            className="px-4 py-3 hover:bg-purple-500/10 rounded-xl transition text-sm text-purple-200 font-semibold border border-purple-500/20 hover:border-purple-400/40 flex items-center gap-3 group"
+            className="px-4 py-3 hover:bg-purple-500/10 rounded-xl transition text-sm text-purple-200 font-semibold border-2 border-purple-400/30 hover:border-purple-400/60 flex items-center gap-3 group backdrop-blur-sm"
+            style={{
+              backgroundColor: "rgba(168, 85, 247, 0.05)",
+              boxShadow: "inset 0 1px 2px rgba(168, 85, 247, 0.1)"
+            }}
           >
             <div className="relative">
               <Vote 
@@ -122,7 +135,11 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
               <Link
                 href="/account"
                 onClick={closeMenu}
-                className="px-4 py-2.5 hover:bg-blue-500/10 rounded-lg transition text-sm text-slate-300 border border-slate-700/30 hover:border-blue-500/30 flex items-center gap-3 group"
+                className="px-4 py-2.5 hover:bg-cyan-500/10 rounded-lg transition text-sm text-slate-300 border border-cyan-400/20 hover:border-cyan-400/50 flex items-center gap-3 group backdrop-blur-sm"
+                style={{
+                  backgroundColor: "rgba(34, 211, 238, 0.03)",
+                  boxShadow: "inset 0 1px 1px rgba(34, 211, 238, 0.08)"
+                }}
               >
                 <Briefcase 
                   className="h-6 w-6 text-white stroke-[1.5] group-hover:text-cyan-300 transition" 
@@ -135,7 +152,11 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
               <Link
                 href="/account"
                 onClick={closeMenu}
-                className="px-4 py-2.5 hover:bg-purple-500/10 rounded-lg transition text-sm text-slate-300 border border-slate-700/30 hover:border-purple-500/30 flex items-center gap-3 group"
+                className="px-4 py-2.5 hover:bg-purple-500/10 rounded-lg transition text-sm text-slate-300 border border-purple-400/20 hover:border-purple-400/50 flex items-center gap-3 group backdrop-blur-sm"
+                style={{
+                  backgroundColor: "rgba(168, 85, 247, 0.03)",
+                  boxShadow: "inset 0 1px 1px rgba(168, 85, 247, 0.08)"
+                }}
               >
                 <User 
                   className="h-6 w-6 text-white stroke-[1.5] group-hover:text-purple-300 transition" 
