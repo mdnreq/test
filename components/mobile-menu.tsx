@@ -32,28 +32,37 @@ export function MobileMenu({ user, isAdmin = false }: MobileMenuProps) {
 
       {/* Floating Menu Panel */}
       <div
-        className={`fixed top-4 right-3 max-h-[85vh] w-72 max-w-[85vw] rounded-3xl shadow-2xl z-50 transform transition-all duration-300 ease-in-out md:hidden overflow-y-auto ${
+        className={`fixed top-4 right-3 max-h-[80vh] w-72 max-w-[85vw] rounded-3xl shadow-2xl z-50 transform transition-all duration-300 ease-in-out md:hidden ${
           isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0 pointer-events-none"
         }`}
         style={{
-          backgroundColor: "#1a2332",
-          backgroundImage: "linear-gradient(135deg, #1a2332 0%, #243447 100%)",
-          backdropFilter: "blur(8px)",
-          border: "1px solid rgba(148, 163, 184, 0.2)",
+          backgroundColor: "#0f1419",
+          backgroundImage: "linear-gradient(135deg, rgba(15, 20, 25, 0.95) 0%, rgba(20, 35, 50, 0.95) 100%)",
+          backdropFilter: "blur(16px)",
+          border: "1px solid rgba(59, 130, 246, 0.3)",
           opacity: isOpen ? 1 : 0,
+          overflowY: "auto",
+          overflowX: "hidden",
+          scrollbarWidth: "none",
         }}
       >
+        <style>{`
+          [style*="overflow-y: auto"]::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
         {/* Header */}
         <div 
-          className="flex items-center justify-between p-4 border-b rounded-t-3xl"
+          className="flex items-center justify-between p-4 border-b rounded-t-3xl sticky top-0"
           style={{
-            backgroundColor: "rgba(30, 41, 59, 0.6)",
-            borderColor: "rgba(148, 163, 184, 0.2)",
+            backgroundColor: "rgba(15, 20, 25, 0.8)",
+            borderColor: "rgba(59, 130, 246, 0.2)",
+            backdropFilter: "blur(16px)",
           }}
         >
           <div className="flex items-center gap-2">
             <Vote className="h-5 w-5 text-blue-400" />
-            <span className="font-bold text-white text-sm">Menu</span>
+            <span className="font-bold text-white text-sm">Navigation</span>
           </div>
           <button onClick={closeMenu} className="p-1 hover:bg-blue-600/30 rounded-lg transition" aria-label="Close menu">
             <X className="h-5 w-5 text-blue-400" />
@@ -61,115 +70,58 @@ export function MobileMenu({ user, isAdmin = false }: MobileMenuProps) {
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex flex-col p-3 gap-2" style={{ backgroundColor: "transparent" }}>
+        <nav className="flex flex-col p-3 gap-2">
           <Link
-            href="/simulation"
+            href="/auth/demo-login?role=candidate"
             onClick={closeMenu}
-            className="px-4 py-3 hover:bg-blue-500/20 rounded-xl transition text-sm text-slate-100 font-medium border border-transparent hover:border-blue-400/50"
+            className="px-4 py-3 hover:bg-blue-600/20 rounded-xl transition text-sm text-blue-300 font-semibold border border-blue-500/30 hover:border-blue-400/60"
           >
-            Simulation
+            👤 Candidate Demo
           </Link>
           <Link
-            href="/municipalities"
+            href="/auth/demo-login?role=voter"
             onClick={closeMenu}
-            className="px-4 py-3 hover:bg-blue-500/20 rounded-xl transition text-sm text-slate-100 font-medium border border-transparent hover:border-blue-400/50"
+            className="px-4 py-3 hover:bg-blue-600/20 rounded-xl transition text-sm text-blue-300 font-semibold border border-blue-500/30 hover:border-blue-400/60"
           >
-            Municipalities
-          </Link>
-          <Link
-            href="/services"
-            onClick={closeMenu}
-            className="px-4 py-3 hover:bg-blue-500/20 rounded-xl transition text-sm text-slate-100 font-medium border border-transparent hover:border-blue-400/50"
-          >
-            Services
-          </Link>
-          <Link
-            href="/candidates"
-            onClick={closeMenu}
-            className="px-4 py-3 hover:bg-blue-500/20 rounded-xl transition text-sm text-slate-100 font-medium border border-transparent hover:border-blue-400/50"
-          >
-            Candidates
-          </Link>
-          <Link 
-            href="/legal" 
-            onClick={closeMenu} 
-            className="px-4 py-3 hover:bg-blue-500/20 rounded-xl transition text-sm text-slate-100 font-medium border border-transparent hover:border-blue-400/50"
-          >
-            Legal
+            🗳️ Voter Demo
           </Link>
 
-          {user && (
-            <>
-              <Link
-                href="/candidate-portal"
-                onClick={closeMenu}
-                className="px-3 py-2 hover:bg-slate-700 rounded-lg transition text-xs font-medium text-blue-300"
-              >
-                My Services Portal
-              </Link>
-              <Link
-                href="/governance"
-                onClick={closeMenu}
-                className="px-3 py-2 hover:bg-slate-700 rounded-lg transition text-xs text-white"
-              >
-                Governance
-              </Link>
-              <Link
-                href="/dashboard"
-                onClick={closeMenu}
-                className="px-3 py-2 hover:bg-slate-700 rounded-lg transition text-xs text-white"
-              >
-                Dashboard
-              </Link>
-              {isAdmin && (
-                <Link
-                  href="/admin"
-                  onClick={closeMenu}
-                  className="px-3 py-2 hover:bg-slate-700 rounded-lg transition text-xs font-medium text-amber-300"
-                >
-                  Admin Panel
-                </Link>
-              )}
-            </>
-          )}
+          <div className="my-2 border-t" style={{ borderColor: "rgba(59, 130, 246, 0.2)" }} />
 
-          <div className="mt-2 pt-2 border-t" style={{ borderColor: "rgba(148, 163, 184, 0.2)" }}>
-            <Link
-              href="/demographics"
-              onClick={closeMenu}
-              className="px-4 py-3 hover:bg-blue-500/20 rounded-xl transition text-sm block text-slate-100 border border-transparent hover:border-blue-400/50"
-            >
-              Demographics
-            </Link>
+          <div className="px-3 py-2">
+            <p className="text-xs text-slate-400 uppercase tracking-wider mb-2">Account</p>
+            <div className="flex flex-col gap-1">
+
+              <Link
+                href="/account"
+                onClick={closeMenu}
+                className="px-3 py-2 hover:bg-blue-500/20 rounded-lg transition text-xs text-blue-300"
+              >
+                👤 Client Account
+              </Link>
+              <Link
+                href="/account"
+                onClick={closeMenu}
+                className="px-3 py-2 hover:bg-blue-500/20 rounded-lg transition text-xs text-blue-300"
+              >
+                🗳️ Voter Account
+              </Link>
+            </div>
           </div>
 
           {/* Auth Buttons */}
-          <div className="mt-3 pt-3 border-t flex flex-col gap-2" style={{ borderColor: "rgba(148, 163, 184, 0.2)" }}>
+          <div className="mt-3 pt-3 border-t flex flex-col gap-2" style={{ borderColor: "rgba(59, 130, 246, 0.2)" }}>
             {!user ? (
               <>
                 <Link href="/auth/login" onClick={closeMenu}>
-                  <Button variant="ghost" className="w-full text-sm h-9 hover:bg-blue-500/20" size="sm">
+                  <Button className="w-full text-sm h-9 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600" size="sm">
                     Login
                   </Button>
                 </Link>
                 <Link href="/auth/sign-up" onClick={closeMenu}>
-                  <Button className="w-full text-sm h-9 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600" size="sm">
-                    Get Started
+                  <Button variant="ghost" className="w-full text-sm h-9 hover:bg-blue-500/20 border border-blue-400/50" size="sm">
+                    Sign Up
                   </Button>
-                </Link>
-                <Link 
-                  href="/auth/demo-login" 
-                  onClick={closeMenu}
-                  className="text-sm text-center text-blue-400 hover:text-blue-300 transition"
-                >
-                  Try Demo
-                </Link>
-                <Link 
-                  href="/admin/login" 
-                  onClick={closeMenu}
-                  className="text-sm text-center text-slate-400 hover:text-amber-400 transition"
-                >
-                  Admin
                 </Link>
               </>
             ) : (
@@ -179,6 +131,17 @@ export function MobileMenu({ user, isAdmin = false }: MobileMenuProps) {
                 </Button>
               </form>
             )}
+          </div>
+
+          {/* Hidden Admin Link */}
+          <div className="mt-4 pt-4 border-t" style={{ borderColor: "rgba(59, 130, 246, 0.1)" }}>
+            <Link
+              href="/admin/login"
+              onClick={closeMenu}
+              className="px-3 py-2 text-xs text-slate-600 hover:text-slate-400 transition opacity-50 hover:opacity-100"
+            >
+              [Admin Access]
+            </Link>
           </div>
         </nav>
       </div>
