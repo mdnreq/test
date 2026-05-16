@@ -7,10 +7,9 @@ import { Button } from "@/components/ui/button"
 
 interface MobileMenuProps {
   user: any
-  isAdmin?: boolean
 }
 
-export function MobileMenu({ user, isAdmin = false }: MobileMenuProps) {
+export function MobileMenu({ user }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleMenu = () => setIsOpen(!isOpen)
