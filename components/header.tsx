@@ -85,9 +85,6 @@ export async function Header() {
               <Link href="/auth/demo-login" className="text-xs text-blue-400 hover:text-blue-300 transition ml-2">
                 Demo
               </Link>
-              <Link href="/admin/login" className="text-xs text-white/30 hover:text-amber-400 transition ml-2">
-                Admin
-              </Link>
             </>
           ) : (
             <form action="/auth/sign-out" method="post">

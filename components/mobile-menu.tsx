@@ -129,17 +129,6 @@ export function MobileMenu({ user, isAdmin = false }: MobileMenuProps) {
               </form>
             )}
           </div>
-
-          {/* Hidden Admin Link */}
-          <div className="mt-3 pt-3 border-t" style={{ borderColor: "rgba(71, 85, 105, 0.15)" }}>
-            <Link
-              href="/admin/login"
-              onClick={closeMenu}
-              className="px-3 py-2 text-xs text-slate-600 hover:text-slate-500 transition opacity-50 hover:opacity-100"
-            >
-              [Admin Access]
-            </Link>
-          </div>
         </nav>
       </div>
     </>
