@@ -5,49 +5,6 @@ import { AnimatedServiceBackground } from "@/components/animated-service-backgro
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#06080c] text-white">
-      {/* Header */}
-      <header className="border-b border-white/10 bg-[#0b0f16]">
-        <div className="container max-w-7xl mx-auto px-4 py-5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div>
-              <div className="text-xs font-black tracking-[0.14em] uppercase mb-1">| THE NEXT MAJORITY</div>
-              <div className="text-xs text-white/70">Independent civic initiative • Municipal turnout strategy (GOTV)</div>
-            </div>
-          </div>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-white/85">
-            <Link href="/simulation" className="hover:text-white transition">
-              Simulation
-            </Link>
-            <Link href="/municipalities" className="hover:text-white transition">
-              Municipalities
-            </Link>
-            <Link href="/services" className="hover:text-white transition">
-              Campaign Services
-            </Link>
-            <Link href="/candidates" className="hover:text-white transition">
-              Candidates
-            </Link>
-            <Link href="/legal" className="hover:text-white transition">
-              Legal
-            </Link>
-          </nav>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/demo"
-              className="px-5 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl transition uppercase text-sm tracking-wider"
-            >
-              Demo Portal
-            </Link>
-            <Link
-              href="/auth/sign-up"
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition uppercase text-sm tracking-wider"
-            >
-              Join the Movement
-            </Link>
-          </div>
-        </div>
-      </header>
-
       {/* Gradient Line */}
       <div className="h-1.5 bg-gradient-to-r from-blue-600 via-cyan-500 via-purple-600 to-pink-500" />
 

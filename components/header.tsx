@@ -32,80 +32,101 @@ export async function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition">
-          <Vote className="h-8 w-8 text-primary" />
-          <span className="text-xl font-bold">The Next Majority</span>
-        </Link>
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-gradient-to-b from-[#0f172a] to-[#0a0f1a] backdrop-blur">
+      {/* Top Section: Logo + Tagline + CTA Buttons */}
+      <div className="border-b border-white/5">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          {/* Logo + Tagline */}
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition">
+            <Vote className="h-7 w-7 text-blue-500 flex-shrink-0" />
+            <div>
+              <div className="text-sm font-black tracking-wider uppercase">The Next Majority</div>
+              <div className="text-xs text-white/60">Independent civic initiative • Municipal turnout strategy</div>
+            </div>
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav id="main-navigation" aria-label="Main navigation" className="hidden md:flex items-center gap-6">
-          <Link href="/simulation" className="text-sm hover:text-primary transition">
-            Simulation
-          </Link>
-          <Link href="/municipalities" className="text-sm hover:text-primary transition">
-            Municipalities
-          </Link>
-          <Link href="/services" className="text-sm hover:text-primary transition">
-            Campaign Services
-          </Link>
-          <Link href="/candidates" className="text-sm hover:text-primary transition">
-            Candidates
-          </Link>
-          <Link href="/legal" className="text-sm hover:text-primary transition">
-            Legal
-          </Link>
+          {/* Main CTA Buttons - Desktop Only */}
+          <div className="hidden md:flex items-center gap-3">
+            {!user ? (
+              <>
+                <Link
+                  href="/demo"
+                  className="px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg transition text-sm tracking-wider"
+                >
+                  Demo Portal
+                </Link>
+                <Link
+                  href="/auth/sign-up"
+                  className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition text-sm tracking-wider"
+                >
+                  Join the Movement
+                </Link>
+              </>
+            ) : (
+              <form action="/auth/sign-out" method="post">
+                <Button variant="ghost" size="sm" type="submit" className="text-white hover:text-white/80">
+                  Sign Out
+                </Button>
+              </form>
+            )}
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <MobileMenu user={user} isAdmin={isAdmin} isDev={isDev} />
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Row */}
+      <nav id="main-navigation" aria-label="Main navigation" className="hidden md:block bg-white/2">
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-8 text-sm font-medium">
+            <Link href="/simulation" className="text-white/80 hover:text-white transition">
+              Simulation
+            </Link>
+            <Link href="/municipalities" className="text-white/80 hover:text-white transition">
+              Municipalities
+            </Link>
+            <Link href="/services" className="text-white/80 hover:text-white transition">
+              Campaign Services
+            </Link>
+            <Link href="/candidates" className="text-white/80 hover:text-white transition">
+              Candidates
+            </Link>
+            <Link href="/legal" className="text-white/80 hover:text-white transition">
+              Legal
+            </Link>
+          </div>
+
+          {/* User Portal Links */}
           {user && (
-            <>
-              <Link href="/candidate-portal" className="text-sm font-medium text-blue-400 hover:text-blue-300 transition">
+            <div className="flex items-center gap-6 text-sm">
+              <Link href="/candidate-portal" className="text-blue-400 hover:text-blue-300 transition font-medium">
                 My Portal
               </Link>
-              <Link href="/governance" className="text-sm hover:text-primary transition">
+              <Link href="/governance" className="text-white/80 hover:text-white transition">
                 Governance
               </Link>
-              <Link href="/dashboard" className="text-sm hover:text-primary transition">
+              <Link href="/dashboard" className="text-white/80 hover:text-white transition">
                 Dashboard
               </Link>
               {isAdmin && (
-                <Link href="/admin" className="text-sm font-medium text-amber-400 hover:text-amber-300 transition">
+                <Link href="/admin" className="text-amber-400 hover:text-amber-300 transition font-medium">
                   Admin
                 </Link>
               )}
-            </>
+            </div>
           )}
-          {!user ? (
-            <>
-              <Link href="/auth/login">
-                <Button variant="ghost" size="sm">
-                  Login
-                </Button>
-              </Link>
-              <Link href="/auth/sign-up">
-                <Button size="sm">Get Started</Button>
-              </Link>
-              <Link href="/auth/demo-login" className="text-xs text-blue-400 hover:text-blue-300 transition ml-2">
-                Demo
-              </Link>
-              {isDev && (
-                <Link href="/admin/login" className="text-xs text-white/30 hover:text-amber-400 transition ml-2">
-                  Admin
-                </Link>
-              )}
-            </>
-          ) : (
-            <form action="/auth/sign-out" method="post">
-              <Button variant="ghost" size="sm" type="submit">
-                Sign Out
-              </Button>
-            </form>
-          )}
-        </nav>
 
-        <div className="flex items-center gap-2">
-          <MobileMenu user={user} isAdmin={isAdmin} isDev={isDev} />
+          {/* Dev-Only Links */}
+          {!user && isDev && (
+            <Link href="/admin/login" className="text-xs text-white/30 hover:text-amber-400 transition">
+              Admin
+            </Link>
+          )}
         </div>
-      </div>
+      </nav>
     </header>
   )
 }
