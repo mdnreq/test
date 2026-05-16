@@ -32,8 +32,8 @@ export function MobileMenu({ user, isAdmin = false }: MobileMenuProps) {
 
       {/* Floating Menu Panel */}
       <div
-        className={`fixed top-1/2 right-3 max-h-[85vh] w-72 max-w-[85vw] rounded-3xl shadow-2xl z-50 transform transition-all duration-300 ease-in-out md:hidden overflow-y-auto ${
-          isOpen ? "scale-100 opacity-100 -translate-y-1/2" : "scale-95 opacity-0 -translate-y-1/2 pointer-events-none"
+        className={`fixed top-4 right-3 max-h-[85vh] w-72 max-w-[85vw] rounded-3xl shadow-2xl z-50 transform transition-all duration-300 ease-in-out md:hidden overflow-y-auto ${
+          isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0 pointer-events-none"
         }`}
         style={{
           backgroundColor: "#1a2332",
