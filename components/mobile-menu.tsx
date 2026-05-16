@@ -32,69 +32,70 @@ export function MobileMenu({ user, isAdmin = false }: MobileMenuProps) {
 
       {/* Floating Menu Panel */}
       <div
-        className={`fixed top-1/2 right-4 max-h-[90vh] w-80 max-w-[90vw] rounded-2xl shadow-2xl z-50 transform transition-all duration-300 ease-in-out md:hidden overflow-y-auto ${
+        className={`fixed top-1/2 right-3 max-h-[85vh] w-72 max-w-[85vw] rounded-3xl shadow-2xl z-50 transform transition-all duration-300 ease-in-out md:hidden overflow-y-auto ${
           isOpen ? "scale-100 opacity-100 -translate-y-1/2" : "scale-95 opacity-0 -translate-y-1/2 pointer-events-none"
         }`}
         style={{
-          backgroundColor: "#0f172a",
-          backgroundImage: "none",
-          backdropFilter: "none",
+          backgroundColor: "#1a2332",
+          backgroundImage: "linear-gradient(135deg, #1a2332 0%, #243447 100%)",
+          backdropFilter: "blur(8px)",
+          border: "1px solid rgba(148, 163, 184, 0.2)",
           opacity: isOpen ? 1 : 0,
         }}
       >
         {/* Header */}
         <div 
-          className="flex items-center justify-between p-4 border-b border-slate-700 rounded-t-2xl"
+          className="flex items-center justify-between p-4 border-b rounded-t-3xl"
           style={{
-            backgroundColor: "#1e293b",
-            backgroundImage: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
+            backgroundColor: "rgba(30, 41, 59, 0.6)",
+            borderColor: "rgba(148, 163, 184, 0.2)",
           }}
         >
           <div className="flex items-center gap-2">
-            <Vote className="h-5 w-5 text-primary" />
-            <span className="font-bold text-white text-sm">The Next Majority</span>
+            <Vote className="h-5 w-5 text-blue-400" />
+            <span className="font-bold text-white text-sm">Menu</span>
           </div>
-          <button onClick={closeMenu} className="p-1 hover:bg-slate-600 rounded-lg transition" aria-label="Close menu">
-            <X className="h-5 w-5 text-white" />
+          <button onClick={closeMenu} className="p-1 hover:bg-blue-600/30 rounded-lg transition" aria-label="Close menu">
+            <X className="h-5 w-5 text-blue-400" />
           </button>
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex flex-col p-3 gap-1" style={{ backgroundColor: "transparent" }}>
+        <nav className="flex flex-col p-3 gap-2" style={{ backgroundColor: "transparent" }}>
           <Link
             href="/simulation"
             onClick={closeMenu}
-            className="px-3 py-2 hover:bg-slate-700 rounded-lg transition text-xs text-white font-medium"
+            className="px-4 py-3 hover:bg-blue-500/20 rounded-xl transition text-sm text-slate-100 font-medium border border-transparent hover:border-blue-400/50"
           >
             Simulation
           </Link>
           <Link
             href="/municipalities"
             onClick={closeMenu}
-            className="px-3 py-2 hover:bg-slate-700 rounded-lg transition text-xs text-white font-medium"
+            className="px-4 py-3 hover:bg-blue-500/20 rounded-xl transition text-sm text-slate-100 font-medium border border-transparent hover:border-blue-400/50"
           >
             Municipalities
           </Link>
           <Link
             href="/services"
             onClick={closeMenu}
-            className="px-3 py-2 hover:bg-slate-700 rounded-lg transition text-xs text-white font-medium"
+            className="px-4 py-3 hover:bg-blue-500/20 rounded-xl transition text-sm text-slate-100 font-medium border border-transparent hover:border-blue-400/50"
           >
-            Campaign Services
+            Services
           </Link>
           <Link
             href="/candidates"
             onClick={closeMenu}
-            className="px-3 py-2 hover:bg-slate-700 rounded-lg transition text-xs text-white font-medium"
+            className="px-4 py-3 hover:bg-blue-500/20 rounded-xl transition text-sm text-slate-100 font-medium border border-transparent hover:border-blue-400/50"
           >
             Candidates
           </Link>
           <Link 
             href="/legal" 
             onClick={closeMenu} 
-            className="px-3 py-2 hover:bg-slate-700 rounded-lg transition text-xs text-white font-medium"
+            className="px-4 py-3 hover:bg-blue-500/20 rounded-xl transition text-sm text-slate-100 font-medium border border-transparent hover:border-blue-400/50"
           >
-            Legal Framework
+            Legal
           </Link>
 
           {user && (
@@ -132,48 +133,48 @@ export function MobileMenu({ user, isAdmin = false }: MobileMenuProps) {
             </>
           )}
 
-          <div className="mt-2 pt-2 border-t border-slate-700 text-white">
+          <div className="mt-2 pt-2 border-t" style={{ borderColor: "rgba(148, 163, 184, 0.2)" }}>
             <Link
               href="/demographics"
               onClick={closeMenu}
-              className="px-3 py-2 hover:bg-slate-700 rounded-lg transition text-xs block text-white"
+              className="px-4 py-3 hover:bg-blue-500/20 rounded-xl transition text-sm block text-slate-100 border border-transparent hover:border-blue-400/50"
             >
               Demographics
             </Link>
           </div>
 
           {/* Auth Buttons */}
-          <div className="mt-2 pt-2 border-t border-slate-700 flex flex-col gap-1">
+          <div className="mt-3 pt-3 border-t flex flex-col gap-2" style={{ borderColor: "rgba(148, 163, 184, 0.2)" }}>
             {!user ? (
               <>
                 <Link href="/auth/login" onClick={closeMenu}>
-                  <Button variant="ghost" className="w-full text-xs h-8" size="sm">
+                  <Button variant="ghost" className="w-full text-sm h-9 hover:bg-blue-500/20" size="sm">
                     Login
                   </Button>
                 </Link>
                 <Link href="/auth/sign-up" onClick={closeMenu}>
-                  <Button className="w-full text-xs h-8" size="sm">
+                  <Button className="w-full text-sm h-9 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600" size="sm">
                     Get Started
                   </Button>
                 </Link>
                 <Link 
                   href="/auth/demo-login" 
                   onClick={closeMenu}
-                  className="text-xs text-center text-blue-400 hover:text-blue-300 transition mt-1"
+                  className="text-sm text-center text-blue-400 hover:text-blue-300 transition"
                 >
                   Try Demo
                 </Link>
                 <Link 
                   href="/admin/login" 
                   onClick={closeMenu}
-                  className="text-xs text-center text-white/30 hover:text-amber-400 transition"
+                  className="text-sm text-center text-slate-400 hover:text-amber-400 transition"
                 >
-                  Admin Login
+                  Admin
                 </Link>
               </>
             ) : (
               <form action="/auth/sign-out" method="post">
-                <Button variant="ghost" className="w-full text-xs h-8" size="sm" type="submit">
+                <Button variant="ghost" className="w-full text-sm h-9 hover:bg-red-500/20" size="sm" type="submit">
                   Sign Out
                 </Button>
               </form>
