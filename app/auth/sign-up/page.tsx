@@ -235,6 +235,19 @@ function SignUpPageContent() {
             <CardDescription>Create your account to participate in municipal democracy</CardDescription>
           </CardHeader>
           <CardContent>
+            {/* Completed Province Badge */}
+            <div className="mb-6 text-center py-6 border-t-2 border-b-2 border-red-500/50">
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <div className="flex-1 border-t-2 border-red-500/60" />
+                <span className="text-4xl font-black text-red-500" style={{ letterSpacing: '0.1em' }}>
+                  77
+                </span>
+                <div className="flex-1 border-t-2 border-red-500/60" />
+              </div>
+              <p className="text-sm font-semibold text-slate-400 uppercase tracking-wider">New Brunswick</p>
+              <p className="text-xs text-slate-500 mt-1">Election cycle complete • No new registrations</p>
+            </div>
+
             <form onSubmit={handleSignUp}>
               <div className="flex flex-col gap-6">
                 <div className="space-y-3">
@@ -359,12 +372,9 @@ function SignUpPageContent() {
                               <SelectItem value={prov} disabled={completedProvinces.includes(prov)}>
                                 <div className="flex items-center gap-2">
                                   {completedProvinces.includes(prov) && (
-                                    <span className="text-red-500 font-bold">●</span>
+                                    <span className="text-red-500 font-bold text-lg">●</span>
                                   )}
                                   {prov}
-                                  {completedProvinces.includes(prov) && (
-                                    <span className="text-xs text-red-500 ml-1">(Completed)</span>
-                                  )}
                                 </div>
                               </SelectItem>
                             </div>
@@ -465,12 +475,9 @@ function SignUpPageContent() {
                               <SelectItem value={prov} disabled={completedProvinces.includes(prov)}>
                                 <div className="flex items-center gap-2">
                                   {completedProvinces.includes(prov) && (
-                                    <span className="text-red-500 font-bold">●</span>
+                                    <span className="text-red-500 font-bold text-lg">●</span>
                                   )}
                                   {prov}
-                                  {completedProvinces.includes(prov) && (
-                                    <span className="text-xs text-red-500 ml-1">(Completed)</span>
-                                  )}
                                 </div>
                               </SelectItem>
                             </div>
