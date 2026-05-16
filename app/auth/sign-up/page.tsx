@@ -48,6 +48,8 @@ function SignUpPageContent() {
     "Northwest Territories",
   ]
 
+  const completedProvinces = ["New Brunswick"]
+
   const validateGovEmail = (email: string): boolean => {
     const govDomains = [
       // Federal
@@ -218,9 +220,16 @@ function SignUpPageContent() {
   }
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center p-6">
-      <div className="w-full max-w-lg">
-        <Card>
+    <div className="min-h-screen bg-[#0a0a0b] flex items-center justify-center p-4">
+      {/* Background gradient effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative w-full max-w-lg">
+        <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="text-2xl">Join The Next Majority</CardTitle>
             <CardDescription>Create your account to participate in municipal democracy</CardDescription>
@@ -343,8 +352,16 @@ function SignUpPageContent() {
                         </SelectTrigger>
                         <SelectContent>
                           {provinces.map((prov) => (
-                            <SelectItem key={prov} value={prov}>
-                              {prov}
+                            <SelectItem key={prov} value={prov} disabled={completedProvinces.includes(prov)}>
+                              <div className="flex items-center gap-2">
+                                {completedProvinces.includes(prov) && (
+                                  <span className="text-red-500 font-bold">●</span>
+                                )}
+                                {prov}
+                                {completedProvinces.includes(prov) && (
+                                  <span className="text-xs text-red-500 ml-1">(Completed)</span>
+                                )}
+                              </div>
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -436,8 +453,16 @@ function SignUpPageContent() {
                         </SelectTrigger>
                         <SelectContent>
                           {provinces.map((prov) => (
-                            <SelectItem key={prov} value={prov}>
-                              {prov}
+                            <SelectItem key={prov} value={prov} disabled={completedProvinces.includes(prov)}>
+                              <div className="flex items-center gap-2">
+                                {completedProvinces.includes(prov) && (
+                                  <span className="text-red-500 font-bold">●</span>
+                                )}
+                                {prov}
+                                {completedProvinces.includes(prov) && (
+                                  <span className="text-xs text-red-500 ml-1">(Completed)</span>
+                                )}
+                              </div>
                             </SelectItem>
                           ))}
                         </SelectContent>
