@@ -337,6 +337,130 @@ a:not([class*="btn"]):not([role="button"]):hover {
   filter: contrast(1.1);
 }
 
+/* Mobile UI Improvements */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Better mobile menu styling */
+  .mobile-menu {
+    background: linear-gradient(135deg, rgb(15, 23, 42) 0%, rgb(30, 41, 59) 100%);
+  }
+
+  /* Mobile drawer improvements */
+  [role="dialog"] {
+    background: linear-gradient(135deg, rgb(15, 23, 42) 0%, rgb(30, 41, 59) 100%) !important;
+  }
+
+  /* Input fields - better touch targets */
+  input,
+  textarea,
+  select {
+    min-height: 44px;
+    padding: 12px 16px !important;
+  }
+
+  /* Button - better touch targets */
+  button,
+  [role="button"] {
+    min-height: 44px;
+    padding: 12px 16px !important;
+  }
+
+  /* Card spacing */
+  .card {
+    margin-bottom: 16px;
+  }
+
+  /* Text readability on mobile */
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  /* Dropdown and modal improvements */
+  [class*="dropdown"],
+  [class*="modal"],
+  [class*="dialog"] {
+    background: linear-gradient(135deg, rgb(15, 23, 42) 0%, rgb(30, 41, 59) 100%) !important;
+    color: white !important;
+  }
+
+  /* Better spacing for touch */
+  .space-y-2 {
+    margin-bottom: 8px;
+  }
+
+  /* Improve form inputs on mobile */
+  .form-control {
+    background-color: rgb(30, 41, 59) !important;
+    border: 1px solid rgb(71, 85, 105) !important;
+    color: white !important;
+  }
+
+  .form-control:focus {
+    background-color: rgb(30, 41, 59) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  }
+
+  /* Navigation padding */
+  nav {
+    padding: 16px;
+  }
+
+  /* Menu links styling */
+  nav a {
+    display: block;
+    padding: 12px 16px;
+    margin: 4px 0;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  nav a:active {
+    background-color: rgba(59, 130, 246, 0.2);
+  }
+
+  /* Improve overlay visibility */
+  [class*="overlay"] {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+  }
+
+  /* Better spacing for small screens */
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Improve text contrast in dark theme */
+  * {
+    color-scheme: dark;
+  }
+}
+
+/* Dark mode defaults */
+body {
+  background: #0f172a;
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
 /* Reduced Motion - User Toggle */
 .reduce-motion *,
 .reduce-motion *::before,

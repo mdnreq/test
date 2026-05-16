@@ -28,16 +28,16 @@ export function MobileMenu({ user, isAdmin = false }: MobileMenuProps) {
       </button>
 
       {/* Overlay */}
-      {isOpen && <div className="fixed inset-0 bg-black/50 z-40 md:hidden" onClick={closeMenu} />}
+      {isOpen && <div className="fixed inset-0 bg-black/70 z-40 md:hidden" onClick={closeMenu} />}
 
       {/* Slide-out Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-gray-950 border-l border-gray-800 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-slate-900 border-l border-slate-700 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-800 bg-gray-900">
+        <div className="flex items-center justify-between p-4 border-b border-slate-700 bg-slate-800">
           <div className="flex items-center gap-2">
             <Vote className="h-6 w-6 text-primary" />
             <span className="font-bold">The Next Majority</span>
@@ -116,7 +116,7 @@ export function MobileMenu({ user, isAdmin = false }: MobileMenuProps) {
             </>
           )}
 
-          <div className="mt-2 pt-2 border-t border-gray-800">
+          <div className="mt-2 pt-2 border-t border-slate-700 text-slate-100">
             <Link
               href="/demographics"
               onClick={closeMenu}
@@ -127,7 +127,7 @@ export function MobileMenu({ user, isAdmin = false }: MobileMenuProps) {
           </div>
 
           {/* Auth Buttons */}
-          <div className="mt-4 pt-4 border-t border-gray-800 flex flex-col gap-2">
+          <div className="mt-4 pt-4 border-t border-slate-700 flex flex-col gap-2">
             {!user ? (
               <>
                 <Link href="/auth/login" onClick={closeMenu}>
