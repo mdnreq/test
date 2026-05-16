@@ -351,18 +351,23 @@ function SignUpPageContent() {
                           <SelectValue placeholder="Select province" />
                         </SelectTrigger>
                         <SelectContent>
-                          {provinces.map((prov) => (
-                            <SelectItem key={prov} value={prov} disabled={completedProvinces.includes(prov)}>
-                              <div className="flex items-center gap-2">
-                                {completedProvinces.includes(prov) && (
-                                  <span className="text-red-500 font-bold">●</span>
-                                )}
-                                {prov}
-                                {completedProvinces.includes(prov) && (
-                                  <span className="text-xs text-red-500 ml-1">(Completed)</span>
-                                )}
-                              </div>
-                            </SelectItem>
+                          {provinces.map((prov, index) => (
+                            <div key={prov}>
+                              {completedProvinces.includes(prov) && index > 0 && (
+                                <div className="my-1 px-2 border-t-2 border-red-500/60" />
+                              )}
+                              <SelectItem value={prov} disabled={completedProvinces.includes(prov)}>
+                                <div className="flex items-center gap-2">
+                                  {completedProvinces.includes(prov) && (
+                                    <span className="text-red-500 font-bold">●</span>
+                                  )}
+                                  {prov}
+                                  {completedProvinces.includes(prov) && (
+                                    <span className="text-xs text-red-500 ml-1">(Completed)</span>
+                                  )}
+                                </div>
+                              </SelectItem>
+                            </div>
                           ))}
                         </SelectContent>
                       </Select>
@@ -452,18 +457,23 @@ function SignUpPageContent() {
                           <SelectValue placeholder="Select province" />
                         </SelectTrigger>
                         <SelectContent>
-                          {provinces.map((prov) => (
-                            <SelectItem key={prov} value={prov} disabled={completedProvinces.includes(prov)}>
-                              <div className="flex items-center gap-2">
-                                {completedProvinces.includes(prov) && (
-                                  <span className="text-red-500 font-bold">●</span>
-                                )}
-                                {prov}
-                                {completedProvinces.includes(prov) && (
-                                  <span className="text-xs text-red-500 ml-1">(Completed)</span>
-                                )}
-                              </div>
-                            </SelectItem>
+                          {provinces.map((prov, index) => (
+                            <div key={prov}>
+                              {completedProvinces.includes(prov) && index > 0 && (
+                                <div className="my-1 px-2 border-t-2 border-red-500/60" />
+                              )}
+                              <SelectItem value={prov} disabled={completedProvinces.includes(prov)}>
+                                <div className="flex items-center gap-2">
+                                  {completedProvinces.includes(prov) && (
+                                    <span className="text-red-500 font-bold">●</span>
+                                  )}
+                                  {prov}
+                                  {completedProvinces.includes(prov) && (
+                                    <span className="text-xs text-red-500 ml-1">(Completed)</span>
+                                  )}
+                                </div>
+                              </SelectItem>
+                            </div>
                           ))}
                         </SelectContent>
                       </Select>
