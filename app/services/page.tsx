@@ -651,9 +651,15 @@ export default async function ServicesPage() {
                     <div className="mt-4 grid gap-3 border-t border-white/10 pt-4 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-center">
                       <p className="min-w-0 text-xs text-white/45">{preset.profileSummary}</p>
                       <div className="flex flex-wrap gap-3 xl:justify-end">
+                        <Link
+                          href={`/auth/sign-up?template=${preset.id}`}
+                          className="inline-flex items-center rounded-xl border border-blue-500/30 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-blue-200 hover:bg-blue-500/20"
+                        >
+                          Use In Candidate Signup
+                        </Link>
                         <Sheet>
                           <SheetTrigger asChild>
-                            <button className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-4 py-3 font-semibold text-white hover:bg-white/10">
+                            <button className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10">
                               View Full Package
                             </button>
                           </SheetTrigger>
@@ -838,12 +844,6 @@ export default async function ServicesPage() {
                             </div>
                           </SheetContent>
                         </Sheet>
-                        <Link
-                          href={`/auth/sign-up?template=${preset.id}`}
-                          className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-4 py-3 font-semibold text-blue-200 hover:bg-white/10"
-                        >
-                          Use In Candidate Signup
-                        </Link>
                       </div>
                     </div>
                   </div>
