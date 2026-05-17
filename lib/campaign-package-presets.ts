@@ -44,10 +44,10 @@ export interface CampaignPackagePreset {
 
 export const CAMPAIGN_PACKAGE_PRESETS: CampaignPackagePreset[] = [
   {
-    id: "premium-tier",
+    id: "tier-mayor",
     officeType: "mayor",
     tier: "top",
-    label: "🌟 PREMIUM TIER",
+    label: "🎖️ TIER MAYOR",
     description: "Full-suite comprehensive campaign: every core service for maximum impact. Includes polling, crisis management, opposition research, and complete launch package with website, video, and social media.",
     demoCandidateId: "demo-cand-1",
     demoCandidateName: "Sarah Thompson",
@@ -75,10 +75,10 @@ export const CAMPAIGN_PACKAGE_PRESETS: CampaignPackagePreset[] = [
     ],
   },
   {
-    id: "professional-tier",
+    id: "lead-mayor",
     officeType: "mayor",
     tier: "top",
-    label: "⭐⭐ PROFESSIONAL TIER",
+    label: "⭐ LEAD MAYOR",
     description: "Strong standard package at $6,000/month: core outreach, voter management, local media relations, and complete launch suite. Add polling or opposition research as strategic upgrades.",
     demoCandidateId: "demo-cand-2",
     demoCandidateName: "James Chen",
@@ -106,10 +106,10 @@ export const CAMPAIGN_PACKAGE_PRESETS: CampaignPackagePreset[] = [
     ],
   },
   {
-    id: "starter-tier",
+    id: "tier-councillor",
     officeType: "councillor",
     tier: "top",
-    label: "⭐ STARTER TIER",
+    label: "🌟 TIER COUNCILLOR",
     description: "Essential campaign toolkit at $4,000/month: messaging, voter management, local advertising, door-to-door operations, and volunteer coordination. Complete launch with website, video, and social.",
     demoCandidateId: "demo-cand-3",
     demoCandidateName: "Maria Rodriguez",
@@ -137,10 +137,10 @@ export const CAMPAIGN_PACKAGE_PRESETS: CampaignPackagePreset[] = [
     ],
   },
   {
-    id: "growth-tier",
+    id: "lead-councillor",
     officeType: "councillor",
     tier: "top",
-    label: "💚 GROWTH TIER",
+    label: "💚 LEAD COUNCILLOR",
     description: "Bootstrap-friendly campaign at $2,500/month: local messaging, voter management, and door-to-door operations. Launch with basic website and social media. Scale up as you build momentum.",
     demoCandidateId: "demo-cand-4",
     demoCandidateName: "Alex Kim",

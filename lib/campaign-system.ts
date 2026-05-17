@@ -364,10 +364,10 @@ export const PUBLIC_SERVICE_STACKS: PublicServiceStack[] = [
 ]
 
 const BLUEPRINT_METRICS: Record<string, { benchmarkType: string; election: string; targetedVoters: number; expectedVotes: number }> = {
-  "premium-tier": { benchmarkType: "comprehensive package", election: "Full-scale municipal campaign", targetedVoters: 450000, expectedVotes: 250000 },
-  "professional-tier": { benchmarkType: "standard package", election: "Competitive municipal campaign", targetedVoters: 120000, expectedVotes: 45000 },
-  "starter-tier": { benchmarkType: "essential package", election: "Ward-level campaign", targetedVoters: 22000, expectedVotes: 7500 },
-  "growth-tier": { benchmarkType: "bootstrap package", election: "First-time candidate campaign", targetedVoters: 9000, expectedVotes: 2600 },
+  "tier-mayor": { benchmarkType: "comprehensive package", election: "Full-scale municipal campaign", targetedVoters: 450000, expectedVotes: 250000 },
+  "lead-mayor": { benchmarkType: "standard package", election: "Competitive municipal campaign", targetedVoters: 120000, expectedVotes: 45000 },
+  "tier-councillor": { benchmarkType: "essential package", election: "Ward-level campaign", targetedVoters: 22000, expectedVotes: 7500 },
+  "lead-councillor": { benchmarkType: "bootstrap package", election: "First-time candidate campaign", targetedVoters: 9000, expectedVotes: 2600 },
 }
 
 const STACK_ID_BY_CATEGORY: Record<string, PublicServiceStack["id"]> = {
