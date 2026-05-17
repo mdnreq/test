@@ -138,12 +138,11 @@ function formatPercent(value: number) {
 
 const PUBLIC_SHEET_CLASS = "overflow-y-auto border-white/10 bg-[#05070a] w-[97vw] sm:w-[94vw] md:w-[86vw] lg:w-[78vw] xl:w-[70vw] max-w-[1280px]"
 
-type CatalogView = "all" | "services" | "packages" | "stacks"
+type CatalogView = "all" | "services" | "stacks"
 
 const CATALOG_VIEW_OPTIONS: Array<{ value: CatalogView; label: string; summary: string }> = [
-  { value: "all", label: "Everything", summary: "Stacks, package examples, and individual service cards together." },
+  { value: "all", label: "Everything", summary: "Stacks and individual service cards together." },
   { value: "services", label: "Individual Services", summary: "Browse every service card one by one." },
-  { value: "packages", label: "Package Examples", summary: "See the bundled campaign examples only." },
   { value: "stacks", label: "Campaign Stacks", summary: "Review the stack layer without the individual cards." },
 ]
 
@@ -277,14 +276,10 @@ export default async function ServicesCatalogPage() {
                   This catalog now lets people switch between individual cards, bundled package examples, and campaign stacks from one public page.
                 </p>
               </div>
-              <div className="grid min-w-[220px] gap-3 text-sm sm:grid-cols-3">
+              <div className="grid min-w-[220px] gap-3 text-sm sm:grid-cols-2">
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-center">
                   <p className="text-white/45">Individual services</p>
                   <p className="mt-1 text-2xl font-bold text-white">{services.length}</p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-center">
-                  <p className="text-white/45">Package examples</p>
-                  <p className="mt-1 text-2xl font-bold text-white">{packageCards.length}</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-center">
                   <p className="text-white/45">Campaign stacks</p>
@@ -311,214 +306,7 @@ export default async function ServicesCatalogPage() {
             </div>
           </div>
 
-          {(activeView === "all" || activeView === "packages") && (
-            <div className="mt-12">
-              <div className="mb-8 flex items-end justify-between gap-4 flex-wrap">
-                <div>
-                  <h2 className="text-3xl font-black uppercase text-white">Package Examples</h2>
-                  <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-                    These are the bundled campaign examples that combine locked retainers, launch work, and optional add-ons.
-                  </p>
-                </div>
-                <p className="text-sm text-white/50">{packageCards.length} examples</p>
-              </div>
 
-              <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
-                {packageCards.map((preset) => (
-                  <div key={preset.id} className="rounded-3xl border border-white/10 bg-[#0b0f16] p-6">
-                    <div className="flex flex-wrap items-start justify-between gap-4">
-                      <div className="max-w-2xl">
-                        <h3 className="text-2xl font-bold text-white">{preset.label}</h3>
-                        <p className="mt-2 text-sm text-white/65">{preset.description}</p>
-                        <p className="mt-3 text-sm text-blue-300">{preset.officeType} campaign • {preset.cycleMonths} months • {preset.targetRegion}</p>
-                      </div>
-                      <span className="rounded-2xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
-                        {preset.tier} tier
-                      </span>
-                    </div>
-
-                    <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                      <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                        <p className="text-xs text-white/45">Core Retainers</p>
-                        <p className="mt-1 text-2xl font-bold text-white">${(preset.coreMonthlyTotal / 100).toLocaleString()}</p>
-                        <p className="mt-1 text-xs text-white/40">/month</p>
-                      </div>
-                      <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                        <p className="text-xs text-white/45">Launch Work</p>
-                        <p className="mt-1 text-2xl font-bold text-white">${(preset.launchTotal / 100).toLocaleString()}</p>
-                        <p className="mt-1 text-xs text-white/40">one-time</p>
-                      </div>
-                      <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                        <p className="text-xs text-white/45">Add-ons</p>
-                        <p className="mt-1 text-2xl font-bold text-white">${(preset.addOnMonthlyTotal / 100).toLocaleString()}</p>
-                        <p className="mt-1 text-xs text-white/40">/month</p>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 rounded-2xl border border-blue-500/30 bg-blue-500/10 p-4">
-                      <p className="text-xs text-blue-200">Total Base Monthly Investment</p>
-                      <p className="mt-2 text-3xl font-black text-white">${(preset.monthlyTotal / 100).toLocaleString()}</p>
-                    </div>
-
-                    <div className="mt-5 flex flex-wrap gap-2 text-xs">
-                      {preset.stackTitles.slice(0, 5).map((title) => (
-                        <span key={`${preset.id}-${title}`} className="rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-blue-200">
-                          {title}
-                        </span>
-                      ))}
-                      {preset.stackTitles.length > 5 && (
-                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-white/65">
-                          +{preset.stackTitles.length - 5} more stacks
-                        </span>
-                      )}
-                    </div>
-
-                    <p className="mt-5 text-sm text-white/55">{preset.profileSummary}</p>
-
-                    <div className="mt-5 flex flex-wrap gap-3 border-t border-white/10 pt-5">
-                      <Sheet>
-                        <SheetTrigger asChild>
-                          <button className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10">
-                            View Full Details
-                          </button>
-                        </SheetTrigger>
-                        <SheetContent side="right" className={PUBLIC_SHEET_CLASS}>
-                          <SheetHeader className="border-b border-white/10 px-6 py-5">
-                            <SheetTitle className="text-2xl text-white">{preset.label}</SheetTitle>
-                            <SheetDescription className="text-white/60">{preset.description}</SheetDescription>
-                            <p className="mt-3 text-xs text-blue-300">{preset.officeType} campaign • {preset.cycleMonths} months • {preset.targetRegion}</p>
-                          </SheetHeader>
-
-                          <div className="space-y-5 px-6 py-5">
-                            {/* Package Summary */}
-                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                              <p className="text-sm font-semibold text-white">Package Summary</p>
-                              <p className="mt-3 text-sm text-white/75">{preset.profileSummary}</p>
-                            </div>
-
-                            {/* Locked Core Services */}
-                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                              <p className="text-sm font-semibold text-white">Locked Core Services ({preset.mustHaveMonthlyRetainers.length})</p>
-                              <div className="mt-4 space-y-2">
-                                {preset.mustHaveMonthlyRetainers.map((serviceId) => {
-                                  const service = CAMPAIGN_SERVICE_CATALOG.find((s) => s.id.toString() === serviceId)
-                                  const monthlyPrice = typeof service?.price_monthly === "number" ? `$${(service.price_monthly / 100).toLocaleString()}/month` : service?.price_display
-                                  return service ? (
-                                    <div key={`${preset.id}-core-${serviceId}`} className="rounded-lg border border-green-500/20 bg-green-500/10 p-3">
-                                      <p className="font-medium text-green-200">{service.name}</p>
-                                      <p className="text-xs text-green-200/60">{monthlyPrice}</p>
-                                    </div>
-                                  ) : null
-                                })}
-                              </div>
-                            </div>
-
-                            {/* Required Launch Work */}
-                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                              <p className="text-sm font-semibold text-white">Required Launch Work ({preset.oneTimeLaunchWork.length})</p>
-                              <div className="mt-4 space-y-2">
-                                {preset.oneTimeLaunchWork.map((serviceId) => {
-                                  const service = CAMPAIGN_SERVICE_CATALOG.find((s) => s.id.toString() === serviceId)
-                                  const launchPrice = typeof service?.price_one_time === "number" ? `$${(service.price_one_time / 100).toLocaleString()} one-time` : service?.price_display
-                                  return service ? (
-                                    <div key={`${preset.id}-launch-${serviceId}`} className="rounded-lg border border-cyan-500/20 bg-cyan-500/10 p-3">
-                                      <p className="font-medium text-cyan-200">{service.name}</p>
-                                      <p className="text-xs text-cyan-200/60">{launchPrice}</p>
-                                    </div>
-                                  ) : null
-                                })}
-                              </div>
-                            </div>
-
-                            {/* Flexible Add-Ons */}
-                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                              <p className="text-sm font-semibold text-white">Flexible Add-Ons ({preset.recommendedAddOns.length})</p>
-                              <div className="mt-4 space-y-2">
-                                {preset.recommendedAddOns.map((serviceId) => {
-                                  const service = CAMPAIGN_SERVICE_CATALOG.find((s) => s.id.toString() === serviceId)
-                                  const addOnPrice = service?.price_display || (typeof service?.price_monthly === "number" ? `$${(service.price_monthly / 100).toLocaleString()}/month` : `$${(service?.price_one_time || 0) / 100} one-time`)
-                                  return service ? (
-                                    <div key={`${preset.id}-addon-${serviceId}`} className="rounded-lg border border-orange-500/20 bg-orange-500/10 p-3">
-                                      <p className="font-medium text-orange-200">{service.name}</p>
-                                      <p className="text-xs text-orange-200/60">{addOnPrice}</p>
-                                    </div>
-                                  ) : null
-                                })}
-                              </div>
-                            </div>
-
-                            {/* Campaign Finance Context */}
-                            <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-5">
-                              <p className="text-sm font-semibold text-amber-200">Campaign Finance Context</p>
-                              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                                <div className="rounded-lg bg-black/20 p-3">
-                                  <p className="text-xs text-white/50">Core Retainers</p>
-                                  <p className="mt-1 text-lg font-bold text-white">${(preset.coreMonthlyTotal / 100).toLocaleString()}/mo</p>
-                                </div>
-                                <div className="rounded-lg bg-black/20 p-3">
-                                  <p className="text-xs text-white/50">Launch Work</p>
-                                  <p className="mt-1 text-lg font-bold text-white">${(preset.launchTotal / 100).toLocaleString()}</p>
-                                </div>
-                                <div className="rounded-lg bg-black/20 p-3">
-                                  <p className="text-xs text-white/50">Add-On Services</p>
-                                  <p className="mt-1 text-lg font-bold text-white">${(preset.addOnMonthlyTotal / 100).toLocaleString()}/mo</p>
-                                </div>
-                                <div className="rounded-lg border border-blue-500/30 bg-blue-500/10 p-3">
-                                  <p className="text-xs text-blue-200">Total Investment</p>
-                                  <p className="mt-1 text-lg font-bold text-white">${(preset.monthlyTotal / 100).toLocaleString()}/mo</p>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Gap Analysis */}
-                            {preset.gapAnalysis.length > 0 && (
-                              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                                <p className="text-sm font-semibold text-white">Gap Analysis</p>
-                                <p className="mt-2 text-xs text-white/50">Strategic gaps and recommended expansions</p>
-                                <div className="mt-4 space-y-3">
-                                  {preset.gapAnalysis.map((gap, gapIndex) => (
-                                    <div key={`${preset.id}-gap-${gapIndex}`} className="rounded-lg border border-white/10 bg-black/20 p-4">
-                                      <p className="font-medium text-white">{gap.area}</p>
-                                      <p className="mt-2 text-sm text-white/70">{gap.summary}</p>
-                                      <div className="mt-3 flex flex-wrap gap-2">
-                                        {gap.recommendedServiceIds.map((serviceId) => {
-                                          const service = CAMPAIGN_SERVICE_CATALOG.find((s) => s.id.toString() === serviceId)
-                                          return service ? (
-                                            <span key={`${preset.id}-gap-service-${serviceId}`} className="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-xs text-white/60">
-                                              {service.name}
-                                            </span>
-                                          ) : null
-                                        })}
-                                      </div>
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-
-                            <div className="flex flex-wrap gap-3 border-t border-white/10 pt-5">
-                              <Link
-                                href={`/auth/sign-up?template=${preset.id}`}
-                                className="inline-flex items-center rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 font-semibold text-blue-200 hover:bg-blue-500/15"
-                              >
-                                Use In Candidate Signup
-                              </Link>
-                            </div>
-                          </div>
-                        </SheetContent>
-                      </Sheet>
-                      <Link
-                        href={`/auth/sign-up?template=${preset.id}`}
-                        className="inline-flex items-center rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-blue-200 hover:bg-blue-500/15"
-                      >
-                        Start Campaign
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
 
           {(activeView === "all" || activeView === "stacks") && (
             <div className="mt-12">
