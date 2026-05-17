@@ -343,12 +343,116 @@ export default async function ServicesCatalogPage() {
                     <p className="mt-5 text-sm text-white/55">{preset.profileSummary}</p>
 
                     <div className="mt-5 flex flex-wrap gap-3 border-t border-white/10 pt-5">
-                      <Link
-                        href="/services#campaign-templates"
-                        className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
-                      >
-                        Open Package Drawer
-                      </Link>
+                      <Sheet>
+                        <SheetTrigger asChild>
+                          <button className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10">
+                            Open Package Drawer
+                          </button>
+                        </SheetTrigger>
+                        <SheetContent className={PUBLIC_SHEET_CLASS}>
+                          <SheetHeader className="mb-6">
+                            <SheetTitle>{preset.label} - Full Details</SheetTitle>
+                            <SheetDescription className="text-white/60">
+                              {preset.description}
+                            </SheetDescription>
+                          </SheetHeader>
+
+                          <div className="space-y-6">
+                            {/* Core Services */}
+                            <div>
+                              <h4 className="font-semibold text-white mb-3">
+                                Monthly Core Services (${(preset.mustHaveMonthlyRetainers.reduce((sum, id) => {
+                                  const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
+                                  return sum + (svc?.price_monthly || 0)
+                                }, 0) / 100).toFixed(0)}/month)
+                              </h4>
+                              <div className="space-y-2">
+                                {preset.mustHaveMonthlyRetainers.map((id) => {
+                                  const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
+                                  return svc ? (
+                                    <div key={svc.id} className="flex justify-between items-start text-sm p-2 rounded bg-white/5 hover:bg-white/10">
+                                      <div className="flex-1">
+                                        <p className="text-white font-medium">{svc.name}</p>
+                                        <p className="text-xs text-white/50 mt-1">{svc.description}</p>
+                                      </div>
+                                      <span className="whitespace-nowrap text-white/60 ml-2">{svc.price_display}</span>
+                                    </div>
+                                  ) : null
+                                })}
+                              </div>
+                            </div>
+
+                            {/* Launch Services */}
+                            {preset.oneTimeLaunchWork.length > 0 && (
+                              <div>
+                                <h4 className="font-semibold text-white mb-3">
+                                  Launch Services (${(preset.oneTimeLaunchWork.reduce((sum, id) => {
+                                    const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
+                                    return sum + (svc?.price_one_time || 0)
+                                  }, 0) / 100).toFixed(0)} one-time)
+                                </h4>
+                                <div className="space-y-2">
+                                  {preset.oneTimeLaunchWork.map((id) => {
+                                    const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
+                                    return svc ? (
+                                      <div key={svc.id} className="flex justify-between items-start text-sm p-2 rounded bg-white/5 hover:bg-white/10">
+                                        <div className="flex-1">
+                                          <p className="text-white font-medium">{svc.name}</p>
+                                          <p className="text-xs text-white/50 mt-1">{svc.description}</p>
+                                        </div>
+                                        <span className="whitespace-nowrap text-white/60 ml-2">{svc.price_display}</span>
+                                      </div>
+                                    ) : null
+                                  })}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Add-ons */}
+                            {preset.recommendedAddOns.length > 0 && (
+                              <div>
+                                <h4 className="font-semibold text-white mb-3">Recommended Add-ons</h4>
+                                <div className="space-y-2">
+                                  {preset.recommendedAddOns.map((id) => {
+                                    const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
+                                    return svc ? (
+                                      <div key={svc.id} className="flex justify-between items-start text-sm p-2 rounded bg-white/5 hover:bg-white/10">
+                                        <div className="flex-1">
+                                          <p className="text-white font-medium">{svc.name}</p>
+                                          <p className="text-xs text-white/50 mt-1">{svc.description}</p>
+                                        </div>
+                                        <span className="whitespace-nowrap text-white/60 ml-2">{svc.price_display}</span>
+                                      </div>
+                                    ) : null
+                                  })}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Summary */}
+                            <div className="border-t border-white/10 pt-4 mt-6">
+                              <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                  <p className="text-xs text-white/50">Office Type</p>
+                                  <p className="text-sm font-semibold text-white mt-1">{preset.officeType}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-white/50">Duration</p>
+                                  <p className="text-sm font-semibold text-white mt-1">{preset.cycleMonths} months</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-white/50">Target Region</p>
+                                  <p className="text-sm font-semibold text-white mt-1">{preset.targetRegion}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-white/50">Tier</p>
+                                  <p className="text-sm font-semibold text-white capitalize mt-1">{preset.tier}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </SheetContent>
+                      </Sheet>
                       <Link
                         href={`/auth/sign-up?template=${preset.id}`}
                         className="inline-flex items-center rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-blue-200 hover:bg-blue-500/15"
@@ -450,8 +554,8 @@ export default async function ServicesCatalogPage() {
                 <p className="text-sm font-semibold text-white mb-4">🔍 Filter Services</p>
                 <div className="grid gap-4 md:grid-cols-4">
                   <div>
-                    <label className="text-xs text-white/60 uppercase">Category</label>
-                    <select className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2">
+                    <label className="text-xs text-white/90 font-semibold uppercase tracking-wide">Category</label>
+                    <select className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2 hover:bg-white/15 transition">
                       <option value="">All Categories</option>
                       {Array.from(new Set(services.map(s => s.category))).map(cat => (
                         <option key={cat} value={cat}>{cat}</option>
@@ -459,8 +563,8 @@ export default async function ServicesCatalogPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs text-white/60 uppercase">Price Range</label>
-                    <select className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2">
+                    <label className="text-xs text-white/90 font-semibold uppercase tracking-wide">Price Range</label>
+                    <select className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2 hover:bg-white/15 transition">
                       <option value="">Any Price</option>
                       <option value="0-500">Under $500</option>
                       <option value="500-1000">$500 - $1,000</option>
@@ -469,8 +573,8 @@ export default async function ServicesCatalogPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs text-white/60 uppercase">Type</label>
-                    <select className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2">
+                    <label className="text-xs text-white/90 font-semibold uppercase tracking-wide">Type</label>
+                    <select className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2 hover:bg-white/15 transition">
                       <option value="">All Types</option>
                       <option value="monthly">Monthly Retainer</option>
                       <option value="one-time">One-Time Project</option>
@@ -478,8 +582,8 @@ export default async function ServicesCatalogPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs text-white/60 uppercase">Search</label>
-                    <input placeholder="Find service..." className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2 placeholder:text-white/40" />
+                    <label className="text-xs text-white/90 font-semibold uppercase tracking-wide">Search</label>
+                    <input placeholder="Find service..." className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2 placeholder:text-white/50 hover:bg-white/15 transition" />
                   </div>
                 </div>
               </div>
