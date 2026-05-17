@@ -621,21 +621,21 @@ export default async function ServicesPage() {
                     </div>
 
                     <div className="grid gap-3 text-sm sm:grid-cols-2 xl:grid-cols-4">
-                      <div className="min-w-0 rounded-xl border border-white/10 bg-black/20 p-4">
-                        <p className="text-white/50 text-xs">Core Campaign Stack</p>
-                        <p className="mt-1 text-lg font-bold leading-tight text-white whitespace-nowrap">${(coreMonthlyValue / 100).toLocaleString()}/month</p>
+                      <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+                        <p className="text-white/50 text-xs truncate">Core Campaign Stack</p>
+                        <p className="mt-1 text-lg font-bold text-white whitespace-nowrap">${(coreMonthlyValue / 100).toLocaleString()}/month</p>
                       </div>
-                      <div className="min-w-0 rounded-xl border border-white/10 bg-black/20 p-4">
-                        <p className="text-white/50 text-xs">Launch Stack</p>
-                        <p className="mt-1 text-lg font-bold leading-tight text-white whitespace-nowrap">${(launchValue / 100).toLocaleString()}</p>
+                      <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+                        <p className="text-white/50 text-xs truncate">Launch Stack</p>
+                        <p className="mt-1 text-lg font-bold text-white whitespace-nowrap">${(launchValue / 100).toLocaleString()}</p>
                       </div>
-                      <div className="min-w-0 rounded-xl border border-white/10 bg-black/20 p-4">
-                        <p className="text-white/50 text-xs">Add-On Stack</p>
-                        <p className="mt-1 text-lg font-bold leading-tight text-white whitespace-nowrap">${(addOnValue / 100).toLocaleString()}</p>
+                      <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+                        <p className="text-white/50 text-xs truncate">Add-On Stack</p>
+                        <p className="mt-1 text-lg font-bold text-white whitespace-nowrap">${(addOnValue / 100).toLocaleString()}</p>
                       </div>
-                      <div className="min-w-0 rounded-xl border border-white/10 bg-black/20 p-4">
-                        <p className="text-white/50 text-xs">Total value</p>
-                        <p className="mt-1 text-lg font-bold leading-tight text-white whitespace-nowrap">${(fullCampaignValue / 100).toLocaleString()}</p>
+                      <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+                        <p className="text-white/50 text-xs truncate">Total value</p>
+                        <p className="mt-1 text-lg font-bold text-white whitespace-nowrap">${(fullCampaignValue / 100).toLocaleString()}</p>
                       </div>
                     </div>
 
