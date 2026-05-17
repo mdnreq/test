@@ -88,10 +88,10 @@ export const CAMPAIGN_PACKAGE_PRESETS: CampaignPackagePreset[] = [
     cycleMonths: 6,
     mustHaveMonthlyRetainers: ["2", "15", "17", "23", "26", "37"],
     coreCampaignStackIds: ["content-creation", "digital-marketing", "analytics-data", "fundraising-donations", "media-content", "video-production"],
-    oneTimeLaunchWork: ["74", "75", "76"],
-    launchCampaignStackIds: ["web-digital-presence", "design-branding", "video-production"],
-    recommendedAddOns: ["66", "65", "33", "19", "61", "32"],
-    addOnCampaignStackIds: ["research-intelligence", "email-marketing", "digital-marketing", "youth-engagement"],
+    oneTimeLaunchWork: ["74", "76"],
+    launchCampaignStackIds: ["web-digital-presence", "design-branding"],
+    recommendedAddOns: ["33", "19", "32", "61"],
+    addOnCampaignStackIds: ["youth-engagement", "digital-marketing", "email-marketing"],
     gapAnalysis: [
       {
         area: "Polling insights",
@@ -121,8 +121,8 @@ export const CAMPAIGN_PACKAGE_PRESETS: CampaignPackagePreset[] = [
     coreCampaignStackIds: ["content-creation", "digital-marketing", "field-operations", "analytics-data", "video-production"],
     oneTimeLaunchWork: ["73", "75"],
     launchCampaignStackIds: ["design-branding", "web-digital-presence", "video-production"],
-    recommendedAddOns: ["37", "33", "32", "61", "31", "18"],
-    addOnCampaignStackIds: ["design-branding", "youth-engagement", "email-marketing", "content-creation"],
+    recommendedAddOns: ["33", "37", "61"],
+    addOnCampaignStackIds: ["youth-engagement", "design-branding", "email-marketing"],
     gapAnalysis: [
       {
         area: "Print materials",
@@ -152,8 +152,8 @@ export const CAMPAIGN_PACKAGE_PRESETS: CampaignPackagePreset[] = [
     coreCampaignStackIds: ["content-creation", "field-operations", "analytics-data"],
     oneTimeLaunchWork: ["73", "76"],
     launchCampaignStackIds: ["design-branding", "web-digital-presence"],
-    recommendedAddOns: ["75", "37", "61", "33", "32"],
-    addOnCampaignStackIds: ["video-production", "design-branding", "email-marketing", "youth-engagement"],
+    recommendedAddOns: ["37", "61"],
+    addOnCampaignStackIds: ["design-branding", "email-marketing"],
     gapAnalysis: [
       {
         area: "Video storytelling",
