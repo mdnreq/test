@@ -227,6 +227,9 @@ export default async function ServicesCatalogPage() {
               </div>
             )}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Link href="/services/assistant" className="inline-flex items-center rounded-xl border border-purple-500/20 bg-purple-500/10 px-5 py-3 font-semibold text-purple-200 hover:bg-purple-500/15">
+                💡 AI Service Assistant
+              </Link>
               <Link href="/services" className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 font-semibold text-white hover:bg-white/10">
                 Back To Campaign Stacks
               </Link>

@@ -437,12 +437,20 @@ export default async function ServicesPage() {
                   Use these filters on this page for stacks, package examples, or individual cards. If you want the dedicated full-page browser, jump into the filtered catalog links below.
                 </p>
               </div>
-              <Link
-                href="/services/catalog"
-                className="inline-flex items-center rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-blue-200 hover:bg-blue-500/15"
-              >
-                Open Full Catalog
-              </Link>
+              <div className="flex gap-3 flex-wrap">
+                <Link
+                  href="/services/assistant"
+                  className="inline-flex items-center rounded-xl border border-purple-500/20 bg-purple-500/10 px-4 py-3 text-sm font-semibold text-purple-200 hover:bg-purple-500/15 whitespace-nowrap"
+                >
+                  💡 AI Assistant
+                </Link>
+                <Link
+                  href="/services/catalog"
+                  className="inline-flex items-center rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-blue-200 hover:bg-blue-500/15"
+                >
+                  Open Full Catalog
+                </Link>
+              </div>
             </div>
 
             <div className="mt-5 grid gap-3 md:grid-cols-3">
