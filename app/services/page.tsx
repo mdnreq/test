@@ -578,7 +578,7 @@ export default async function ServicesPage() {
                 }, 0)
                 const launchValue = preset.oneTimeLaunchWork.reduce((sum, serviceId) => {
                   const service = services.find((entry) => entry.id === serviceId)
-                  return sum + (service ? normalizePriceToCents(service.price_monthly) : 0)
+                  return sum + (service ? normalizePriceToCents(service.price_one_time) : 0)
                 }, 0)
                 const addOnValue = preset.recommendedAddOns.reduce((sum, serviceId) => {
                   const service = services.find((entry) => entry.id === serviceId)
@@ -594,7 +594,10 @@ export default async function ServicesPage() {
                   if (preset.mustHaveMonthlyRetainers.includes(service.id)) {
                     return sum + (normalizePriceToCents(service.price_monthly) * preset.cycleMonths)
                   }
-                  if (preset.oneTimeLaunchWork.includes(service.id) || preset.recommendedAddOns.includes(service.id)) {
+                  if (preset.oneTimeLaunchWork.includes(service.id)) {
+                    return sum + normalizePriceToCents(service.price_one_time)
+                  }
+                  if (preset.recommendedAddOns.includes(service.id)) {
                     return sum + normalizePriceToCents(service.price_monthly)
                   }
                   return sum
