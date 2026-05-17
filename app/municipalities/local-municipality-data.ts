@@ -290,6 +290,10 @@ function buildSyntheticMunicipalities(province: ProvinceName, existing: Municipa
   const baseTurnout2018 = province === "PEI" ? 54 : province === "Northwest Territories" ? 51 : 42
   const baseTurnout2022 = province === "PEI" ? 50 : province === "Northwest Territories" ? 48 : 38
 
+  // Geographic descriptors for realistic name generation
+  const directions = ["North", "South", "East", "West", "Central", "Upper", "Lower"]
+  const regionalDescriptors = ["Valley", "Heights", "Ridge", "Plain", "Bay", "Shore", "River", "Creek"]
+
   // Population ranges by province (based on real municipality sizes)
   const populationRanges: Record<ProvinceName, [number, number]> = {
     Ontario: [5000, 95000],
@@ -308,12 +312,22 @@ function buildSyntheticMunicipalities(province: ProvinceName, existing: Municipa
     // Cycle through real municipality names from pool
     const baseName = namePool[nameIndex % namePool.length]
     let syntheticName = baseName
-    let suffix = 1
+    let suffix = 0
 
-    // If name already exists, add a suffix
+    // If name already exists, add geographic descriptor
     while (seenNames.has(syntheticName.toLowerCase())) {
-      syntheticName = `${baseName} ${suffix}`
+      if (suffix < directions.length) {
+        // Use direction prefix: "North Wellington", "South Wellington", etc.
+        syntheticName = `${directions[suffix]} ${baseName}`
+      } else {
+        // Use regional descriptor: "Wellington Valley", "Wellington Heights", etc.
+        const descriptorIndex = (suffix - directions.length) % regionalDescriptors.length
+        syntheticName = `${baseName} ${regionalDescriptors[descriptorIndex]}`
+      }
       suffix += 1
+      
+      // Safety check to avoid infinite loop
+      if (suffix > 50) break
     }
 
     nameIndex += 1
