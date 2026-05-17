@@ -552,7 +552,7 @@ export default async function ServicesCatalogPage() {
               {/* Filter Section */}
               <div className="mb-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
                 <p className="text-sm font-semibold text-white mb-4">🔍 Filter Services</p>
-                <div className="grid gap-4 md:grid-cols-4">
+                <div className="grid gap-4 md:grid-cols-5">
                   <div>
                     <label className="text-xs text-white/90 font-semibold uppercase tracking-wide">Category</label>
                     <select className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2 hover:bg-white/15 transition">
@@ -560,6 +560,15 @@ export default async function ServicesCatalogPage() {
                       {Array.from(new Set(services.map(s => s.category))).map(cat => (
                         <option key={cat} value={cat}>{cat}</option>
                       ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-xs text-white/90 font-semibold uppercase tracking-wide">Tier</label>
+                    <select className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2 hover:bg-white/15 transition">
+                      <option value="">All Tiers</option>
+                      <option value="top">Top Tier (Premium)</option>
+                      <option value="lean">Lean Tier</option>
+                      <option value="standalone">Standalone Only</option>
                     </select>
                   </div>
                   <div>
@@ -624,14 +633,24 @@ export default async function ServicesCatalogPage() {
                         <span className={`rounded-full border px-2 py-1 text-[11px] font-semibold ${launchProject ? "border-cyan-500/30 bg-cyan-500/15 text-cyan-300" : "border-green-500/30 bg-green-500/15 text-green-300"}`}>
                           {launchProject ? "Launch project" : "Monthly retainer"}
                         </span>
-                        {packageMatches.slice(0, 2).map((preset) => (
-                          <span key={`${service.id}-${preset.id}`} className="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-[11px] text-white/70">
-                            {preset.label}
-                          </span>
-                        ))}
+                        {/* Show which tiers this service is in */}
+                        {packageMatches.length > 0 && (
+                          <>
+                            {packageMatches.some(p => p.tier === "top") && (
+                              <span className="rounded-full border border-purple-500/30 bg-purple-500/15 px-2 py-1 text-[11px] font-semibold text-purple-300">
+                                Top Tier
+                              </span>
+                            )}
+                            {packageMatches.some(p => p.tier === "lean") && (
+                              <span className="rounded-full border border-blue-500/30 bg-blue-500/15 px-2 py-1 text-[11px] font-semibold text-blue-300">
+                                Lean Tier
+                              </span>
+                            )}
+                          </>
+                        )}
                       </div>
-                      <h3 className="mt-3 text-xl font-bold text-white">{service.name}</h3>
-                      <p className="mt-2 text-sm text-white/60">{service.description}</p>
+                      <h3 className="mt-3 text-lg font-bold text-white leading-snug">{service.name}</h3>
+                      <p className="mt-2 text-sm text-white/60 line-clamp-2">{service.description}</p>
                       <Sheet>
                         <SheetTrigger asChild>
                           <button className="mt-3 inline-flex items-center text-sm font-semibold text-cyan-300 hover:text-cyan-200">
@@ -716,11 +735,13 @@ export default async function ServicesCatalogPage() {
                         </div>
                       ))}
                     </div>
-                    <div className="flex flex-col gap-3 border-t border-white/10 pt-4 sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
-                      <span className="text-xl font-bold leading-tight text-white whitespace-nowrap">{service.price_display}</span>
+                    <div className="flex flex-col gap-3 border-t border-white/10 pt-4">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-lg font-bold text-white whitespace-nowrap">{service.price_display}</span>
+                      </div>
                       <Link
                         href={isVerifiedCandidate ? `/candidate-portal/checkout?service=${service.id}` : "/auth/sign-up"}
-                        className="inline-flex min-h-10 w-full items-center justify-center rounded-xl bg-white px-4 py-2 text-center text-sm font-semibold text-black hover:bg-white/90 sm:min-w-[132px] sm:w-auto"
+                        className="w-full inline-flex min-h-10 items-center justify-center rounded-lg bg-white px-3 py-2 text-center text-sm font-semibold text-black hover:bg-white/90 transition"
                       >
                         {launchProject ? "Start Project" : "Start Retainer"}
                       </Link>
