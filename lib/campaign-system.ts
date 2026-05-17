@@ -6,6 +6,7 @@ export interface CampaignServiceDefinition {
   description: string
   category: string
   price_monthly: number
+  price_one_time: number
   price_display: string
   features: string[]
   popular: boolean

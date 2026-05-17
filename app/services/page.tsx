@@ -742,12 +742,7 @@ export default async function ServicesPage() {
                                     </div>
                                   </div>
 
-                                  <div className="rounded-2xl border border-blue-500/20 bg-blue-500/10 p-4 text-sm">
-                                    <p className="font-medium text-blue-200">Commercial guardrail</p>
-                                    <p className="mt-2 text-white/70">
-                                      Locked core retainers protect the monthly operating floor. Launch work is approved as a separate scope, and only add-ons should be swapped or removed later.
-                                    </p>
-                                  </div>
+
                                 </div>
                               </div>
 
@@ -858,9 +853,6 @@ export default async function ServicesPage() {
           <div id="individual-services" className="mt-16 space-y-6 scroll-mt-24">
             <div className="text-center">
               <h3 className="text-3xl font-black uppercase text-white">Campaign Services</h3>
-              <p className="mx-auto mt-3 max-w-3xl text-sm text-muted-foreground">
-                The featured cards below are real services from the shared campaign catalog. Each one is tagged as a monthly retainer or launch project and maps back into the same template logic used in the portal.
-              </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
