@@ -20,7 +20,7 @@ const suggestedQuestions = [
 
 // Fallback responses when AI is unavailable
 const fallbackResponses: Record<string, string> = {
-  "votes at 16": `**Votes at 16** is a movement to lower the municipal voting age from 18 to 16.
+  "votes at 16": `**Millennial Mobilization** is a data-driven platform to increase civic engagement among voters aged 30-45 through digital campaigns.
 
 **Key facts:**
 - Already enacted in Scotland (2015) and Wales (2020)
@@ -42,7 +42,7 @@ const fallbackResponses: Record<string, string> = {
    - Birth year (must be Gen X or younger, under 59)
    - Province/Territory
    - Municipality
-4. **Pledge Support** - Confirm you support Votes at 16
+4. **Pledge Support** - Confirm you support millennial voter engagement initiatives
 5. **Verify Email** - Check your inbox for verification link
 
 Once verified, you'll get access to campaign services ($395-$995/month).`,
@@ -78,7 +78,7 @@ Use our Municipalities page to search and filter all Ontario municipalities.
   "default": `I'm The Next Majority AI Assistant! I can help with:
 
 **Campaign Strategy** - Messaging, outreach, Gen Z/Millennial engagement
-**Voter Education** - Municipal elections, Votes at 16, councillor roles  
+**Voter Education** - Municipal elections, millennial engagement strategies, councillor roles  
 **Legal Compliance** - Campaign finance, regulations, deadlines
 **Platform Navigation** - Finding municipalities, services, registration
 
@@ -89,7 +89,7 @@ function getFallbackResponse(query: string): string {
   const lowerQuery = query.toLowerCase()
   
   if (lowerQuery.includes("vote") && lowerQuery.includes("16")) {
-    return fallbackResponses["votes at 16"]
+    return fallbackResponses["votes at 16"] // Legacy fallback for millennial engagement
   }
   if (lowerQuery.includes("register") || lowerQuery.includes("candidate")) {
     return fallbackResponses["register"]

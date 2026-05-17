@@ -56,7 +56,7 @@ const liveDebates = [
   },
   {
     id: 2,
-    title: "Votes at 16: Implementation Roadmap",
+    title: "Millennial Mobilization: Implementation Roadmap",
     status: "scheduled",
     scheduledFor: "Tomorrow, 3:00 PM",
     registeredViewers: 456,

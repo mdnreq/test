@@ -209,7 +209,7 @@ function SignUpPageContent() {
           p_email: email,
           p_municipality_id: municipality,
           p_position: "Municipal Candidate",
-          p_platform_summary: `Supporting Votes at 16 and youth engagement. ${generation} candidate committed to 2.5X lifetime engagement multiplier.`,
+          p_platform_summary: `Mobilizing millennial voters through digital platforms. ${generation} candidate committed to 1.8X millennial engagement multiplier.`,
         })
 
         if (candidateError) {
@@ -462,7 +462,7 @@ function SignUpPageContent() {
                           {canVoteAt16 ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
                           <span>
                             Age {votingAge} -{" "}
-                            {canVoteAt16 ? "Eligible for Votes at 16" : "Not yet eligible (must be 16+)"}
+                            {canVoteAt16 ? "Millennial voter cohort (18+)" : "Not yet eligible (must be 18+)"}
                           </span>
                         </div>
                       )}

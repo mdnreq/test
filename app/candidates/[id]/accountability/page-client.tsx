@@ -44,7 +44,7 @@ const candidateData = {
 const promises = [
   {
     id: 1,
-    title: "Implement Votes at 16 in Municipal Elections",
+    title: "Launch Millennial Voter Engagement Campaign",
     category: "Youth Empowerment",
     status: "kept",
     madeOn: "Jan 15, 2024",

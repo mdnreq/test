@@ -122,7 +122,7 @@ export default function SchoolToBallotSimulation() {
           </div>
 
           <div className="bg-gradient-to-br from-blue-600/10 to-cyan-600/10 border border-blue-500/20 rounded-xl p-8">
-            <h3 className="text-lg font-bold mb-4">WITH VOTES AT 16</h3>
+            <h3 className="text-lg font-bold mb-4">MILLENNIAL ENGAGEMENT PROJECTION</h3>
             <div className="text-center py-8">
               <div className="text-6xl font-black text-blue-500 mb-2">{selected.projected}%</div>
               <div className="text-sm text-muted-foreground">Projected Turnout (+6.5%)</div>
@@ -199,7 +199,7 @@ export default function SchoolToBallotSimulation() {
         {/* Key Benefits */}
         <div className="bg-card border rounded-xl overflow-hidden mb-12">
           <div className="border-b p-6">
-            <h2 className="text-2xl font-bold">KEY BENEFITS OF VOTES AT 16</h2>
+            <h2 className="text-2xl font-bold">DIGITAL MOBILIZATION BENEFITS</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-px bg-border">
             {[
@@ -234,7 +234,7 @@ export default function SchoolToBallotSimulation() {
             href="/governance"
             className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition"
           >
-            Support Votes at 16 in the DAO
+            Support Millennial Mobilization in the DAO
             <ArrowRight className="h-5 w-5" />
           </Link>
         </div>

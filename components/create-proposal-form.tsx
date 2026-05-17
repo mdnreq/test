@@ -71,7 +71,7 @@ export function CreateProposalForm({ municipalities, userId }: CreateProposalFor
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid gap-2">
             <Label htmlFor="title">Proposal Title</Label>
-            <Input id="title" name="title" placeholder="Implement Votes at 16 initiative" required />
+            <Input id="title" name="title" placeholder="Launch millennial voter mobilization campaign" required />
           </div>
 
           <div className="grid gap-2">

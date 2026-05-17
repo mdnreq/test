@@ -151,7 +151,7 @@ export default function AcknowledgementsPage() {
             </p>
             <p className="text-gray-300 leading-relaxed">
               By focusing on municipal democracy—the most direct form of governance—we believe we can create the
-              retention lock-in that transforms 16-year-old voters into lifelong civic champions. This is how we build{" "}
+              engagement multiplier that transforms millennial voters into lifelong civic champions through digital platforms. This is how we build{" "}
               <strong className="text-blue-400">The Next Majority</strong>.
             </p>
           </section>

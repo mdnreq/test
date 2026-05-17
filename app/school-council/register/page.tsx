@@ -135,7 +135,7 @@ const councilRoles = [
 ]
 
 const interestOptions = [
-  "Youth Voting Rights (Votes at 16)",
+  "Millennial Civic Engagement (Ages 30-45)",
   "Climate & Environment",
   "Mental Health Support",
   "Education Policy",

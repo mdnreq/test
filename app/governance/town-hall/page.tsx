@@ -211,7 +211,7 @@ function TownHallBoardContent() {
     {
       id: "5",
       title: "Lower voting age to 16 for municipal elections",
-      description: "Youth are affected by local policies but have no voice. Votes at 16 would increase civic engagement and better represent our community.",
+      description: "Millennials have untapped civic potential. Digital engagement campaigns can increase voter turnout by 8-12% and better represent our community.",
       category: "Electoral Reform",
       author: { name: "Youth Assembly Council", type: "school_council", avatar: "YA", verified: true },
       createdAt: "2026-01-20",
@@ -227,7 +227,7 @@ function TownHallBoardContent() {
   const [proposals, setProposals] = useState<Proposal[]>([
     {
       id: "p1",
-      title: "Votes at 16: Municipal Voting Rights for Youth",
+      title: "Millennial Mobilization: Digital Campaigns for Municipal Engagement",
       description: "Amend municipal charter to allow 16 and 17 year olds to vote in local elections, with civic education requirements.",
       author: { name: "Youth Assembly", type: "school_council", avatar: "YA" },
       linkedIssue: "5",
@@ -316,7 +316,7 @@ function TownHallBoardContent() {
       attendees: 234,
       maxAttendees: 500,
       status: "live",
-      topics: ["Votes at 16", "Civic Education", "Implementation"]
+      topics: ["Millennial Engagement", "Digital Mobilization", "Turnout Optimization"]
     },
     {
       id: "l2",

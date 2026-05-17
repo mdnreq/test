@@ -98,7 +98,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-bold mb-3">7. Children's Privacy</h2>
             <p className="leading-relaxed">
-              Our platform is designed for individuals aged 16 and older to align with our Votes at 16 initiative. We do
+              Our platform is designed for millennial voters aged 18+ to maximize civic participation through digital engagement. We do
               not knowingly collect information from individuals under 16 without parental consent.
             </p>
           </section>
