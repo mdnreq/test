@@ -54,12 +54,18 @@ export async function Header() {
                 <Link
                   href="/demo"
                   className="px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg transition text-sm tracking-wider"
+                  style={{
+                    boxShadow: "0 0 20px rgba(168, 85, 247, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.2)"
+                  }}
                 >
                   Demo Portal
                 </Link>
                 <Link
                   href="/auth/sign-up"
                   className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition text-sm tracking-wider"
+                  style={{
+                    boxShadow: "0 0 20px rgba(59, 130, 246, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.2)"
+                  }}
                 >
                   Join the Movement
                 </Link>

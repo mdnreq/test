@@ -1,4 +1,13 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
   <style>
     @media (prefers-color-scheme: light) {
       .card { fill: #0a1220; }
@@ -12,6 +21,7 @@
     }
   </style>
   <rect class="card" width="180" height="180" rx="40" />
+  <rect class="accent" x="34" y="34" width="112" height="112" rx="28" opacity="0.18" filter="url(#glow)" />
   <rect class="accent" x="34" y="34" width="112" height="112" rx="28" opacity="0.18" />
   <path class="line" d="M56 53C56 48.5817 59.5817 45 64 45H116C120.418 45 124 48.5817 124 53V127C124 131.418 120.418 135 116 135H64C59.5817 135 56 131.418 56 127V53Z" />
   <path class="card" d="M68 59H112V121H68V59Z" />
