@@ -55,11 +55,11 @@ export const CAMPAIGN_PACKAGE_PRESETS: CampaignPackagePreset[] = [
     targetRegion: "Toronto City-wide",
     profileSummary: "Official-style top-tier mayor demo account with city-wide paid media, fundraising, polling, and rapid-response delivery.",
     cycleMonths: 6,
-    mustHaveMonthlyRetainers: ["2", "17", "23", "26", "66", "11"],
+    mustHaveMonthlyRetainers: ["2", "17", "23", "26", "66", "11", "73a", "74a", "75a", "77a", "78a", "81"],
     coreCampaignStackIds: ["content-creation", "digital-marketing", "analytics-data", "fundraising-donations", "research-intelligence", "crisis-risk"],
     oneTimeLaunchWork: ["10", "58", "36"],
     launchCampaignStackIds: ["web-digital-presence", "design-branding"],
-    recommendedAddOns: ["14", "61", "33", "65"],
+    recommendedAddOns: ["14", "61", "33", "65", "76a", "79a", "80"],
     addOnCampaignStackIds: ["design-branding", "email-marketing", "youth-engagement", "crisis-risk", "research-intelligence"],
     gapAnalysis: [
       {
@@ -86,11 +86,11 @@ export const CAMPAIGN_PACKAGE_PRESETS: CampaignPackagePreset[] = [
     targetRegion: "Regional municipality",
     profileSummary: "Lean mayor demo account for a smaller municipality with essential website, volunteer, voter, and donor operations.",
     cycleMonths: 5,
-    mustHaveMonthlyRetainers: ["2", "17", "22", "23"],
+    mustHaveMonthlyRetainers: ["2", "17", "22", "23", "73", "74", "75", "77", "78"],
     coreCampaignStackIds: ["content-creation", "digital-marketing", "field-operations", "analytics-data"],
     oneTimeLaunchWork: ["10", "58"],
     launchCampaignStackIds: ["web-digital-presence"],
-    recommendedAddOns: ["26", "61", "14"],
+    recommendedAddOns: ["26", "61", "14", "76", "79", "80"],
     addOnCampaignStackIds: ["fundraising-donations", "email-marketing", "crisis-risk"],
     gapAnalysis: [
       {
@@ -117,11 +117,11 @@ export const CAMPAIGN_PACKAGE_PRESETS: CampaignPackagePreset[] = [
     targetRegion: "Competitive urban ward",
     profileSummary: "Competitive ward demo account with persuasion media, volunteer throughput, analytics, and election-week execution.",
     cycleMonths: 6,
-    mustHaveMonthlyRetainers: ["2", "17", "20", "22", "23"],
+    mustHaveMonthlyRetainers: ["2", "17", "20", "22", "23", "73a", "74a", "75a", "77a", "81"],
     coreCampaignStackIds: ["content-creation", "digital-marketing", "field-operations", "analytics-data"],
     oneTimeLaunchWork: ["36", "10", "58"],
     launchCampaignStackIds: ["design-branding", "web-digital-presence"],
-    recommendedAddOns: ["66", "65", "14", "37"],
+    recommendedAddOns: ["66", "65", "14", "37", "76a", "79a", "78a"],
     addOnCampaignStackIds: ["design-branding", "research-intelligence", "crisis-risk"],
     gapAnalysis: [
       {
@@ -148,11 +148,11 @@ export const CAMPAIGN_PACKAGE_PRESETS: CampaignPackagePreset[] = [
     targetRegion: "Neighbourhood ward",
     profileSummary: "Lean ward demo account focused on basic website, volunteer coordination, recurring messaging, and voter capture.",
     cycleMonths: 5,
-    mustHaveMonthlyRetainers: ["2", "22", "23"],
+    mustHaveMonthlyRetainers: ["2", "22", "23", "73", "74", "75", "77", "78"],
     coreCampaignStackIds: ["content-creation", "field-operations", "analytics-data"],
     oneTimeLaunchWork: ["36", "10"],
     launchCampaignStackIds: ["design-branding", "web-digital-presence"],
-    recommendedAddOns: ["20", "14", "61"],
+    recommendedAddOns: ["20", "14", "61", "76", "79", "80"],
     addOnCampaignStackIds: ["design-branding", "field-operations", "crisis-risk", "email-marketing"],
     gapAnalysis: [
       {
