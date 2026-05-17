@@ -1,7 +1,16 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="boxGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feFlood flood-color="#3b82f6" flood-opacity="0.8" result="coloredBlur"/>
+      <feComposite in="coloredBlur" in2="SourceGraphic" operator="in" result="coloredBlur"/>
       <feMerge>
         <feMergeNode in="coloredBlur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -24,7 +33,7 @@
   <rect class="bg" width="180" height="180" rx="40" />
   
   <!-- Blue Box Container with Glow -->
-  <rect class="box" x="35" y="35" width="110" height="110" rx="20" filter="url(#glow)" opacity="0.95" />
+  <rect class="box" x="35" y="35" width="110" height="110" rx="20" filter="url(#boxGlow)" opacity="0.95" />
   
   <!-- Checkmark Icon -->
   <g>
