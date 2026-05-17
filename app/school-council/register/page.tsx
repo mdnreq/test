@@ -135,7 +135,7 @@ const councilRoles = [
 ]
 
 const interestOptions = [
-  "Millennial Civic Engagement (Ages 30-45)",
+  "Gen Z & Millennial Civic Engagement (Ages 12-27 & 28-43)",
   "Climate & Environment",
   "Mental Health Support",
   "Education Policy",

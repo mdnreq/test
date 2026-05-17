@@ -112,7 +112,7 @@ const demoTokenBalance = {
 const demoBounties = [
   { id: "1", title: "Design Youth Voter Outreach Campaign", category: "Design", reward: 500, deadline: "2026-02-15", difficulty: "Medium", applicants: 12 },
   { id: "2", title: "Build Mobile Canvassing App", category: "Development", reward: 1500, deadline: "2026-03-01", difficulty: "Hard", applicants: 8 },
-  { id: "3", title: "Create Millennial Engagement Documentary", category: "Media", reward: 750, deadline: "2026-02-20", difficulty: "Medium", applicants: 15 },
+  { id: "3", title: "Create Gen Z & Millennial Engagement Documentary", category: "Media", reward: 750, deadline: "2026-02-20", difficulty: "Medium", applicants: 15 },
   { id: "4", title: "Write Policy Brief on Municipal Reform", category: "Research", reward: 400, deadline: "2026-02-10", difficulty: "Easy", applicants: 6 },
   { id: "5", title: "Translate Platform to French", category: "Translation", reward: 300, deadline: "2026-02-28", difficulty: "Easy", applicants: 4 },
 ]

@@ -89,7 +89,7 @@ function getFallbackResponse(query: string): string {
   const lowerQuery = query.toLowerCase()
   
   if (lowerQuery.includes("vote") && lowerQuery.includes("16")) {
-    return fallbackResponses["votes at 16"] // Legacy fallback for millennial engagement
+    return fallbackResponses["votes at 16"] // Legacy fallback for Gen Z & millennial engagement
   }
   if (lowerQuery.includes("register") || lowerQuery.includes("candidate")) {
     return fallbackResponses["register"]

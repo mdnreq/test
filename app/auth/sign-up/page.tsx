@@ -209,7 +209,7 @@ function SignUpPageContent() {
           p_email: email,
           p_municipality_id: municipality,
           p_position: "Municipal Candidate",
-          p_platform_summary: `Mobilizing millennial voters through digital platforms. ${generation} candidate committed to 1.8X millennial engagement multiplier.`,
+          p_platform_summary: `Mobilizing Gen Z & millennial voters through digital platforms. ${generation} candidate committed to 1.8X Gen Z & millennial engagement multiplier.`,
         })
 
         if (candidateError) {

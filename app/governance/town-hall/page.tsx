@@ -316,7 +316,7 @@ function TownHallBoardContent() {
       attendees: 234,
       maxAttendees: 500,
       status: "live",
-      topics: ["Millennial Engagement", "Digital Mobilization", "Turnout Optimization"]
+      topics: ["Gen Z & Millennial Engagement", "Digital Mobilization", "Turnout Optimization"]
     },
     {
       id: "l2",

@@ -47,7 +47,7 @@ const mediaContent = [
   {
     id: 1,
     type: "video",
-    title: "Why Millennial Engagement Matters: Data-Driven Turnout Strategy",
+    title: "Why Gen Z & Millennial Engagement Matters: Data-Driven Turnout Strategy",
     creator: "Maya Chen",
     creatorType: "Youth Creator",
     verified: true,

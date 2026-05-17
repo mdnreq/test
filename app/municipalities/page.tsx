@@ -6,7 +6,7 @@ import { TrendingUp, Users } from "lucide-react"
 import { loadLocalMunicipalityData, type MunicipalityRecord } from "./local-municipality-data"
 
 function calculateGenMillennialTurnout(currentTurnout: number) {
-  // Millennials (born 1981-1996) now aged 30-45 represent 18% of eligible voters
+  // Gen Z (born 1997-2012, ages 12-27) and Millennials (born 1981-1996, ages 28-43) represent 46% of eligible voters
   // With targeted engagement campaigns, millennial turnout can increase 8-12%
   // Gen Y voters show 1.8x higher participation when mobilized around digital platforms
   const baseIncrease = 9.2 // Average 9.2% millennial turnout increase with targeted campaigns
@@ -288,7 +288,7 @@ export default async function MunicipalitiesPage() {
             <div>
               <CardTitle className="text-2xl">Gen Millennial Turnout Simulation</CardTitle>
               <CardDescription className="text-blue-200">
-                Projected turnout increase with targeted millennial engagement
+                Projected turnout increase with targeted Gen Z & Millennial engagement
               </CardDescription>
             </div>
           </div>
@@ -309,7 +309,7 @@ export default async function MunicipalitiesPage() {
             </div>
           </div>
           <p className="text-sm text-blue-100">
-            Millennials (ages 30-45) respond strongly to digital mobilization and data-driven campaigns. Targeted outreach
+            Gen Z (ages 12-27) and Millennials (ages 28-43) respond strongly to digital mobilization and data-driven campaigns. Targeted outreach
             through social media and mobile platforms increases turnout by 8-12% across all demographics.
           </p>
         </CardContent>
@@ -363,7 +363,7 @@ export default async function MunicipalitiesPage() {
         <TabsContent value="nb" className="space-y-6">
           <Card className="border-amber-700/50 bg-amber-950/20">
             <CardHeader>
-              <CardTitle className="text-xl">New Brunswick 2026 Millennial Engagement</CardTitle>
+              <CardTitle className="text-xl">New Brunswick 2026 Gen Z & Millennial Engagement</CardTitle>
               <CardDescription>
                 Elections NB ran province-wide local government elections on {newBrunswick2026Election.dateLabel}.
               </CardDescription>
@@ -374,7 +374,7 @@ export default async function MunicipalitiesPage() {
                 <div className="text-2xl font-semibold">{newBrunswick2026Election.turnout}%</div>
               </div>
               <div className="rounded-lg border border-amber-700/40 bg-background/60 p-4">
-                <div className="text-sm text-muted-foreground">Millennial population (ages 30-45)</div>
+                <div className="text-sm text-muted-foreground">Gen Z & Millennial population (ages 12-43)</div>
                 <div className="text-2xl font-semibold">~19%</div>
               </div>
               <div className="rounded-lg border border-amber-700/40 bg-background/60 p-4">

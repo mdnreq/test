@@ -189,7 +189,7 @@ export function CandidateRegistrationForm({ municipalities, userId }: CandidateR
                 I support lowering the municipal voting age to 16
               </Label>
               <p className="text-sm text-muted-foreground">
-                Required: The Next Majority platform advocates for millennial engagement to create a 1.8X digital engagement
+                Required: The Next Majority platform advocates for Gen Z & millennial engagement to create a 1.8X digital engagement
                 multiplier and reverse the municipal turnout crisis.
               </p>
             </div>
