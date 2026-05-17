@@ -22,15 +22,14 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
       {/* Hamburger Button - Only visible on mobile */}
       <button
         onClick={toggleMenu}
-        className="md:hidden p-2 hover:bg-accent rounded-lg transition group"
+        className="md:hidden p-2 hover:opacity-80 transition group"
         aria-label="Toggle menu"
       >
-        <Menu 
-          className="h-6 w-6 text-white stroke-[1.5] group-hover:text-cyan-300 transition" 
-          style={{
-            filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.5))'
-          }}
-        />
+        <div className="w-8 h-8 bg-cyan-500 rounded-lg flex items-center justify-center" style={{ boxShadow: "0 0 16px rgba(34, 211, 238, 0.6)" }}>
+          <Menu 
+            className="h-5 w-5 text-white stroke-[2]" 
+          />
+        </div>
       </button>
 
       {/* Overlay */}
@@ -69,12 +68,11 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
           }}
         >
           <div className="flex items-center gap-3">
-            <Vote 
-              className="h-6 w-6 text-cyan-300 stroke-[1.5]" 
-              style={{
-                filter: 'drop-shadow(0 0 12px rgba(34, 211, 238, 0.8))'
-              }}
-            />
+            <div className="w-8 h-8 bg-cyan-500 rounded-lg flex items-center justify-center" style={{ boxShadow: "0 0 16px rgba(34, 211, 238, 0.7)" }}>
+              <Vote 
+                className="h-5 w-5 text-white stroke-[1.5]" 
+              />
+            </div>
             <span className="font-semibold text-white text-sm">Navigation</span>
           </div>
           <button onClick={closeMenu} className="p-1 hover:bg-slate-700/30 rounded-lg transition" aria-label="Close menu">
@@ -94,13 +92,11 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
             }}
           >
             <div className="relative">
-              <User 
-                className="h-8 w-8 text-white stroke-[1.5] group-hover:text-cyan-300 transition" 
-                style={{
-                  filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.6))',
-                  textShadow: '0 0 8px rgba(34, 211, 238, 0.5)'
-                }}
-              />
+              <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center" style={{ boxShadow: "0 0 12px rgba(59, 130, 246, 0.5)" }}>
+                <User 
+                  className="h-5 w-5 text-white stroke-[1.5]" 
+                />
+              </div>
             </div>
             <span>Candidate Demo</span>
           </Link>
@@ -115,13 +111,11 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
             }}
           >
             <div className="relative">
-              <Vote 
-                className="h-8 w-8 text-white stroke-[1.5] group-hover:text-purple-300 transition" 
-                style={{
-                  filter: 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.6))',
-                  textShadow: '0 0 8px rgba(168, 85, 247, 0.5)'
-                }}
-              />
+              <div className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.5)" }}>
+                <Vote 
+                  className="h-5 w-5 text-white stroke-[1.5]"
+                />
+              </div>
             </div>
             <span>Voter Demo</span>
           </Link>
@@ -141,12 +135,11 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
                   boxShadow: "inset 0 1px 1px rgba(34, 211, 238, 0.08)"
                 }}
               >
-                <Briefcase 
-                  className="h-6 w-6 text-white stroke-[1.5] group-hover:text-cyan-300 transition" 
-                  style={{
-                    filter: 'drop-shadow(0 0 6px rgba(34, 211, 238, 0.4))'
-                  }}
-                />
+                <div className="w-8 h-8 bg-cyan-500 rounded-lg flex items-center justify-center" style={{ boxShadow: "0 0 12px rgba(34, 211, 238, 0.4)" }}>
+                  <Briefcase 
+                    className="h-5 w-5 text-white stroke-[1.5]" 
+                  />
+                </div>
                 Client Account
               </Link>
               <Link
@@ -158,12 +151,11 @@ export function MobileMenu({ user, isAdmin = false, isDev = false }: MobileMenuP
                   boxShadow: "inset 0 1px 1px rgba(168, 85, 247, 0.08)"
                 }}
               >
-                <User 
-                  className="h-6 w-6 text-white stroke-[1.5] group-hover:text-purple-300 transition" 
-                  style={{
-                    filter: 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.4))'
-                  }}
-                />
+                <div className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.4)" }}>
+                  <User 
+                    className="h-5 w-5 text-white stroke-[1.5]" 
+                  />
+                </div>
                 Voter Account
               </Link>
             </div>

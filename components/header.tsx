@@ -38,7 +38,9 @@ export async function Header() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           {/* Logo + Tagline */}
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition">
-            <Vote className="h-7 w-7 text-blue-500 flex-shrink-0" />
+            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0" style={{ boxShadow: "0 0 16px rgba(59, 130, 246, 0.5)" }}>
+              <Vote className="h-5 w-5 text-white flex-shrink-0" />
+            </div>
             <div>
               <div className="text-sm font-black tracking-wider uppercase">The Next Majority</div>
               <div className="text-xs text-white/60">Independent civic initiative • Municipal turnout strategy</div>
