@@ -1,18 +1,13 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+    <filter id="strongGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="12" result="blur1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur2"/>
+      <feFlood flood-color="#3b82f6" flood-opacity="1" result="color"/>
+      <feComposite in="color" in2="blur1" operator="in" result="glow"/>
       <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="boxGlow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
-      <feFlood flood-color="#3b82f6" flood-opacity="0.8" result="coloredBlur"/>
-      <feComposite in="coloredBlur" in2="SourceGraphic" operator="in" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="blur2"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
@@ -21,22 +16,24 @@
     @media (prefers-color-scheme: light) {
       .bg { fill: #0a1220; }
       .box { fill: #3b82f6; }
-      .icon { stroke: #f8fafc; }
+      .icon { stroke: #ffffff; }
     }
     @media (prefers-color-scheme: dark) {
-      .bg { fill: #f8fafc; }
-      .box { fill: #2563eb; }
-      .icon { stroke: #0f172a; }
+      .bg { fill: #ffffff; }
+      .box { fill: #1d4ed8; }
+      .icon { stroke: #000000; }
     }
   </style>
   <!-- Background -->
   <rect class="bg" width="180" height="180" rx="40" />
   
-  <!-- Blue Box Container with Glow -->
-  <rect class="box" x="35" y="35" width="110" height="110" rx="20" filter="url(#boxGlow)" opacity="0.95" />
+  <!-- Blue Box Container with Strong Glow -->
+  <rect class="box" x="35" y="35" width="110" height="110" rx="20" filter="url(#strongGlow)" opacity="1" />
   
   <!-- Checkmark Icon -->
   <g>
-    <path class="icon" d="M65 95 L80 108 L125 65" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path class="icon" d="M65 95 L80 108 L125 65" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+</svg>
   </g>
 </svg>
