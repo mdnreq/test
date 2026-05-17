@@ -445,6 +445,45 @@ export default async function ServicesCatalogPage() {
                 <p className="text-sm text-white/50">{services.length} services</p>
               </div>
 
+              {/* Filter Section */}
+              <div className="mb-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
+                <p className="text-sm font-semibold text-white mb-4">🔍 Filter Services</p>
+                <div className="grid gap-4 md:grid-cols-4">
+                  <div>
+                    <label className="text-xs text-white/60 uppercase">Category</label>
+                    <select className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2">
+                      <option value="">All Categories</option>
+                      {Array.from(new Set(services.map(s => s.category))).map(cat => (
+                        <option key={cat} value={cat}>{cat}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-xs text-white/60 uppercase">Price Range</label>
+                    <select className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2">
+                      <option value="">Any Price</option>
+                      <option value="0-500">Under $500</option>
+                      <option value="500-1000">$500 - $1,000</option>
+                      <option value="1000-2000">$1,000 - $2,000</option>
+                      <option value="2000+">$2,000+</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-xs text-white/60 uppercase">Type</label>
+                    <select className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2">
+                      <option value="">All Types</option>
+                      <option value="monthly">Monthly Retainer</option>
+                      <option value="one-time">One-Time Project</option>
+                      <option value="popular">Popular Only</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-xs text-white/60 uppercase">Search</label>
+                    <input placeholder="Find service..." className="mt-2 w-full rounded-lg bg-white/10 border border-white/10 text-white text-sm px-3 py-2 placeholder:text-white/40" />
+                  </div>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {services.map((service) => {
               const Icon = service.icon
@@ -498,7 +537,7 @@ export default async function ServicesCatalogPage() {
                         <SheetContent side="right" className={PUBLIC_SHEET_CLASS}>
                           <SheetHeader className="border-b border-white/10 px-6 py-5">
                             <div className="flex flex-wrap gap-2">
-                              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">{service.price_display}</span>
+                              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 whitespace-nowrap">{service.price_display}</span>
                               <span className={`rounded-full border px-3 py-1 text-xs ${commercialModel === "monthly-retainer" ? "border-green-500/30 bg-green-500/15 text-green-300" : "border-cyan-500/30 bg-cyan-500/15 text-cyan-300"}`}>
                                 {commercialModel === "monthly-retainer" ? "Monthly retainer" : "Launch project"}
                               </span>
@@ -574,7 +613,7 @@ export default async function ServicesCatalogPage() {
                       ))}
                     </div>
                     <div className="flex flex-col gap-3 border-t border-white/10 pt-4 sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
-                      <span className="text-xl font-bold leading-tight text-white break-words">{service.price_display}</span>
+                      <span className="text-xl font-bold leading-tight text-white whitespace-nowrap">{service.price_display}</span>
                       <Link
                         href={isVerifiedCandidate ? `/candidate-portal/checkout?service=${service.id}` : "/auth/sign-up"}
                         className="inline-flex min-h-10 w-full items-center justify-center rounded-xl bg-white px-4 py-2 text-center text-sm font-semibold text-black hover:bg-white/90 sm:min-w-[132px] sm:w-auto"
