@@ -259,21 +259,21 @@ export default async function MunicipalitiesPage() {
           </div>
 
           {/* Value Proposition Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-8">
-            <div className="bg-[#0b0f16] border border-blue-500/30 rounded-2xl p-6 hover:border-blue-400/60 transition-colors">
-              <div className="text-4xl font-black text-blue-300 mb-2">+9.2%</div>
-              <div className="font-bold text-white mb-2">Average Turnout Gain</div>
-              <p className="text-sm text-white/70">Projected increase from targeted Gen Z & Millennial digital campaigns</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+            <div className="bg-[#0d121b] border border-white/10 hover:border-blue-500/50 rounded-2xl p-8 transition-all hover:shadow-lg hover:shadow-blue-500/10">
+              <div className="text-5xl font-black text-blue-400 mb-3">+9.2%</div>
+              <div className="font-bold text-white text-lg mb-3">Average Turnout Gain</div>
+              <p className="text-sm text-white/70 leading-relaxed">Projected increase from targeted Gen Z & Millennial digital campaigns</p>
             </div>
-            <div className="bg-[#0b0f16] border border-cyan-500/30 rounded-2xl p-6 hover:border-cyan-400/60 transition-colors">
-              <div className="text-4xl font-black text-cyan-300 mb-2">1.8x</div>
-              <div className="font-bold text-white mb-2">Engagement Multiplier</div>
-              <p className="text-sm text-white/70">Gen Z & Millennials respond to digital-first, data-driven outreach strategies</p>
+            <div className="bg-[#0d121b] border border-white/10 hover:border-cyan-500/50 rounded-2xl p-8 transition-all hover:shadow-lg hover:shadow-cyan-500/10">
+              <div className="text-5xl font-black text-cyan-400 mb-3">1.8x</div>
+              <div className="font-bold text-white text-lg mb-3">Engagement Multiplier</div>
+              <p className="text-sm text-white/70 leading-relaxed">Gen Z & Millennials respond to digital-first, data-driven outreach strategies</p>
             </div>
-            <div className="bg-[#0b0f16] border border-purple-500/30 rounded-2xl p-6 hover:border-purple-400/60 transition-colors">
-              <div className="text-4xl font-black text-purple-300 mb-2">46%</div>
-              <div className="font-bold text-white mb-2">Of Eligible Voters</div>
-              <p className="text-sm text-white/70">Combined Gen Z & Millennial population across Canadian municipalities</p>
+            <div className="bg-[#0d121b] border border-white/10 hover:border-purple-500/50 rounded-2xl p-8 transition-all hover:shadow-lg hover:shadow-purple-500/10">
+              <div className="text-5xl font-black text-purple-400 mb-3">46%</div>
+              <div className="font-bold text-white text-lg mb-3">Of Eligible Voters</div>
+              <p className="text-sm text-white/70 leading-relaxed">Combined Gen Z & Millennial population across Canadian municipalities</p>
             </div>
           </div>
 
