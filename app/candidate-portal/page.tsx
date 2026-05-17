@@ -863,8 +863,8 @@ export default function CandidatePortalPage() {
                       <p className="text-white/50 text-sm mb-3 line-clamp-2">
                         {service.description}
                       </p>
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-blue-400 font-bold text-sm whitespace-nowrap">
+                      <div className="flex items-center justify-between">
+                        <span className="text-blue-400 font-bold text-sm">
                           {service.price_display}
                         </span>
                         <ChevronRight className="w-5 h-5 text-white/30 group-hover:text-blue-400 transition-colors" />

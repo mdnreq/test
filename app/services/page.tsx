@@ -437,20 +437,12 @@ export default async function ServicesPage() {
                   Use these filters on this page for stacks, package examples, or individual cards. If you want the dedicated full-page browser, jump into the filtered catalog links below.
                 </p>
               </div>
-              <div className="flex gap-3 flex-wrap">
-                <Link
-                  href="/services/assistant"
-                  className="inline-flex items-center rounded-xl border border-purple-500/20 bg-purple-500/10 px-4 py-3 text-sm font-semibold text-purple-200 hover:bg-purple-500/15 whitespace-nowrap"
-                >
-                  💡 AI Assistant
-                </Link>
-                <Link
-                  href="/services/catalog"
-                  className="inline-flex items-center rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-blue-200 hover:bg-blue-500/15"
-                >
-                  Open Full Catalog
-                </Link>
-              </div>
+              <Link
+                href="/services/catalog"
+                className="inline-flex items-center rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-blue-200 hover:bg-blue-500/15"
+              >
+                Open Full Catalog
+              </Link>
             </div>
 
             <div className="mt-5 grid gap-3 md:grid-cols-3">
@@ -764,12 +756,12 @@ export default async function ServicesPage() {
                                   <div className="mt-3 space-y-2 text-white/85">
                                     {coreServices.map((service) => (
                                       <div key={`${preset.id}-sheet-core-${service.id}`} className="flex min-w-0 flex-col gap-1 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                                        <span className="min-w-0 line-clamp-2 text-white/90">{service.name}</span>
-                                        <span className="whitespace-nowrap text-white/45">{service.price_display}</span>
+                                        <span className="min-w-0 break-words text-white/90">{service.name}</span>
+                                        <span className="text-white/45">{service.price_display}</span>
                                       </div>
                                     ))}
                                   </div>
-                                  <p className="line-clamp-2 text-xs text-white/55">Stack coverage: {coreStackHighlights.visible.join(", ")}{coreStackHighlights.hiddenCount > 0 ? ` +${coreStackHighlights.hiddenCount} more` : ""}</p>
+                                  <p className="mt-3 break-words text-xs text-white/55">Stack coverage: {coreStackHighlights.visible.join(", ")}{coreStackHighlights.hiddenCount > 0 ? ` +${coreStackHighlights.hiddenCount} more` : ""}</p>
                                 </div>
 
                                 <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-4">
@@ -779,12 +771,12 @@ export default async function ServicesPage() {
                                   <div className="mt-3 space-y-2 text-white/85">
                                     {launchServices.map((service) => (
                                       <div key={`${preset.id}-sheet-launch-${service.id}`} className="flex min-w-0 flex-col gap-1 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                                        <span className="min-w-0 line-clamp-2 text-white/90">{service.name}</span>
-                                        <span className="whitespace-nowrap text-white/45">{service.price_display}</span>
+                                        <span className="min-w-0 break-words text-white/90">{service.name}</span>
+                                        <span className="text-white/45">{service.price_display}</span>
                                       </div>
                                     ))}
                                   </div>
-                                  <p className="line-clamp-2 text-xs text-white/55">Stack coverage: {launchStackHighlights.visible.join(", ")}{launchStackHighlights.hiddenCount > 0 ? ` +${launchStackHighlights.hiddenCount} more` : ""}</p>
+                                  <p className="mt-3 break-words text-xs text-white/55">Stack coverage: {launchStackHighlights.visible.join(", ")}{launchStackHighlights.hiddenCount > 0 ? ` +${launchStackHighlights.hiddenCount} more` : ""}</p>
                                 </div>
 
                                 <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-4">
@@ -794,12 +786,12 @@ export default async function ServicesPage() {
                                   <div className="mt-3 space-y-2 text-white/85">
                                     {addOnServices.length > 0 ? addOnServices.map((service) => (
                                       <div key={`${preset.id}-sheet-addon-${service.id}`} className="flex min-w-0 flex-col gap-1 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                                        <span className="min-w-0 line-clamp-2 text-white/90">{service.name}</span>
-                                        <span className="whitespace-nowrap text-white/45">{service.price_display}</span>
+                                        <span className="min-w-0 break-words text-white/90">{service.name}</span>
+                                        <span className="text-white/45">{service.price_display}</span>
                                       </div>
                                     )) : <p className="text-white/60">No add-ons selected for this package.</p>}
                                   </div>
-                                  <p className="line-clamp-2 text-xs text-white/55">Stack coverage: {addOnServices.length === 0 ? "No add-on stack examples" : `${addOnStackHighlights.visible.join(", ")}${addOnStackHighlights.hiddenCount > 0 ? ` +${addOnStackHighlights.hiddenCount} more` : ""}`}</p>
+                                  <p className="mt-3 break-words text-xs text-white/55">Stack coverage: {addOnServices.length === 0 ? "No add-on stack examples" : `${addOnStackHighlights.visible.join(", ")}${addOnStackHighlights.hiddenCount > 0 ? ` +${addOnStackHighlights.hiddenCount} more` : ""}`}</p>
                                 </div>
                               </div>
 
@@ -921,7 +913,7 @@ export default async function ServicesPage() {
                           <SheetContent side="right" className={PUBLIC_SHEET_CLASS}>
                             <SheetHeader className="border-b border-white/10 px-6 py-5">
                               <div className="flex flex-wrap gap-2">
-                                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 whitespace-nowrap">{service.price_display}</span>
+                                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">{service.price_display}</span>
                                 <span className={`rounded-full border px-3 py-1 text-xs ${commercialModel === "monthly-retainer" ? "border-green-500/30 bg-green-500/15 text-green-300" : "border-cyan-500/30 bg-cyan-500/15 text-cyan-300"}`}>
                                   {commercialModel === "monthly-retainer" ? "Monthly retainer" : "Launch project"}
                                 </span>
@@ -1036,7 +1028,7 @@ export default async function ServicesPage() {
                         </div>
                       </details>
                       <div className="flex flex-col gap-3 border-t border-white/10 pt-4 sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
-                        <span className="text-xl font-bold leading-tight text-white whitespace-nowrap">{service.price_display}</span>
+                        <span className="text-xl font-bold leading-tight text-white break-words">{service.price_display}</span>
                         <Link
                           href={isVerifiedCandidate ? `/candidate-portal/checkout?service=${service.id}` : "/auth/sign-up"}
                           className="inline-flex min-h-10 w-full items-center justify-center rounded-xl bg-white px-4 py-2 text-center text-sm font-semibold text-black hover:bg-white/90 sm:min-w-[132px] sm:w-auto"

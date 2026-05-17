@@ -869,8 +869,8 @@ export function CandidateServicesCatalog({ embedded = false }: { embedded?: bool
                                     <div className="mt-3 space-y-2 text-white/85">
                                       {coreMonthly.map((service) => (
                                         <div key={`${preset.id}-core-${service.id}`} className="flex min-w-0 flex-col gap-1 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                                          <span className="min-w-0 line-clamp-2 text-white/90">{service.name}</span>
-                                          <span className="whitespace-nowrap text-white/45">{service.price_display}</span>
+                                          <span className="min-w-0 break-words text-white/90">{service.name}</span>
+                                          <span className="text-white/45">{service.price_display}</span>
                                         </div>
                                       ))}
                                     </div>
@@ -884,8 +884,8 @@ export function CandidateServicesCatalog({ embedded = false }: { embedded?: bool
                                     <div className="mt-3 space-y-2 text-white/85">
                                       {launchWork.map((service) => (
                                         <div key={`${preset.id}-launch-${service.id}`} className="flex min-w-0 flex-col gap-1 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                                          <span className="min-w-0 line-clamp-2 text-white/90">{service.name}</span>
-                                          <span className="whitespace-nowrap text-white/45">{service.price_display}</span>
+                                          <span className="min-w-0 break-words text-white/90">{service.name}</span>
+                                          <span className="text-white/45">{service.price_display}</span>
                                         </div>
                                       ))}
                                     </div>
@@ -899,8 +899,8 @@ export function CandidateServicesCatalog({ embedded = false }: { embedded?: bool
                                     <div className="mt-3 space-y-2 text-white/85">
                                       {addOns.length > 0 ? addOns.map((service) => (
                                         <div key={`${preset.id}-addon-${service.id}`} className="flex min-w-0 flex-col gap-1 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                                          <span className="min-w-0 line-clamp-2 text-white/90">{service.name}</span>
-                                          <span className="whitespace-nowrap text-white/45">{service.price_display}</span>
+                                          <span className="min-w-0 break-words text-white/90">{service.name}</span>
+                                          <span className="text-white/45">{service.price_display}</span>
                                         </div>
                                       )) : <p className="text-white/60">No add-ons selected for this package.</p>}
                                     </div>
@@ -1113,7 +1113,7 @@ export function CandidateServicesCatalog({ embedded = false }: { embedded?: bool
 
                       <div className="flex items-center justify-between pt-3 border-t border-white/10">
                         <div>
-                          <span className="text-sm font-bold text-white whitespace-nowrap">{service.price_display}</span>
+                          <span className="text-sm font-bold text-white">{service.price_display}</span>
                         </div>
                         {isSubscribed ? (
                           <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-[10px]">Active</Badge>

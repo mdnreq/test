@@ -38,7 +38,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <h1 className="mt-3 text-5xl font-black tracking-tight">{service.name}</h1>
             <p className="mt-4 text-lg text-white/70">{service.description}</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-white/80 whitespace-nowrap">{service.price_display}</span>
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-white/80">{service.price_display}</span>
               <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-sm text-cyan-200">
                 {commercialModel === "monthly-retainer" ? "Monthly retainer" : "Launch project"}
               </span>

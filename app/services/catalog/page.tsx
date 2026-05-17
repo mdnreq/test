@@ -1,58 +1,217 @@
 import Link from "next/link"
+
 import { createClient } from "@/lib/supabase/server"
 import { AnimatedServiceBackground } from "@/components/animated-service-background"
-import { CAMPAIGN_SERVICE_CATALOG, PUBLIC_SERVICE_STACKS, getCampaignServicesForStack, slugifyCampaignLabel } from "@/lib/campaign-system"
+import { CAMPAIGN_SERVICE_CATALOG, PUBLIC_SERVICE_STACKS, getCampaignCommercialModel, getCampaignServicesForStack, getCampaignStackForService, slugifyCampaignLabel } from "@/lib/campaign-system"
 import { CAMPAIGN_PACKAGE_PRESETS } from "@/lib/campaign-package-presets"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { AlertCircle, Briefcase } from "lucide-react"
+import {
+  AlertCircle,
+  BarChart3,
+  Briefcase,
+  Calendar,
+  Eye,
+  Globe,
+  MessageSquare,
+  Scale,
+  Search,
+  Shield,
+  Target,
+  Video,
+  Zap,
+} from "lucide-react"
+
+const categoryIconMap = {
+  "Digital Marketing": Target,
+  "Content Creation": MessageSquare,
+  "Web Development": Globe,
+  "Video Production": Video,
+  "Email Marketing": Calendar,
+  Design: Zap,
+  Research: Briefcase,
+  Analytics: BarChart3,
+  "SEO & Optimization": Search,
+  Reputation: Eye,
+  "Risk & Crisis": Shield,
+} as const
+
+const categoryVisualMap = {
+  "Digital Marketing": {
+    animation: "digital",
+    headerClass: "bg-gradient-to-r from-blue-950 via-indigo-950/80 to-violet-950/60",
+    bodyClass: "from-blue-950/35 to-indigo-950/15",
+  },
+  "Content Creation": {
+    animation: "content",
+    headerClass: "bg-gradient-to-r from-violet-950 via-fuchsia-950/80 to-purple-950/60",
+    bodyClass: "from-violet-950/35 to-fuchsia-950/15",
+  },
+  "Web Development": {
+    animation: "web",
+    headerClass: "bg-gradient-to-r from-cyan-950 via-blue-950/80 to-indigo-950/60",
+    bodyClass: "from-cyan-950/30 to-blue-950/15",
+  },
+  "Video Production": {
+    animation: "video",
+    headerClass: "bg-gradient-to-r from-rose-950 via-red-950/80 to-orange-950/60",
+    bodyClass: "from-rose-950/30 to-orange-950/15",
+  },
+  "Email Marketing": {
+    animation: "email",
+    headerClass: "bg-gradient-to-r from-lime-950 via-green-950/80 to-emerald-950/60",
+    bodyClass: "from-lime-950/30 to-emerald-950/15",
+  },
+  Design: {
+    animation: "design",
+    headerClass: "bg-gradient-to-r from-purple-950 via-fuchsia-950/80 to-pink-950/60",
+    bodyClass: "from-purple-950/35 to-fuchsia-950/15",
+  },
+  Research: {
+    animation: "research",
+    headerClass: "bg-gradient-to-r from-amber-950 via-yellow-950/80 to-lime-950/60",
+    bodyClass: "from-amber-950/35 to-lime-950/15",
+  },
+  Analytics: {
+    animation: "analytics",
+    headerClass: "bg-gradient-to-r from-emerald-950 via-teal-950/80 to-cyan-950/60",
+    bodyClass: "from-emerald-950/35 to-cyan-950/15",
+  },
+  "SEO & Optimization": {
+    animation: "seo",
+    headerClass: "bg-gradient-to-r from-sky-950 via-blue-950/80 to-indigo-950/60",
+    bodyClass: "from-sky-950/35 to-indigo-950/15",
+  },
+  Reputation: {
+    animation: "reputation",
+    headerClass: "bg-gradient-to-r from-indigo-950 via-slate-950/80 to-blue-950/60",
+    bodyClass: "from-indigo-950/35 to-slate-950/15",
+  },
+  "Risk & Crisis": {
+    animation: "crisis",
+    headerClass: "bg-gradient-to-r from-red-950 via-orange-950/80 to-amber-950/60",
+    bodyClass: "from-red-950/35 to-orange-950/15",
+  },
+} as const
+
+const OFFICIAL_FINANCE_SOURCE_URL = "http://app.toronto.ca/EFD/jsf/main/main.xhtml?campaign=19"
+
+const OLIVIA_CHOW_2023_FINANCE = {
+  candidateName: "Olivia Chow",
+  election: "2023 Toronto By-Election for Mayor",
+  spendingLimitCents: 161675145,
+  totalContributionsCents: 161092765,
+  totalExpensesCents: 156905568,
+  surplusCents: 4189697,
+  categories: [
+    { label: "Advertising", amountCents: 52611822, mappedService: "Paid media and message distribution" },
+    { label: "Brochures / Flyers", amountCents: 4528728, mappedService: "Print collateral and voter literature" },
+    { label: "Signs", amountCents: 9810315, mappedService: "Sign program and street visibility" },
+    { label: "Meetings Hosted", amountCents: 3176597, mappedService: "Events and stakeholder activations" },
+    { label: "Office + Phone + Internet", amountCents: 14251241, mappedService: "Campaign operations infrastructure" },
+    { label: "Salaries + Professional Fees", amountCents: 38748839, mappedService: "Staffing, consultants, and specialist execution" },
+    { label: "Voting Day Parties / Appreciation", amountCents: 10874648, mappedService: "Election-day engagement and volunteer recognition" },
+    { label: "Accounting + Audit", amountCents: 4655293, mappedService: "Compliance and financial reporting support" },
+    { label: "Fundraising Event Costs", amountCents: 10451933, mappedService: "Fundraising production and event delivery" },
+    { label: "Other + Bank Charges", amountCents: 7796152, mappedService: "Miscellaneous campaign operations" },
+  ],
+} as const
+
+function isOneTimeService(priceDisplay: string) {
+  return /one-time|\/page/i.test(priceDisplay.toLowerCase())
+}
+
+function getCategoryVisual(category: string) {
+  return categoryVisualMap[category as keyof typeof categoryVisualMap] ?? {
+    animation: "analytics",
+    headerClass: "bg-gradient-to-r from-slate-950 via-zinc-950/80 to-neutral-950/60",
+    bodyClass: "from-slate-950/35 to-zinc-950/15",
+  }
+}
+
+function formatCurrency(cents: number) {
+  return new Intl.NumberFormat("en-CA", { style: "currency", currency: "CAD" }).format(cents / 100)
+}
+
+function formatPercent(value: number) {
+  return `${value.toFixed(1)}%`
+}
 
 const PUBLIC_SHEET_CLASS = "overflow-y-auto border-white/10 bg-[#05070a] w-[97vw] sm:w-[94vw] md:w-[86vw] lg:w-[78vw] xl:w-[70vw] max-w-[1280px]"
 
 type CatalogView = "all" | "services" | "packages" | "stacks"
 
 const CATALOG_VIEW_OPTIONS: Array<{ value: CatalogView; label: string; summary: string }> = [
-  { value: "all", label: "Everything", summary: "Services, stacks, and packages together." },
-  { value: "services", label: "Individual Services", summary: "Browse every service card." },
-  { value: "packages", label: "Campaign Packages", summary: "See the bundled examples only." },
-  { value: "stacks", label: "Campaign Stacks", summary: "Review the stack layer." },
+  { value: "all", label: "Everything", summary: "Stacks, package examples, and individual service cards together." },
+  { value: "services", label: "Individual Services", summary: "Browse every service card one by one." },
+  { value: "packages", label: "Package Examples", summary: "See the bundled campaign examples only." },
+  { value: "stacks", label: "Campaign Stacks", summary: "Review the stack layer without the individual cards." },
 ]
 
 function resolveCatalogView(value?: string): CatalogView {
   return CATALOG_VIEW_OPTIONS.some((option) => option.value === value) ? (value as CatalogView) : "all"
 }
 
-export default async function ServicesCatalogPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ view?: string }>
-}) {
-  const params = await searchParams
-  const activeView: CatalogView = resolveCatalogView(params.view)
+export default async function ServicesCatalogPage() {
+  const activeView: CatalogView = "all"
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   let isVerifiedCandidate = false
+
   if (user) {
     const { data: candidate } = await supabase.from("candidates").select("verified").eq("user_id", user.id).single()
     isVerifiedCandidate = candidate?.verified === true
   }
 
-  const services = CAMPAIGN_SERVICE_CATALOG
-  const allPackageCards = CAMPAIGN_PACKAGE_PRESETS.map((preset) => {
+  const services = CAMPAIGN_SERVICE_CATALOG.map((service) => ({
+    ...service,
+    icon: categoryIconMap[service.category as keyof typeof categoryIconMap] ?? Briefcase,
+  }))
+  const packageCards = CAMPAIGN_PACKAGE_PRESETS
+    .filter((preset) => preset.tier === 'top')
+    .map((preset) => {
     const includedServiceCount = preset.mustHaveMonthlyRetainers.length + preset.oneTimeLaunchWork.length + preset.recommendedAddOns.length
-    const monthlyTotal = preset.mustHaveMonthlyRetainers.reduce((sum, id) => {
-      const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
-      return sum + (svc?.price_monthly || 0)
+    const stackTitles = [
+      ...preset.coreCampaignStackIds,
+      ...preset.launchCampaignStackIds,
+      ...preset.addOnCampaignStackIds,
+    ].map((stackId) => PUBLIC_SERVICE_STACKS.find((stack) => stack.id === stackId)?.title).filter((title): title is string => Boolean(title))
+
+    // Calculate pricing by stack
+    const coreRetainerServices = CAMPAIGN_SERVICE_CATALOG.filter((service) => preset.mustHaveMonthlyRetainers.includes(service.id.toString()))
+    const launchServices = CAMPAIGN_SERVICE_CATALOG.filter((service) => preset.oneTimeLaunchWork.includes(service.id.toString()))
+    const addOnServices = CAMPAIGN_SERVICE_CATALOG.filter((service) => preset.recommendedAddOns.includes(service.id.toString()))
+
+    const coreMonthlyTotal = coreRetainerServices.reduce((sum, service) => {
+      const price = typeof service.price_monthly === "number" ? service.price_monthly : 0
+      return sum + price
     }, 0)
-    const launchTotal = preset.oneTimeLaunchWork.reduce((sum, id) => {
-      const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
-      return sum + (svc?.price_one_time || 0)
+
+    const launchTotal = launchServices.reduce((sum, service) => {
+      const price = typeof service.price_one_time === "number" ? service.price_one_time : 0
+      return sum + price
     }, 0)
-    return { ...preset, includedServiceCount, monthlyTotal, launchTotal }
+
+    const addOnMonthlyTotal = addOnServices.reduce((sum, service) => {
+      const price = typeof service.price_monthly === "number" ? service.price_monthly : 0
+      return sum + price
+    }, 0)
+
+    const monthlyTotal = coreMonthlyTotal + addOnMonthlyTotal
+    const launchTotalDisplay = launchTotal
+
+    return {
+      ...preset,
+      includedServiceCount,
+      stackTitles: Array.from(new Set(stackTitles)),
+      coreMonthlyTotal,
+      launchTotal: launchTotalDisplay,
+      addOnMonthlyTotal,
+      monthlyTotal,
+    }
   })
-  // Show ONLY top-tier packages (no Lean)
-  const packageCards = allPackageCards.filter(p => p.tier === 'top')
-  
   const stackCards = PUBLIC_SERVICE_STACKS.map((stack) => {
     const stackServices = getCampaignServicesForStack(stack.id)
     const relatedPackages = CAMPAIGN_PACKAGE_PRESETS.filter((preset) =>
@@ -60,19 +219,28 @@ export default async function ServicesCatalogPage({
       preset.launchCampaignStackIds.includes(stack.id) ||
       preset.addOnCampaignStackIds.includes(stack.id),
     )
-    return { ...stack, stackServices, relatedPackages }
+
+    return {
+      ...stack,
+      stackServices,
+      relatedPackages,
+    }
   })
+
+  const oliviaBudgetUsage = OLIVIA_CHOW_2023_FINANCE.totalExpensesCents / OLIVIA_CHOW_2023_FINANCE.spendingLimitCents
+  const oliviaLargestCategory = OLIVIA_CHOW_2023_FINANCE.categories.reduce((largest, category) =>
+    category.amountCents > largest.amountCents ? category : largest,
+  )
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <section className="border-b border-border bg-gradient-to-b from-blue-950/20 to-background">
         <div className="container mx-auto max-w-6xl px-4 py-20">
           <div className="mx-auto max-w-4xl text-center">
             <p className="text-sm uppercase tracking-[0.25em] text-blue-300/80">Public Catalog</p>
-            <h1 className="mt-4 text-5xl font-black uppercase tracking-tight text-white">Campaign Services Catalog</h1>
+            <h1 className="mt-4 text-5xl font-black uppercase tracking-tight text-white">Full Campaign Services Catalog</h1>
             <p className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground">
-              Browse individual services, campaign stacks, and bundled package examples all in one place.
+              This page is the full public catalog of every campaign service card. It is separate from the campaign stacks overview so people can browse the entire service inventory in one place.
             </p>
             {!isVerifiedCandidate && (
               <div className="mx-auto mt-8 max-w-2xl rounded-lg border border-yellow-500/40 bg-yellow-500/10 p-4 text-left">
@@ -81,7 +249,7 @@ export default async function ServicesCatalogPage({
                   <div>
                     <p className="font-semibold text-yellow-300">Public browsing only</p>
                     <p className="mt-1 text-sm text-white/70">
-                      Candidate checkout requires a verified account.
+                      You can browse every service here. Candidate checkout still requires a verified candidate account.
                     </p>
                   </div>
                 </div>
@@ -89,325 +257,573 @@ export default async function ServicesCatalogPage({
             )}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link href="/services" className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 font-semibold text-white hover:bg-white/10">
-                Back To Stacks
+                Back To Campaign Stacks
               </Link>
               <Link href={isVerifiedCandidate ? "/candidate-portal/services" : "/auth/sign-up"} className="inline-flex items-center rounded-xl bg-white px-5 py-3 font-semibold text-black hover:bg-white/90">
-                {isVerifiedCandidate ? "Candidate Workspace" : "Sign Up"}
+                {isVerifiedCandidate ? "Open Candidate Workspace Catalog" : "Sign Up As Candidate"}
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* View Switcher */}
-      <section className="py-8 border-b border-white/10">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex flex-wrap gap-3">
-            {CATALOG_VIEW_OPTIONS.map((option) => {
-              const active = option.value === activeView
-              return (
-                <Link
-                  key={option.value}
-                  href={option.value === "all" ? "/services/catalog" : `/services/catalog?view=${option.value}`}
-                  className={`rounded-2xl border px-4 py-3 text-sm transition ${active ? "border-blue-500/40 bg-blue-500/15 text-white" : "border-white/10 bg-white/5 text-white/70 hover:bg-white/10"}`}
-                >
-                  <span className="font-semibold">{option.label}</span>
-                </Link>
-              )
-            })}
           </div>
         </div>
       </section>
 
       <section className="py-16">
-        <div className="container mx-auto max-w-6xl px-4">
-          
-          {/* SERVICES SECTION */}
-          {(activeView === "all" || activeView === "services") && (
-            <div className="mb-20">
-              <div className="mb-8">
-                <h2 className="text-3xl font-black uppercase text-white">Individual Services</h2>
-                <p className="mt-2 text-sm text-muted-foreground">All {services.length} services in the catalog</p>
+        <div className="container mx-auto max-w-7xl px-4">
+          <div className="rounded-3xl border border-white/10 bg-[#0b0f16] p-6 md:p-8">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <h2 className="text-3xl font-black uppercase text-white">Browse Full Services</h2>
+                <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
+                  This catalog now lets people switch between individual cards, bundled package examples, and campaign stacks from one public page.
+                </p>
+              </div>
+              <div className="grid min-w-[220px] gap-3 text-sm sm:grid-cols-3">
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-center">
+                  <p className="text-white/45">Individual services</p>
+                  <p className="mt-1 text-2xl font-bold text-white">{services.length}</p>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-center">
+                  <p className="text-white/45">Package examples</p>
+                  <p className="mt-1 text-2xl font-bold text-white">{packageCards.length}</p>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-center">
+                  <p className="text-white/45">Campaign stacks</p>
+                  <p className="mt-1 text-2xl font-bold text-white">{stackCards.length}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              {CATALOG_VIEW_OPTIONS.map((option) => {
+                const active = option.value === activeView
+
+                return (
+                  <Link
+                    key={option.value}
+                    href={option.value === "all" ? "/services/catalog" : `/services/catalog?view=${option.value}`}
+                    className={`rounded-2xl border px-4 py-3 text-sm transition ${active ? "border-blue-500/40 bg-blue-500/15 text-white" : "border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"}`}
+                  >
+                    <span className="block font-semibold">{option.label}</span>
+                    <span className="mt-1 block text-xs text-inherit/80">{option.summary}</span>
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+
+          {(activeView === "all" || activeView === "packages") && (
+            <div className="mt-12">
+              <div className="mb-8 flex items-end justify-between gap-4 flex-wrap">
+                <div>
+                  <h2 className="text-3xl font-black uppercase text-white">Package Examples</h2>
+                  <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
+                    These are the bundled campaign examples that combine locked retainers, launch work, and optional add-ons.
+                  </p>
+                </div>
+                <p className="text-sm text-white/50">{packageCards.length} examples</p>
               </div>
 
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {services.map((service) => (
-                  <div key={service.id} className="rounded-2xl border border-white/10 bg-[#0b0f16] p-5 hover:border-white/20 transition">
-                    <h3 className="font-bold text-white">{service.name}</h3>
-                    <p className="mt-1 text-xs text-white/45">{service.category}</p>
-                    <p className="mt-3 text-sm text-white/70">{service.description}</p>
-                    <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4">
-                      <span className="text-lg font-bold text-white">{service.price_display}</span>
-                      {service.tier && service.tier.length > 0 && (
-                        <div className="flex gap-1">
-                          {service.tier.includes('top') && <span className="rounded px-2 py-1 text-xs bg-purple-500/20 text-purple-200">Top</span>}
-                          {service.tier.includes('lean') && <span className="rounded px-2 py-1 text-xs bg-blue-500/20 text-blue-200">Lean</span>}
-                        </div>
+              <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+                {packageCards.map((preset) => (
+                  <div key={preset.id} className="rounded-3xl border border-white/10 bg-[#0b0f16] p-6">
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div className="max-w-2xl">
+                        <h3 className="text-2xl font-bold text-white">{preset.label}</h3>
+                        <p className="mt-2 text-sm text-white/65">{preset.description}</p>
+                        <p className="mt-3 text-sm text-blue-300">{preset.officeType} campaign • {preset.cycleMonths} months • {preset.targetRegion}</p>
+                      </div>
+                      <span className="rounded-2xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+                        {preset.tier} tier
+                      </span>
+                    </div>
+
+                    <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                      <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                        <p className="text-xs text-white/45">Core Retainers</p>
+                        <p className="mt-1 text-2xl font-bold text-white">${(preset.coreMonthlyTotal / 100).toLocaleString()}</p>
+                        <p className="mt-1 text-xs text-white/40">/month</p>
+                      </div>
+                      <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                        <p className="text-xs text-white/45">Launch Work</p>
+                        <p className="mt-1 text-2xl font-bold text-white">${(preset.launchTotal / 100).toLocaleString()}</p>
+                        <p className="mt-1 text-xs text-white/40">one-time</p>
+                      </div>
+                      <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                        <p className="text-xs text-white/45">Add-ons</p>
+                        <p className="mt-1 text-2xl font-bold text-white">${(preset.addOnMonthlyTotal / 100).toLocaleString()}</p>
+                        <p className="mt-1 text-xs text-white/40">/month</p>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 rounded-2xl border border-blue-500/30 bg-blue-500/10 p-4">
+                      <p className="text-xs text-blue-200">Total Base Monthly Investment</p>
+                      <p className="mt-2 text-3xl font-black text-white">${(preset.monthlyTotal / 100).toLocaleString()}</p>
+                    </div>
+
+                    <div className="mt-5 flex flex-wrap gap-2 text-xs">
+                      {preset.stackTitles.slice(0, 5).map((title) => (
+                        <span key={`${preset.id}-${title}`} className="rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-blue-200">
+                          {title}
+                        </span>
+                      ))}
+                      {preset.stackTitles.length > 5 && (
+                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-white/65">
+                          +{preset.stackTitles.length - 5} more stacks
+                        </span>
                       )}
                     </div>
+
+                    <p className="mt-5 text-sm text-white/55">{preset.profileSummary}</p>
+
+                    <div className="mt-5 flex flex-wrap gap-3 border-t border-white/10 pt-5">
+                      <Sheet>
+                        <SheetTrigger asChild>
+                          <button className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10">
+                            View Full Details
+                          </button>
+                        </SheetTrigger>
+                        <SheetContent side="right" className={PUBLIC_SHEET_CLASS}>
+                          <SheetHeader className="border-b border-white/10 px-6 py-5">
+                            <SheetTitle className="text-2xl text-white">{preset.label}</SheetTitle>
+                            <SheetDescription className="text-white/60">{preset.description}</SheetDescription>
+                            <p className="mt-3 text-xs text-blue-300">{preset.officeType} campaign • {preset.cycleMonths} months • {preset.targetRegion}</p>
+                          </SheetHeader>
+
+                          <div className="space-y-5 px-6 py-5">
+                            {/* Package Summary */}
+                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                              <p className="text-sm font-semibold text-white">Package Summary</p>
+                              <p className="mt-3 text-sm text-white/75">{preset.profileSummary}</p>
+                            </div>
+
+                            {/* Locked Core Services */}
+                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                              <p className="text-sm font-semibold text-white">Locked Core Services ({preset.mustHaveMonthlyRetainers.length})</p>
+                              <div className="mt-4 space-y-2">
+                                {preset.mustHaveMonthlyRetainers.map((serviceId) => {
+                                  const service = CAMPAIGN_SERVICE_CATALOG.find((s) => s.id.toString() === serviceId)
+                                  const monthlyPrice = typeof service?.price_monthly === "number" ? `$${(service.price_monthly / 100).toLocaleString()}/month` : service?.price_display
+                                  return service ? (
+                                    <div key={`${preset.id}-core-${serviceId}`} className="rounded-lg border border-green-500/20 bg-green-500/10 p-3">
+                                      <p className="font-medium text-green-200">{service.name}</p>
+                                      <p className="text-xs text-green-200/60">{monthlyPrice}</p>
+                                    </div>
+                                  ) : null
+                                })}
+                              </div>
+                            </div>
+
+                            {/* Required Launch Work */}
+                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                              <p className="text-sm font-semibold text-white">Required Launch Work ({preset.oneTimeLaunchWork.length})</p>
+                              <div className="mt-4 space-y-2">
+                                {preset.oneTimeLaunchWork.map((serviceId) => {
+                                  const service = CAMPAIGN_SERVICE_CATALOG.find((s) => s.id.toString() === serviceId)
+                                  const launchPrice = typeof service?.price_one_time === "number" ? `$${(service.price_one_time / 100).toLocaleString()} one-time` : service?.price_display
+                                  return service ? (
+                                    <div key={`${preset.id}-launch-${serviceId}`} className="rounded-lg border border-cyan-500/20 bg-cyan-500/10 p-3">
+                                      <p className="font-medium text-cyan-200">{service.name}</p>
+                                      <p className="text-xs text-cyan-200/60">{launchPrice}</p>
+                                    </div>
+                                  ) : null
+                                })}
+                              </div>
+                            </div>
+
+                            {/* Flexible Add-Ons */}
+                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                              <p className="text-sm font-semibold text-white">Flexible Add-Ons ({preset.recommendedAddOns.length})</p>
+                              <div className="mt-4 space-y-2">
+                                {preset.recommendedAddOns.map((serviceId) => {
+                                  const service = CAMPAIGN_SERVICE_CATALOG.find((s) => s.id.toString() === serviceId)
+                                  const addOnPrice = service?.price_display || (typeof service?.price_monthly === "number" ? `$${(service.price_monthly / 100).toLocaleString()}/month` : `$${(service?.price_one_time || 0) / 100} one-time`)
+                                  return service ? (
+                                    <div key={`${preset.id}-addon-${serviceId}`} className="rounded-lg border border-orange-500/20 bg-orange-500/10 p-3">
+                                      <p className="font-medium text-orange-200">{service.name}</p>
+                                      <p className="text-xs text-orange-200/60">{addOnPrice}</p>
+                                    </div>
+                                  ) : null
+                                })}
+                              </div>
+                            </div>
+
+                            {/* Campaign Finance Context */}
+                            <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-5">
+                              <p className="text-sm font-semibold text-amber-200">Campaign Finance Context</p>
+                              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                                <div className="rounded-lg bg-black/20 p-3">
+                                  <p className="text-xs text-white/50">Core Retainers</p>
+                                  <p className="mt-1 text-lg font-bold text-white">${(preset.coreMonthlyTotal / 100).toLocaleString()}/mo</p>
+                                </div>
+                                <div className="rounded-lg bg-black/20 p-3">
+                                  <p className="text-xs text-white/50">Launch Work</p>
+                                  <p className="mt-1 text-lg font-bold text-white">${(preset.launchTotal / 100).toLocaleString()}</p>
+                                </div>
+                                <div className="rounded-lg bg-black/20 p-3">
+                                  <p className="text-xs text-white/50">Add-On Services</p>
+                                  <p className="mt-1 text-lg font-bold text-white">${(preset.addOnMonthlyTotal / 100).toLocaleString()}/mo</p>
+                                </div>
+                                <div className="rounded-lg border border-blue-500/30 bg-blue-500/10 p-3">
+                                  <p className="text-xs text-blue-200">Total Investment</p>
+                                  <p className="mt-1 text-lg font-bold text-white">${(preset.monthlyTotal / 100).toLocaleString()}/mo</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Gap Analysis */}
+                            {preset.gapAnalysis.length > 0 && (
+                              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                                <p className="text-sm font-semibold text-white">Gap Analysis</p>
+                                <p className="mt-2 text-xs text-white/50">Strategic gaps and recommended expansions</p>
+                                <div className="mt-4 space-y-3">
+                                  {preset.gapAnalysis.map((gap, gapIndex) => (
+                                    <div key={`${preset.id}-gap-${gapIndex}`} className="rounded-lg border border-white/10 bg-black/20 p-4">
+                                      <p className="font-medium text-white">{gap.area}</p>
+                                      <p className="mt-2 text-sm text-white/70">{gap.summary}</p>
+                                      <div className="mt-3 flex flex-wrap gap-2">
+                                        {gap.recommendedServiceIds.map((serviceId) => {
+                                          const service = CAMPAIGN_SERVICE_CATALOG.find((s) => s.id.toString() === serviceId)
+                                          return service ? (
+                                            <span key={`${preset.id}-gap-service-${serviceId}`} className="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-xs text-white/60">
+                                              {service.name}
+                                            </span>
+                                          ) : null
+                                        })}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            <div className="flex flex-wrap gap-3 border-t border-white/10 pt-5">
+                              <Link
+                                href={`/auth/sign-up?template=${preset.id}`}
+                                className="inline-flex items-center rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 font-semibold text-blue-200 hover:bg-blue-500/15"
+                              >
+                                Use In Candidate Signup
+                              </Link>
+                            </div>
+                          </div>
+                        </SheetContent>
+                      </Sheet>
+                      <Link
+                        href={`/auth/sign-up?template=${preset.id}`}
+                        className="inline-flex items-center rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-blue-200 hover:bg-blue-500/15"
+                      >
+                        Start Campaign
+                      </Link>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {/* STACKS SECTION */}
           {(activeView === "all" || activeView === "stacks") && (
-            <div className="mb-20">
-              <div className="mb-8">
-                <h2 className="text-3xl font-black uppercase text-white">Campaign Stacks</h2>
-                <p className="mt-2 text-sm text-muted-foreground">{stackCards.length} stacks group related services</p>
+            <div className="mt-12">
+              <div className="mb-8 flex items-end justify-between gap-4 flex-wrap">
+                <div>
+                  <h2 className="text-3xl font-black uppercase text-white">Campaign Stacks</h2>
+                  <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
+                    Stack cards group related services into an operating layer so people can browse strategy before drilling into individual cards.
+                  </p>
+                </div>
+                <p className="text-sm text-white/50">{stackCards.length} stacks</p>
               </div>
 
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
                 {stackCards.map((stack) => (
-                  <div key={stack.id} className="rounded-3xl border border-white/10 bg-[#0b0f16] p-6 hover:border-white/20 transition">
-                    <span className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold ${stack.badgeClass}`}>
-                      {stack.badge}
-                    </span>
-                    <h3 className="mt-3 text-2xl font-bold text-white">{stack.title}</h3>
-                    <p className="mt-2 text-sm text-white/65">{stack.description}</p>
-                    <div className="mt-5 text-sm text-white/55">
-                      <p>{stack.stackServices.length} services • {stack.relatedPackages.length} packages</p>
+                  <div key={stack.id} className="rounded-3xl border border-white/10 bg-[#0b0f16] p-6">
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div>
+                        <span className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold ${stack.badgeClass}`}>
+                          {stack.badge}
+                        </span>
+                        <h3 className="mt-3 text-2xl font-bold text-white">{stack.title}</h3>
+                        <p className="mt-2 text-sm text-white/65">{stack.description}</p>
+                      </div>
+                      <div className="min-w-[220px] space-y-2 text-right text-sm text-white/55">
+                        <p>{stack.stackServices.length} services in stack</p>
+                        <p>{stack.relatedPackages.length} package matches</p>
+                      </div>
                     </div>
-                    <Link
-                      href={`/services/stacks/${slugifyCampaignLabel(stack.title)}`}
-                      className="mt-5 inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10"
-                    >
-                      Open Stack
-                    </Link>
+
+                    <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                      {stack.metrics.map((metric, metricIndex) => (
+                        <div key={`${stack.id}-${metric.label}-${metricIndex}`} className="rounded-2xl border border-white/10 bg-black/20 p-4 text-center">
+                          <p className={`text-2xl font-bold ${metric.accentClass}`}>{metric.value}</p>
+                          <p className="mt-1 text-xs text-white/50">{metric.label}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-5 flex flex-wrap gap-2 text-xs">
+                      {stack.stackServices.slice(0, 4).map((service) => (
+                        <span key={`${stack.id}-${service.id}`} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-white/70">
+                          {service.name}
+                        </span>
+                      ))}
+                      {stack.stackServices.length > 4 && (
+                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-white/50">
+                          +{stack.stackServices.length - 4} more services
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="mt-5 flex flex-wrap gap-3 border-t border-white/10 pt-5">
+                      <Link
+                        href={`/services/stacks/${slugifyCampaignLabel(stack.title)}`}
+                        className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                      >
+                        Open Stack Page
+                      </Link>
+                      <Link
+                        href="/services"
+                        className="inline-flex items-center rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-blue-200 hover:bg-blue-500/15"
+                      >
+                        Browse Stack Examples
+                      </Link>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {/* PACKAGES SECTION - LAST */}
-          {(activeView === "all" || activeView === "packages") && (
-            <div>
-              <div className="mb-12 rounded-3xl border border-white/15 bg-gradient-to-r from-blue-950/30 to-indigo-950/30 p-8">
-                <h2 className="text-4xl font-black uppercase text-white">Campaign Packages</h2>
-                <p className="mt-3 text-lg text-white/75">Premium bundles designed for competitive campaigns</p>
-                <p className="mt-2 text-sm text-white/50">Only TOP-TIER packages shown • Comprehensive service bundles</p>
+          {(activeView === "all" || activeView === "services") && (
+            <div className="mt-12">
+              <div className="mb-8 flex items-end justify-between gap-4 flex-wrap">
+                <div>
+                  <h2 className="text-3xl font-black uppercase text-white">Individual Service Cards</h2>
+                  <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
+                    Every service below is a real card from the shared catalog. Monthly retainers and one-time launch projects are shown together so you can compare scope, pricing, and package coverage.
+                  </p>
+                </div>
+                <p className="text-sm text-white/50">{services.length} services</p>
               </div>
 
-              {/* MAYOR SECTION */}
-              <div className="mb-12">
-                <h3 className="text-3xl font-bold text-white mb-6">🏛️ Mayoral Campaigns</h3>
-                <div className="grid grid-cols-1 gap-8">
-                  {packageCards.filter(p => p.officeType === 'mayor').map((preset) => (
-                    <div key={preset.id} className="rounded-3xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-950/40 to-blue-950/40 p-8">
-                      {/* TIER BADGE - HUGE AND PROMINENT */}
-                      <div className="mb-6 inline-block">
-                        <span className="rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 text-2xl font-black uppercase tracking-[0.2em] text-white shadow-lg">
-                          ⭐ TOP TIER
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {services.map((service) => {
+              const Icon = service.icon
+              const launchProject = isOneTimeService(service.price_display)
+              const visual = getCategoryVisual(service.category)
+              const stack = getCampaignStackForService(service)
+              const commercialModel = getCampaignCommercialModel(service)
+              const packageMatches = CAMPAIGN_PACKAGE_PRESETS.filter((preset) =>
+                preset.mustHaveMonthlyRetainers.includes(service.id) ||
+                preset.oneTimeLaunchWork.includes(service.id) ||
+                preset.recommendedAddOns.includes(service.id),
+              )
+
+              return (
+                <div key={service.id} className={`rounded-3xl border border-white/10 bg-gradient-to-br ${visual.bodyClass} overflow-hidden`}>
+                  <div className={`relative h-20 overflow-hidden ${visual.headerClass}`}>
+                    <AnimatedServiceBackground type={visual.animation} />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50" />
+                  </div>
+                  <div className="p-5 space-y-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+                        <Icon className="h-5 w-5 text-white/80" />
+                      </div>
+                      {service.popular && (
+                        <span className="rounded-full border border-orange-500/30 bg-orange-500/15 px-2 py-1 text-[11px] font-semibold text-orange-300">
+                          Popular
                         </span>
+                      )}
+                    </div>
+                    <div>
+                      <p className="text-[11px] uppercase tracking-wide text-white/40">{service.category}</p>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        <span className={`rounded-full border px-2 py-1 text-[11px] font-semibold ${launchProject ? "border-cyan-500/30 bg-cyan-500/15 text-cyan-300" : "border-green-500/30 bg-green-500/15 text-green-300"}`}>
+                          {launchProject ? "Launch project" : "Monthly retainer"}
+                        </span>
+                        {packageMatches.slice(0, 2).map((preset) => (
+                          <span key={`${service.id}-${preset.id}`} className="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-[11px] text-white/70">
+                            {preset.label}
+                          </span>
+                        ))}
                       </div>
-
-                      <h3 className="text-3xl font-black text-white">{preset.label}</h3>
-                      <p className="mt-3 text-lg text-white/75">{preset.description}</p>
-                      <p className="mt-2 text-sm text-white/50">{preset.cycleMonths} month campaign • {preset.targetRegion}</p>
-
-                      {/* PRICING - LARGE AND CLEAR */}
-                      <div className="mt-8 rounded-2xl border-2 border-white/20 bg-white/5 p-6">
-                        <p className="text-sm text-white/60 uppercase tracking-wider">Base Monthly Investment</p>
-                        <p className="mt-2 text-5xl font-black text-white">
-                          ${(preset.monthlyTotal / 100).toLocaleString()}
-                          <span className="text-xl text-white/60">/month</span>
-                        </p>
-                        <p className="mt-3 text-sm text-white/60">
-                          Launch Cost: ${(preset.launchTotal / 100).toLocaleString()} (one-time)
-                        </p>
-                      </div>
-
-                      {/* PACKAGE BREAKDOWN */}
-                      <div className="mt-8 grid grid-cols-3 gap-4">
-                        <div className="rounded-lg bg-white/5 border border-white/10 p-4">
-                          <p className="text-xs text-white/50">Core Services</p>
-                          <p className="mt-2 text-2xl font-bold text-white">{preset.mustHaveMonthlyRetainers.length}</p>
-                        </div>
-                        <div className="rounded-lg bg-white/5 border border-white/10 p-4">
-                          <p className="text-xs text-white/50">Launch Work</p>
-                          <p className="mt-2 text-2xl font-bold text-white">{preset.oneTimeLaunchWork.length}</p>
-                        </div>
-                        <div className="rounded-lg bg-white/5 border border-white/10 p-4">
-                          <p className="text-xs text-white/50">Add-ons</p>
-                          <p className="mt-2 text-2xl font-bold text-white">{preset.recommendedAddOns.length}</p>
-                        </div>
-                      </div>
-
-                      {/* BUTTONS */}
-                      <div className="mt-8 flex gap-4">
-                        <Sheet>
-                          <SheetTrigger asChild>
-                            <button className="rounded-xl border border-white/10 bg-white/10 px-6 py-3 font-semibold text-white hover:bg-white/15">
-                              View Full Details
-                            </button>
-                          </SheetTrigger>
-                          <SheetContent className={PUBLIC_SHEET_CLASS}>
-                            <SheetHeader className="mb-6">
-                              <SheetTitle className="text-white">{preset.label}</SheetTitle>
-                              <SheetDescription className="text-white/60">
-                                Top-Tier Package • {preset.cycleMonths} months
-                              </SheetDescription>
-                            </SheetHeader>
-                            
-                            <div className="space-y-6">
-                              <div>
-                                <h4 className="font-semibold text-white mb-3">Core Monthly Services</h4>
-                                <div className="space-y-2">
-                                  {preset.mustHaveMonthlyRetainers.map((id) => {
-                                    const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
-                                    return svc ? (
-                                      <div key={svc.id} className="text-sm p-2 rounded bg-white/5">
-                                        <p className="text-white font-medium">{svc.name}</p>
-                                        <p className="text-xs text-white/50">{svc.price_display}</p>
-                                      </div>
-                                    ) : null
-                                  })}
-                                </div>
-                              </div>
-
-                              {preset.oneTimeLaunchWork.length > 0 && (
-                                <div>
-                                  <h4 className="font-semibold text-white mb-3">Launch Services</h4>
-                                  <div className="space-y-2">
-                                    {preset.oneTimeLaunchWork.map((id) => {
-                                      const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
-                                      return svc ? (
-                                        <div key={svc.id} className="text-sm p-2 rounded bg-white/5">
-                                          <p className="text-white font-medium">{svc.name}</p>
-                                          <p className="text-xs text-white/50">{svc.price_display}</p>
-                                        </div>
-                                      ) : null
-                                    })}
-                                  </div>
-                                </div>
+                      <h3 className="mt-3 text-xl font-bold text-white">{service.name}</h3>
+                      <p className="mt-2 text-sm text-white/60">{service.description}</p>
+                      <Sheet>
+                        <SheetTrigger asChild>
+                          <button className="mt-3 inline-flex items-center text-sm font-semibold text-cyan-300 hover:text-cyan-200">
+                            View Service Breakdown
+                          </button>
+                        </SheetTrigger>
+                        <SheetContent side="right" className={PUBLIC_SHEET_CLASS}>
+                          <SheetHeader className="border-b border-white/10 px-6 py-5">
+                            <div className="flex flex-wrap gap-2">
+                              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">{service.price_display}</span>
+                              <span className={`rounded-full border px-3 py-1 text-xs ${commercialModel === "monthly-retainer" ? "border-green-500/30 bg-green-500/15 text-green-300" : "border-cyan-500/30 bg-cyan-500/15 text-cyan-300"}`}>
+                                {commercialModel === "monthly-retainer" ? "Monthly retainer" : "Launch project"}
+                              </span>
+                              {stack && (
+                                <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-xs text-blue-200">
+                                  Stack: {stack.title}
+                                </span>
                               )}
                             </div>
-                          </SheetContent>
-                        </Sheet>
-                        <Link
-                          href={`/auth/sign-up?template=${preset.id}`}
-                          className="rounded-xl bg-white px-6 py-3 font-semibold text-black hover:bg-white/90"
-                        >
-                          Start Campaign
-                        </Link>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                            <SheetTitle className="text-2xl text-white">{service.name}</SheetTitle>
+                            <SheetDescription className="text-white/60">{service.description}</SheetDescription>
+                          </SheetHeader>
 
-              {/* COUNCILLOR SECTION */}
-              <div>
-                <h3 className="text-3xl font-bold text-white mb-6">🏘️ Councillor Campaigns</h3>
-                <div className="grid grid-cols-1 gap-8">
-                  {packageCards.filter(p => p.officeType === 'councillor').map((preset) => (
-                    <div key={preset.id} className="rounded-3xl border-2 border-indigo-500/30 bg-gradient-to-br from-indigo-950/40 to-blue-950/40 p-8">
-                      {/* TIER BADGE - HUGE AND PROMINENT */}
-                      <div className="mb-6 inline-block">
-                        <span className="rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 px-6 py-3 text-2xl font-black uppercase tracking-[0.2em] text-white shadow-lg">
-                          ⭐ TOP TIER
-                        </span>
-                      </div>
-
-                      <h3 className="text-3xl font-black text-white">{preset.label}</h3>
-                      <p className="mt-3 text-lg text-white/75">{preset.description}</p>
-                      <p className="mt-2 text-sm text-white/50">{preset.cycleMonths} month campaign • {preset.targetRegion}</p>
-
-                      {/* PRICING - LARGE AND CLEAR */}
-                      <div className="mt-8 rounded-2xl border-2 border-white/20 bg-white/5 p-6">
-                        <p className="text-sm text-white/60 uppercase tracking-wider">Base Monthly Investment</p>
-                        <p className="mt-2 text-5xl font-black text-white">
-                          ${(preset.monthlyTotal / 100).toLocaleString()}
-                          <span className="text-xl text-white/60">/month</span>
-                        </p>
-                        <p className="mt-3 text-sm text-white/60">
-                          Launch Cost: ${(preset.launchTotal / 100).toLocaleString()} (one-time)
-                        </p>
-                      </div>
-
-                      {/* PACKAGE BREAKDOWN */}
-                      <div className="mt-8 grid grid-cols-3 gap-4">
-                        <div className="rounded-lg bg-white/5 border border-white/10 p-4">
-                          <p className="text-xs text-white/50">Core Services</p>
-                          <p className="mt-2 text-2xl font-bold text-white">{preset.mustHaveMonthlyRetainers.length}</p>
-                        </div>
-                        <div className="rounded-lg bg-white/5 border border-white/10 p-4">
-                          <p className="text-xs text-white/50">Launch Work</p>
-                          <p className="mt-2 text-2xl font-bold text-white">{preset.oneTimeLaunchWork.length}</p>
-                        </div>
-                        <div className="rounded-lg bg-white/5 border border-white/10 p-4">
-                          <p className="text-xs text-white/50">Add-ons</p>
-                          <p className="mt-2 text-2xl font-bold text-white">{preset.recommendedAddOns.length}</p>
-                        </div>
-                      </div>
-
-                      {/* BUTTONS */}
-                      <div className="mt-8 flex gap-4">
-                        <Sheet>
-                          <SheetTrigger asChild>
-                            <button className="rounded-xl border border-white/10 bg-white/10 px-6 py-3 font-semibold text-white hover:bg-white/15">
-                              View Full Details
-                            </button>
-                          </SheetTrigger>
-                          <SheetContent className={PUBLIC_SHEET_CLASS}>
-                            <SheetHeader className="mb-6">
-                              <SheetTitle className="text-white">{preset.label}</SheetTitle>
-                              <SheetDescription className="text-white/60">
-                                Top-Tier Package • {preset.cycleMonths} months
-                              </SheetDescription>
-                            </SheetHeader>
-                            
-                            <div className="space-y-6">
-                              <div>
-                                <h4 className="font-semibold text-white mb-3">Core Monthly Services</h4>
-                                <div className="space-y-2">
-                                  {preset.mustHaveMonthlyRetainers.map((id) => {
-                                    const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
-                                    return svc ? (
-                                      <div key={svc.id} className="text-sm p-2 rounded bg-white/5">
-                                        <p className="text-white font-medium">{svc.name}</p>
-                                        <p className="text-xs text-white/50">{svc.price_display}</p>
-                                      </div>
-                                    ) : null
-                                  })}
-                                </div>
-                              </div>
-
-                              {preset.oneTimeLaunchWork.length > 0 && (
-                                <div>
-                                  <h4 className="font-semibold text-white mb-3">Launch Services</h4>
-                                  <div className="space-y-2">
-                                    {preset.oneTimeLaunchWork.map((id) => {
-                                      const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
-                                      return svc ? (
-                                        <div key={svc.id} className="text-sm p-2 rounded bg-white/5">
-                                          <p className="text-white font-medium">{svc.name}</p>
-                                          <p className="text-xs text-white/50">{svc.price_display}</p>
-                                        </div>
-                                      ) : null
-                                    })}
+                          <div className="space-y-5 px-6 py-5">
+                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                              <p className="text-sm font-semibold text-white">What’s included</p>
+                              <div className="mt-4 space-y-3">
+                                {service.features.map((feature) => (
+                                  <div key={`${service.id}-catalog-sheet-feature-${feature}`} className="rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white/75">
+                                    {feature}
                                   </div>
-                                </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                              <p className="text-sm font-semibold text-white">Package placement</p>
+                              <div className="mt-4 space-y-3">
+                                {packageMatches.length > 0 ? packageMatches.map((preset) => (
+                                  <div key={`${service.id}-catalog-sheet-package-${preset.id}`} className="rounded-xl border border-white/10 bg-black/20 p-4">
+                                    <p className="font-medium text-white">{preset.label}</p>
+                                    <p className="mt-1 text-sm text-white/60">{preset.description}</p>
+                                  </div>
+                                )) : (
+                                  <p className="text-sm text-white/60">This service is available individually even when it is not pre-bundled in a campaign template.</p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-5">
+                              <p className="text-sm font-semibold text-amber-200">Selling premise</p>
+                              <p className="mt-2 text-sm text-white/75">
+                                Use this service when the campaign needs sharper Gen Z and Millennial voter targeting, stronger persuasion, or a more reliable turnout system.
+                              </p>
+                            </div>
+
+                            <div className="flex flex-wrap gap-3 border-t border-white/10 pt-5">
+                              <Link
+                                href={`/services/catalog/${slugifyCampaignLabel(service.name)}`}
+                                className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-4 py-3 font-semibold text-white hover:bg-white/10"
+                              >
+                                Open Standalone Service Page
+                              </Link>
+                              {stack && (
+                                <Link
+                                  href={`/services/stacks/${slugifyCampaignLabel(stack.title)}`}
+                                  className="inline-flex items-center rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 font-semibold text-blue-200 hover:bg-blue-500/15"
+                                >
+                                  Open Standalone Stack Page
+                                </Link>
                               )}
                             </div>
-                          </SheetContent>
-                        </Sheet>
-                        <Link
-                          href={`/auth/sign-up?template=${preset.id}`}
-                          className="rounded-xl bg-white px-6 py-3 font-semibold text-black hover:bg-white/90"
-                        >
-                          Start Campaign
-                        </Link>
-                      </div>
+                          </div>
+                        </SheetContent>
+                      </Sheet>
                     </div>
-                  ))}
+                    <div className="space-y-1 text-sm text-white/70">
+                      {service.features.slice(0, 4).map((feature) => (
+                        <div key={`${service.id}-${feature}`} className="flex items-center gap-2">
+                          <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
+                          <span>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex flex-col gap-3 border-t border-white/10 pt-4 sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+                      <span className="text-xl font-bold leading-tight text-white break-words">{service.price_display}</span>
+                      <Link
+                        href={isVerifiedCandidate ? `/candidate-portal/checkout?service=${service.id}` : "/auth/sign-up"}
+                        className="inline-flex min-h-10 w-full items-center justify-center rounded-xl bg-white px-4 py-2 text-center text-sm font-semibold text-black hover:bg-white/90 sm:min-w-[132px] sm:w-auto"
+                      >
+                        {launchProject ? "Start Project" : "Start Retainer"}
+                      </Link>
+                    </div>
+                  </div>
                 </div>
+              )
+            })}
               </div>
             </div>
           )}
+        </div>
+      </section>
+
+      <section className="border-t border-border bg-blue-950/10 py-16">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="rounded-3xl border border-white/10 bg-[#0b0f16] p-6 md:p-8">
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <div>
+                <h2 className="text-2xl font-black uppercase text-white">Olivia Chow Campaign Finance Reference</h2>
+                <p className="mt-2 max-w-3xl text-sm text-white/60">
+                  This benchmark sits at the bottom of the public catalog so people can compare a real municipal filing against the service buckets and campaign-stack model shown above.
+                </p>
+              </div>
+              <a href={OFFICIAL_FINANCE_SOURCE_URL} target="_blank" rel="noreferrer" className="text-sm text-amber-300 underline underline-offset-4 hover:text-amber-200">
+                Open official City of Toronto disclosure
+              </a>
+            </div>
+
+            <div className="mt-8 grid gap-4 md:grid-cols-5">
+              <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+                <p className="text-xs text-white/50">Candidate</p>
+                <p className="mt-1 font-semibold text-white">{OLIVIA_CHOW_2023_FINANCE.candidateName}</p>
+                <p className="mt-1 text-xs text-white/40">{OLIVIA_CHOW_2023_FINANCE.election}</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+                <p className="text-xs text-white/50">Spending Limit</p>
+                <p className="mt-1 font-semibold text-white">{formatCurrency(OLIVIA_CHOW_2023_FINANCE.spendingLimitCents)}</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+                <p className="text-xs text-white/50">Official Contributions</p>
+                <p className="mt-1 font-semibold text-white">{formatCurrency(OLIVIA_CHOW_2023_FINANCE.totalContributionsCents)}</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+                <p className="text-xs text-white/50">Official Expenses</p>
+                <p className="mt-1 font-semibold text-white">{formatCurrency(OLIVIA_CHOW_2023_FINANCE.totalExpensesCents)}</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+                <p className="text-xs text-white/50">Filed Surplus</p>
+                <p className="mt-1 font-semibold text-white">{formatCurrency(OLIVIA_CHOW_2023_FINANCE.surplusCents)}</p>
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+                <p className="text-sm font-medium text-white">Budget Usage</p>
+                <p className="mt-2 text-sm text-white/70">
+                  {formatCurrency(OLIVIA_CHOW_2023_FINANCE.totalExpensesCents)} spent against a {formatCurrency(OLIVIA_CHOW_2023_FINANCE.spendingLimitCents)} limit.
+                </p>
+                <p className="mt-2 text-xs text-amber-300">{formatPercent(oliviaBudgetUsage * 100)} of official spending limit used.</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+                <p className="text-sm font-medium text-white">Largest Filed Cost Bucket</p>
+                <p className="mt-2 text-sm text-white/70">{oliviaLargestCategory.label}</p>
+                <p className="mt-2 text-xs text-amber-300">
+                  {formatCurrency(oliviaLargestCategory.amountCents)} mapped to {oliviaLargestCategory.mappedService}.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 rounded-xl border border-white/10 bg-black/20 p-4">
+              <div className="mb-4 flex items-center gap-2">
+                <Scale className="h-4 w-4 text-amber-300" />
+                <p className="font-medium text-white">Filed Categories Mapped To Service Buckets</p>
+              </div>
+              <div className="space-y-3">
+                {OLIVIA_CHOW_2023_FINANCE.categories.map((category) => (
+                  <div key={category.label} className="flex items-start justify-between gap-4 border-b border-white/5 pb-3 last:border-b-0 last:pb-0">
+                    <div>
+                      <p className="text-sm font-medium text-white">{category.label}</p>
+                      <p className="mt-1 text-xs text-white/50">Mapped here as: {category.mappedService}</p>
+                    </div>
+                    <p className="whitespace-nowrap font-medium text-white">{formatCurrency(category.amountCents)}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>

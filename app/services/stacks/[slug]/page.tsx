@@ -71,7 +71,7 @@ export default async function ServiceStackDetailPage({ params }: { params: Promi
                   <p className="text-xs uppercase tracking-[0.2em] text-white/40">{service.category}</p>
                   <h3 className="mt-3 text-xl font-semibold">{service.name}</h3>
                   <p className="mt-2 text-sm text-white/65">{service.description}</p>
-                  <p className="mt-4 text-sm font-semibold text-cyan-300 whitespace-nowrap">{service.price_display}</p>
+                  <p className="mt-4 text-sm font-semibold text-cyan-300">{service.price_display}</p>
                 </Link>
               ))}
             </div>
