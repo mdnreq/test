@@ -151,8 +151,13 @@ function resolveCatalogView(value?: string): CatalogView {
   return CATALOG_VIEW_OPTIONS.some((option) => option.value === value) ? (value as CatalogView) : "all"
 }
 
-export default async function ServicesCatalogPage() {
-  const activeView: CatalogView = "all"
+export default async function ServicesCatalogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ view?: string }>
+}) {
+  const params = await searchParams
+  const activeView: CatalogView = resolveCatalogView(params.view)
   const supabase = await createClient()
   const {
     data: { user },
@@ -341,6 +346,30 @@ export default async function ServicesCatalogPage() {
                           +{preset.stackTitles.length - 5} more stacks
                         </span>
                       )}
+                    </div>
+
+                    {/* Pricing Summary */}
+                    <div className="mt-5 grid grid-cols-2 gap-3">
+                      <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
+                        <p className="text-xs text-white/45">Monthly Core</p>
+                        <p className="mt-1 text-lg font-bold text-white">
+                          ${(preset.mustHaveMonthlyRetainers.reduce((sum, id) => {
+                            const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
+                            return sum + (svc?.price_monthly || 0)
+                          }, 0) / 100).toLocaleString()}
+                        </p>
+                        <p className="text-xs text-white/40">/month</p>
+                      </div>
+                      <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
+                        <p className="text-xs text-white/45">Launch Cost</p>
+                        <p className="mt-1 text-lg font-bold text-white">
+                          ${(preset.oneTimeLaunchWork.reduce((sum, id) => {
+                            const svc = CAMPAIGN_SERVICE_CATALOG.find(s => s.id === id)
+                            return sum + (svc?.price_monthly || 0)
+                          }, 0) / 100).toLocaleString()}
+                        </p>
+                        <p className="text-xs text-white/40">one-time</p>
+                      </div>
                     </div>
 
                     <p className="mt-5 text-sm text-white/55">{preset.profileSummary}</p>
