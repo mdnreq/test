@@ -756,12 +756,12 @@ export default async function ServicesPage() {
                                   <div className="mt-3 space-y-2 text-white/85">
                                     {coreServices.map((service) => (
                                       <div key={`${preset.id}-sheet-core-${service.id}`} className="flex min-w-0 flex-col gap-1 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                                        <span className="min-w-0 break-words text-white/90">{service.name}</span>
-                                        <span className="text-white/45">{service.price_display}</span>
+                                        <span className="min-w-0 line-clamp-2 text-white/90">{service.name}</span>
+                                        <span className="whitespace-nowrap text-white/45">{service.price_display}</span>
                                       </div>
                                     ))}
                                   </div>
-                                  <p className="mt-3 break-words text-xs text-white/55">Stack coverage: {coreStackHighlights.visible.join(", ")}{coreStackHighlights.hiddenCount > 0 ? ` +${coreStackHighlights.hiddenCount} more` : ""}</p>
+                                  <p className="line-clamp-2 text-xs text-white/55">Stack coverage: {coreStackHighlights.visible.join(", ")}{coreStackHighlights.hiddenCount > 0 ? ` +${coreStackHighlights.hiddenCount} more` : ""}</p>
                                 </div>
 
                                 <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-4">
@@ -771,12 +771,12 @@ export default async function ServicesPage() {
                                   <div className="mt-3 space-y-2 text-white/85">
                                     {launchServices.map((service) => (
                                       <div key={`${preset.id}-sheet-launch-${service.id}`} className="flex min-w-0 flex-col gap-1 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                                        <span className="min-w-0 break-words text-white/90">{service.name}</span>
-                                        <span className="text-white/45">{service.price_display}</span>
+                                        <span className="min-w-0 line-clamp-2 text-white/90">{service.name}</span>
+                                        <span className="whitespace-nowrap text-white/45">{service.price_display}</span>
                                       </div>
                                     ))}
                                   </div>
-                                  <p className="mt-3 break-words text-xs text-white/55">Stack coverage: {launchStackHighlights.visible.join(", ")}{launchStackHighlights.hiddenCount > 0 ? ` +${launchStackHighlights.hiddenCount} more` : ""}</p>
+                                  <p className="line-clamp-2 text-xs text-white/55">Stack coverage: {launchStackHighlights.visible.join(", ")}{launchStackHighlights.hiddenCount > 0 ? ` +${launchStackHighlights.hiddenCount} more` : ""}</p>
                                 </div>
 
                                 <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-4">
@@ -786,12 +786,12 @@ export default async function ServicesPage() {
                                   <div className="mt-3 space-y-2 text-white/85">
                                     {addOnServices.length > 0 ? addOnServices.map((service) => (
                                       <div key={`${preset.id}-sheet-addon-${service.id}`} className="flex min-w-0 flex-col gap-1 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                                        <span className="min-w-0 break-words text-white/90">{service.name}</span>
-                                        <span className="text-white/45">{service.price_display}</span>
+                                        <span className="min-w-0 line-clamp-2 text-white/90">{service.name}</span>
+                                        <span className="whitespace-nowrap text-white/45">{service.price_display}</span>
                                       </div>
                                     )) : <p className="text-white/60">No add-ons selected for this package.</p>}
                                   </div>
-                                  <p className="mt-3 break-words text-xs text-white/55">Stack coverage: {addOnServices.length === 0 ? "No add-on stack examples" : `${addOnStackHighlights.visible.join(", ")}${addOnStackHighlights.hiddenCount > 0 ? ` +${addOnStackHighlights.hiddenCount} more` : ""}`}</p>
+                                  <p className="line-clamp-2 text-xs text-white/55">Stack coverage: {addOnServices.length === 0 ? "No add-on stack examples" : `${addOnStackHighlights.visible.join(", ")}${addOnStackHighlights.hiddenCount > 0 ? ` +${addOnStackHighlights.hiddenCount} more` : ""}`}</p>
                                 </div>
                               </div>
 

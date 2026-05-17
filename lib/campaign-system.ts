@@ -156,6 +156,25 @@ export const CAMPAIGN_SERVICE_CATALOG: CampaignServiceDefinition[] = [
   { id: "33", name: "Youth Voter Outreach", description: "Specialized strategies for engaging Gen Z voters and building first-time turnout momentum", category: "Digital Marketing", price_monthly: 595, price_display: "$595/month", features: ["18-24 demographic targeting", "Campus and school engagement", "Youth ambassador network", "Social media activation"], popular: true },
   { id: "34", name: "Gen Z Engagement Strategy", description: "AI-powered strategies to authentically connect with Gen Z voters (1997-2012)", category: "Digital Marketing", price_monthly: 695, price_display: "$695/month", features: ["TikTok & Instagram Reels content", "Meme-driven messaging", "Discord/Twitch community building", "Climate & social justice positioning"], popular: true },
   { id: "35", name: "Millennial Mobilization", description: "Data-driven approaches to engage Millennial voters (1981-1996) on key issues", category: "Digital Marketing", price_monthly: 745, price_display: "$745/month", features: ["Housing affordability messaging", "Student debt relief positioning", "Work-life balance advocacy", "Facebook & LinkedIn targeting"], popular: false },
+  
+  // CAMPAIGN MEDIA SERVICES - PRODUCTION & CREATIVE
+  { id: "82", name: "Creative Direction & Art Direction", description: "Professional creative direction for all campaign materials, ensuring consistent visual storytelling", category: "Design", price_monthly: 1295, price_display: "$1,295/month", features: ["Creative strategy", "Visual direction", "Style guides", "Design oversight", "Material review & feedback"], popular: true },
+  
+  { id: "83", name: "Event Media Coverage & Live Streaming", description: "Professional photography, videography, and live streaming for campaign events and town halls", category: "Content Creation", price_monthly: 1595, price_display: "$1,595/month", features: ["Event photography (high-res)", "Event videography (4K)", "Live stream setup", "Social media clips", "Post-event editing"], popular: true },
+  
+  { id: "84", name: "Podcast Production & Distribution", description: "Full podcast production including recording, editing, and distribution across all platforms", category: "Content Creation", price_monthly: 1295, price_display: "$1,295/month", features: ["Episode planning & scripts", "Professional recording", "Audio editing & mixing", "Distribution to all platforms", "Show artwork & branding"], popular: true },
+  
+  { id: "85", name: "Podcast Production - Elite", description: "Premium podcast production with interviews, graphics, analytics, and multi-platform promotion", category: "Content Creation", price_monthly: 2495, price_display: "$2,495/month", features: ["Unlimited episode production", "Guest interview coordination", "Video podcast creation", "Social media graphics per episode", "Analytics & listener reports", "Multi-platform scheduling"], popular: true },
+  
+  { id: "86", name: "Event Production & Staging", description: "End-to-end event production including technical setup, lighting, sound, and stage design", category: "Content Creation", price_monthly: 2495, price_display: "$2,495/month", features: ["Technical production planning", "Lighting & sound setup", "Stage design", "Video/slide integration", "Sound check & rehearsal"], popular: false },
+  
+  { id: "87", name: "Content Studio Access", description: "24/7 access to professional content creation studio with green screen, lighting, and editing", category: "Content Creation", price_monthly: 995, price_display: "$995/month", features: ["Studio space rental", "Green screen setup", "Professional lighting", "Audio recording booth", "Post-production software access"], popular: false },
+  
+  { id: "88", name: "Content Calendar & Strategy", description: "AI-powered content calendar with editorial strategy, audience insights, and performance optimization", category: "Content Creation", price_monthly: 795, price_display: "$795/month", features: ["Content planning (12 weeks)", "AI topic generation", "Platform-specific optimization", "Scheduling integration", "Performance dashboards"], popular: true },
+  
+  { id: "89", name: "Social Media Content Production", description: "High-volume social media content creation including graphics, videos, and copy", category: "Digital Marketing", price_monthly: 1895, price_display: "$1,895/month", features: ["50+ posts/month", "Reels & TikToks", "Story content", "Carousel posts", "Audience engagement"], popular: true },
+  
+  { id: "90", name: "Social Media Content Production - Elite", description: "Premium social media production with unlimited posts, influencer coordination, and viral strategies", category: "Digital Marketing", price_monthly: 3495, price_display: "$3,495/month", features: ["Unlimited content", "Influencer partnerships", "Viral trend optimization", "Community management", "Real-time monitoring", "Crisis response"], popular: true },
 ]
 
 export const PUBLIC_SERVICE_STACKS: PublicServiceStack[] = [
