@@ -142,6 +142,12 @@ function SignUpPageContent() {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
 
+    // Check if province is completed
+    if (province && completedProvinces.includes(province)) {
+      setError(`${province} has completed its election cycle. Registration is closed for this province.`)
+      return
+    }
+
     if (isCandidate) {
       if (!isEligible) {
         setError("The Next Majority platform is youth-led. Candidates must be Gen X or younger.")
@@ -239,9 +245,17 @@ function SignUpPageContent() {
             <div className="mb-6 text-center py-6 border-t-2 border-b-2 border-red-500/50">
               <div className="flex items-center justify-center gap-3 mb-2">
                 <div className="flex-1 border-t-2 border-red-500/60" />
-                <span className="text-4xl font-black text-red-500" style={{ letterSpacing: '0.1em' }}>
-                  77
-                </span>
+                <div className="relative">
+                  <span 
+                    className="text-4xl font-black text-red-500 relative inline-block" 
+                    style={{ letterSpacing: '0.1em' }}
+                  >
+                    77
+                  </span>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-full h-1 bg-red-500 transform -rotate-12" />
+                  </div>
+                </div>
                 <div className="flex-1 border-t-2 border-red-500/60" />
               </div>
               <p className="text-sm font-semibold text-slate-400 uppercase tracking-wider">New Brunswick</p>
