@@ -47,7 +47,7 @@ function getElectionYear(municipality: MunicipalityView) {
   return Number.isNaN(year) ? undefined : year
 }
 
-function renderMunicipalityCard(municipality: MunicipalityView, projectionLabel = "MILLENNIAL TURNOUT SIMULATION") {
+function renderMunicipalityCard(municipality: MunicipalityView, projectionLabel = "GEN Z & MILLENNIAL TURNOUT SIMULATION") {
   const turnoutYears = getTurnoutYears(municipality)
   const electionYear = getElectionYear(municipality)
   const rawLatestYear = turnoutYears[0]
@@ -349,7 +349,7 @@ export default async function MunicipalitiesPage() {
               <TrendingUp className="h-6 w-6 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl">Gen Millennial Turnout Simulation</CardTitle>
+              <CardTitle className="text-2xl">Gen Z & Millennial Turnout Simulation</CardTitle>
               <CardDescription className="text-blue-200">
                 Projected turnout increase with targeted Gen Z & Millennial engagement
               </CardDescription>
@@ -451,7 +451,7 @@ export default async function MunicipalitiesPage() {
 
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {displayedNbMunicipalities.map((municipality) =>
-              renderMunicipalityCard(municipality, "MILLENNIAL TURNOUT PROJECTION"),
+              renderMunicipalityCard(municipality, "GEN Z & MILLENNIAL TURNOUT PROJECTION"),
             )}
           </div>
         </TabsContent>
