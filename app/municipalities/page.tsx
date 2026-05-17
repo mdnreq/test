@@ -409,19 +409,19 @@ export default async function MunicipalitiesPage() {
         </div>
 
         <TabsContent value="ontario" className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {displayedOntarioMunicipalities.map((municipality) => renderMunicipalityCard(municipality))}
           </div>
         </TabsContent>
 
         <TabsContent value="pei" className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {displayedPeiMunicipalities.map((municipality) => renderMunicipalityCard(municipality))}
           </div>
         </TabsContent>
 
         <TabsContent value="manitoba" className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {displayedManitobaMunicipalities.map((municipality) => renderMunicipalityCard(municipality))}
           </div>
         </TabsContent>
@@ -452,7 +452,7 @@ export default async function MunicipalitiesPage() {
             </CardContent>
           </Card>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {displayedNbMunicipalities.map((municipality) =>
               renderMunicipalityCard(municipality, "MILLENNIAL TURNOUT PROJECTION"),
             )}
@@ -460,19 +460,19 @@ export default async function MunicipalitiesPage() {
         </TabsContent>
 
         <TabsContent value="nwt" className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {displayedNwtMunicipalities.map((municipality) => renderMunicipalityCard(municipality))}
           </div>
         </TabsContent>
 
         <TabsContent value="bc" className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {displayedBcMunicipalities.map((municipality) => renderMunicipalityCard(municipality))}
           </div>
         </TabsContent>
 
         <TabsContent value="sk" className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {displayedSkMunicipalities.map((municipality) => renderMunicipalityCard(municipality))}
           </div>
         </TabsContent>
