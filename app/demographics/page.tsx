@@ -41,7 +41,7 @@ export default function DemographicsPage() {
             <p className="text-white/70 mb-4">Next Majority Target Pool</p>
             <ul className="space-y-2 text-sm text-white/60">
               <li>• Gen X and younger (74% of all candidates)</li>
-              <li>• Support Votes at 16 policy</li>
+              <li>• Support millennial voter mobilization through digital campaigns</li>
               <li>• Progressive municipal platforms</li>
               <li>• Non-Boomer candidates (under 59)</li>
             </ul>

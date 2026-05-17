@@ -65,7 +65,7 @@ export default function VoterDashboard() {
         })
 
         setReputationHistory([
-          { id: "1", action_type: "proposal_vote", points: 10, description: "Voted on 'School to ballot programme'", created_at: new Date(Date.now() - 2*24*60*60*1000).toISOString() },
+          { id: "1", action_type: "proposal_vote", points: 10, description: "Voted on 'Millennial Civic Mobilization Initiative'", created_at: new Date(Date.now() - 2*24*60*60*1000).toISOString() },
           { id: "2", action_type: "issue_raised", points: 25, description: "Raised issue: 'Youth transit passes'", created_at: new Date(Date.now() - 5*24*60*60*1000).toISOString() },
           { id: "3", action_type: "town_hall_attendance", points: 15, description: "Attended virtual town hall", created_at: new Date(Date.now() - 7*24*60*60*1000).toISOString() },
           { id: "4", action_type: "comment_upvoted", points: 5, description: "Your comment received 10+ upvotes", created_at: new Date(Date.now() - 10*24*60*60*1000).toISOString() },
@@ -73,7 +73,7 @@ export default function VoterDashboard() {
         ])
 
         setActiveProposals([
-          { id: "1", title: "School to ballot programme", status: "active", votes_for: 234, votes_against: 45, your_vote: null, deadline: new Date(Date.now() + 7*24*60*60*1000).toISOString() },
+          { id: "1", title: "Millennial Civic Mobilization Initiative", status: "active", votes_for: 234, votes_against: 45, your_vote: null, deadline: new Date(Date.now() + 7*24*60*60*1000).toISOString() },
           { id: "2", title: "Youth transit subsidy", status: "active", votes_for: 189, votes_against: 78, your_vote: "for", deadline: new Date(Date.now() + 14*24*60*60*1000).toISOString() },
           { id: "3", title: "Climate action fund allocation", status: "active", votes_for: 567, votes_against: 123, your_vote: null, deadline: new Date(Date.now() + 3*24*60*60*1000).toISOString() },
         ])
