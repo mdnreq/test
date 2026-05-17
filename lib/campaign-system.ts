@@ -146,9 +146,9 @@ export const PUBLIC_SERVICE_STACKS: PublicServiceStack[] = [
     textClass: "text-purple-100/80",
     badgeClass: "border-purple-400/30 bg-purple-500/20 text-purple-300",
     metrics: [
-      { value: "$395", label: "Logo Design", accentClass: "text-white" },
-      { value: "$495", label: "Full Branding", accentClass: "text-cyan-400" },
-      { value: "8+", label: "Services", accentClass: "text-green-400" },
+      { value: "$395", label: "Logo Design (one-time)", accentClass: "text-white" },
+      { value: "$545", label: "Print Materials/month", accentClass: "text-cyan-400" },
+      { value: "$445", label: "Social Graphics/month", accentClass: "text-green-400" },
     ],
   },
   {

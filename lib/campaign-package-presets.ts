@@ -119,7 +119,7 @@ export const CAMPAIGN_PACKAGE_PRESETS: CampaignPackagePreset[] = [
     cycleMonths: 5,
     mustHaveMonthlyRetainers: ["2", "23", "20", "22", "17"],
     coreCampaignStackIds: ["content-creation", "digital-marketing", "field-operations", "analytics-data", "video-production"],
-    oneTimeLaunchWork: ["74", "75", "76"],
+    oneTimeLaunchWork: ["73", "75"],
     launchCampaignStackIds: ["design-branding", "web-digital-presence", "video-production"],
     recommendedAddOns: ["37", "33", "32", "61", "31", "18"],
     addOnCampaignStackIds: ["design-branding", "youth-engagement", "email-marketing", "content-creation"],
