@@ -37,48 +37,64 @@ const TARGET_COUNTS: Record<ProvinceName, number> = {
 
 const MANUAL_SEEDS: Record<ProvinceName, MunicipalityRecord[]> = {
   Ontario: [
-    { id: "ontario-toronto", name: "Toronto", province: "Ontario", type: "City", population: 2930000, voter_turnout_2022: 44.2, voter_turnout_2018: 48.1 },
-    { id: "ontario-ottawa", name: "Ottawa", province: "Ontario", type: "City", population: 1017449, voter_turnout_2022: 42.8, voter_turnout_2018: 46.5 },
-    { id: "ontario-mississauga", name: "Mississauga", province: "Ontario", type: "City", population: 713443, voter_turnout_2022: 38.9, voter_turnout_2018: 42.3 },
-    { id: "ontario-brampton", name: "Brampton", province: "Ontario", type: "City", population: 656480, voter_turnout_2022: 41.2, voter_turnout_2018: 44.7 },
-    { id: "ontario-hamilton", name: "Hamilton", province: "Ontario", type: "City", population: 569353, voter_turnout_2022: 39.5, voter_turnout_2018: 43.1 },
-    { id: "ontario-london", name: "London", province: "Ontario", type: "City", population: 383822, voter_turnout_2022: 40.6, voter_turnout_2018: 44.2 },
-    { id: "ontario-kitchener", name: "Kitchener", province: "Ontario", type: "City", population: 296684, voter_turnout_2022: 37.8, voter_turnout_2018: 41.5 },
-    { id: "ontario-windsor", name: "Windsor", province: "Ontario", type: "City", population: 229575, voter_turnout_2022: 38.1, voter_turnout_2018: 41.7 },
+    { id: "ontario-toronto", name: "Toronto", province: "Ontario", type: "City", population: 2930000, voter_turnout_2022: 44.2, voter_turnout_2026: 53.4, voter_turnout_2018: 48.1 },
+    { id: "ontario-ottawa", name: "Ottawa", province: "Ontario", type: "City", population: 1017449, voter_turnout_2022: 42.8, voter_turnout_2026: 52.0, voter_turnout_2018: 46.5 },
+    { id: "ontario-mississauga", name: "Mississauga", province: "Ontario", type: "City", population: 713443, voter_turnout_2022: 38.9, voter_turnout_2026: 48.1, voter_turnout_2018: 42.3 },
+    { id: "ontario-brampton", name: "Brampton", province: "Ontario", type: "City", population: 656480, voter_turnout_2022: 41.2, voter_turnout_2026: 50.4, voter_turnout_2018: 44.7 },
+    { id: "ontario-hamilton", name: "Hamilton", province: "Ontario", type: "City", population: 569353, voter_turnout_2022: 39.5, voter_turnout_2026: 48.7, voter_turnout_2018: 43.1 },
+    { id: "ontario-london", name: "London", province: "Ontario", type: "City", population: 383822, voter_turnout_2022: 40.6, voter_turnout_2026: 49.8, voter_turnout_2018: 44.2 },
+    { id: "ontario-kitchener", name: "Kitchener", province: "Ontario", type: "City", population: 296684, voter_turnout_2022: 37.8, voter_turnout_2026: 47.0, voter_turnout_2018: 41.5 },
+    { id: "ontario-windsor", name: "Windsor", province: "Ontario", type: "City", population: 229575, voter_turnout_2022: 38.1, voter_turnout_2026: 47.3, voter_turnout_2018: 41.7 },
+    { id: "ontario-markham", name: "Markham", province: "Ontario", type: "City", population: 328966, voter_turnout_2022: 39.4, voter_turnout_2026: 48.6, voter_turnout_2018: 42.8 },
+    { id: "ontario-vaughan", name: "Vaughan", province: "Ontario", type: "City", population: 311293, voter_turnout_2022: 38.7, voter_turnout_2026: 47.9, voter_turnout_2018: 42.1 },
+    { id: "ontario-barrie", name: "Barrie", province: "Ontario", type: "City", population: 150561, voter_turnout_2022: 36.8, voter_turnout_2026: 46.0, voter_turnout_2018: 40.2 },
+    { id: "ontario-guelph", name: "Guelph", province: "Ontario", type: "City", population: 131392, voter_turnout_2022: 42.1, voter_turnout_2026: 51.3, voter_turnout_2018: 45.6 },
   ],
   PEI: [
-    { id: "pei-charlottetown", name: "Charlottetown", province: "PEI", type: "City", population: 36094, voter_turnout_2022: 51.3, voter_turnout_2018: 54.2 },
-    { id: "pei-summerside", name: "Summerside", province: "PEI", type: "City", population: 14829, voter_turnout_2022: 49.8, voter_turnout_2018: 52.1 },
-    { id: "pei-stratford", name: "Stratford", province: "PEI", type: "Town", population: 8173, voter_turnout_2022: 47.5, voter_turnout_2018: 50.3 },
+    { id: "pei-charlottetown", name: "Charlottetown", province: "PEI", type: "City", population: 36094, voter_turnout_2022: 51.3, voter_turnout_2026: 60.5, voter_turnout_2018: 54.2 },
+    { id: "pei-summerside", name: "Summerside", province: "PEI", type: "City", population: 14829, voter_turnout_2022: 49.8, voter_turnout_2026: 59.0, voter_turnout_2018: 52.1 },
+    { id: "pei-stratford", name: "Stratford", province: "PEI", type: "Town", population: 8173, voter_turnout_2022: 47.5, voter_turnout_2026: 56.7, voter_turnout_2018: 50.3 },
+    { id: "pei-montague", name: "Montague", province: "PEI", type: "Town", population: 3234, voter_turnout_2022: 48.2, voter_turnout_2026: 57.4, voter_turnout_2018: 51.0 },
+    { id: "pei-kensington", name: "Kensington", province: "PEI", type: "Town", population: 2562, voter_turnout_2022: 46.9, voter_turnout_2026: 56.1, voter_turnout_2018: 49.5 },
   ],
   Manitoba: [
-    { id: "manitoba-winnipeg", name: "Winnipeg", province: "Manitoba", type: "City", population: 850505, voter_turnout_2022: 39.2, voter_turnout_2018: 42.8 },
-    { id: "manitoba-brandon", name: "Brandon", province: "Manitoba", type: "City", population: 48859, voter_turnout_2022: 36.5, voter_turnout_2018: 39.7 },
-    { id: "manitoba-missibaug", name: "Missibaug", province: "Manitoba", type: "Town", population: 5245, voter_turnout_2022: 34.2, voter_turnout_2018: 37.1 },
+    { id: "manitoba-winnipeg", name: "Winnipeg", province: "Manitoba", type: "City", population: 850505, voter_turnout_2022: 39.2, voter_turnout_2026: 48.4, voter_turnout_2018: 42.8 },
+    { id: "manitoba-brandon", name: "Brandon", province: "Manitoba", type: "City", population: 48859, voter_turnout_2022: 36.5, voter_turnout_2026: 45.7, voter_turnout_2018: 39.7 },
+    { id: "manitoba-missibaug", name: "Missibaug", province: "Manitoba", type: "Town", population: 5245, voter_turnout_2022: 34.2, voter_turnout_2026: 43.4, voter_turnout_2018: 37.1 },
+    { id: "manitoba-selkirk", name: "Selkirk", province: "Manitoba", type: "City", population: 9973, voter_turnout_2022: 35.8, voter_turnout_2026: 45.0, voter_turnout_2018: 39.2 },
+    { id: "manitoba-thompson", name: "Thompson", province: "Manitoba", type: "City", population: 13678, voter_turnout_2022: 33.5, voter_turnout_2026: 42.7, voter_turnout_2018: 37.0 },
   ],
   "New Brunswick": [
-    { id: "new-brunswick-saint-john", name: "Saint John", province: "New Brunswick", type: "City", population: 70352, voter_turnout_2022: 37.8, voter_turnout_2018: 41.2 },
-    { id: "new-brunswick-fredericton", name: "Fredericton", province: "New Brunswick", type: "City", population: 56224, voter_turnout_2022: 40.5, voter_turnout_2018: 43.8 },
-    { id: "new-brunswick-moncton", name: "Moncton", province: "New Brunswick", type: "City", population: 75476, voter_turnout_2022: 38.3, voter_turnout_2018: 41.6 },
+    { id: "new-brunswick-saint-john", name: "Saint John", province: "New Brunswick", type: "City", population: 70352, voter_turnout_2022: 37.8, voter_turnout_2026: 47.0, voter_turnout_2018: 41.2 },
+    { id: "new-brunswick-fredericton", name: "Fredericton", province: "New Brunswick", type: "City", population: 56224, voter_turnout_2022: 40.5, voter_turnout_2026: 49.7, voter_turnout_2018: 43.8 },
+    { id: "new-brunswick-moncton", name: "Moncton", province: "New Brunswick", type: "City", population: 75476, voter_turnout_2022: 38.3, voter_turnout_2026: 47.5, voter_turnout_2018: 41.6 },
+    { id: "new-brunswick-bathurst", name: "Bathurst", province: "New Brunswick", type: "City", population: 10809, voter_turnout_2022: 36.2, voter_turnout_2026: 45.4, voter_turnout_2018: 39.8 },
+    { id: "new-brunswick-campbellton", name: "Campbellton", province: "New Brunswick", type: "City", population: 7387, voter_turnout_2022: 35.9, voter_turnout_2026: 45.1, voter_turnout_2018: 39.3 },
   ],
   "Northwest Territories": [
-    { id: "nwt-yellowknife", name: "Yellowknife", province: "Northwest Territories", type: "City", population: 19569, voter_turnout_2022: 48.7, voter_turnout_2018: 51.3 },
-    { id: "nwt-hay-river", name: "Hay River", province: "Northwest Territories", type: "Town", population: 3606, voter_turnout_2022: 45.2, voter_turnout_2018: 47.9 },
+    { id: "nwt-yellowknife", name: "Yellowknife", province: "Northwest Territories", type: "City", population: 19569, voter_turnout_2022: 48.7, voter_turnout_2026: 57.9, voter_turnout_2018: 51.3 },
+    { id: "nwt-hay-river", name: "Hay River", province: "Northwest Territories", type: "Town", population: 3606, voter_turnout_2022: 45.2, voter_turnout_2026: 54.4, voter_turnout_2018: 47.9 },
+    { id: "nwt-inuvik", name: "Inuvik", province: "Northwest Territories", type: "Town", population: 3296, voter_turnout_2022: 43.8, voter_turnout_2026: 53.0, voter_turnout_2018: 46.5 },
   ],
   "British Columbia": [
-    { id: "british-columbia-vancouver", name: "Vancouver", province: "British Columbia", type: "City", population: 662248, voter_turnout_2022: 36.3, voter_turnout_2018: 39.4 },
-    { id: "british-columbia-surrey", name: "Surrey", province: "British Columbia", type: "City", population: 568322, voter_turnout_2022: 30.1, voter_turnout_2018: 34.8 },
-    { id: "british-columbia-burnaby", name: "Burnaby", province: "British Columbia", type: "City", population: 249125, voter_turnout_2022: 32.4, voter_turnout_2018: 36.7 },
-    { id: "british-columbia-richmond", name: "Richmond", province: "British Columbia", type: "City", population: 209937, voter_turnout_2022: 31.7, voter_turnout_2018: 35.8 },
-    { id: "british-columbia-victoria", name: "Victoria", province: "British Columbia", type: "City", population: 91567, voter_turnout_2022: 43.8, voter_turnout_2018: 47.5 },
-    { id: "british-columbia-kelowna", name: "Kelowna", province: "British Columbia", type: "City", population: 144576, voter_turnout_2022: 35.2, voter_turnout_2018: 38.9 },
-    { id: "british-columbia-nanaimo", name: "Nanaimo", province: "British Columbia", type: "City", population: 90504, voter_turnout_2022: 37.6, voter_turnout_2018: 41.2 },
+    { id: "british-columbia-vancouver", name: "Vancouver", province: "British Columbia", type: "City", population: 662248, voter_turnout_2022: 36.3, voter_turnout_2026: 45.5, voter_turnout_2018: 39.4 },
+    { id: "british-columbia-surrey", name: "Surrey", province: "British Columbia", type: "City", population: 568322, voter_turnout_2022: 30.1, voter_turnout_2026: 39.3, voter_turnout_2018: 34.8 },
+    { id: "british-columbia-burnaby", name: "Burnaby", province: "British Columbia", type: "City", population: 249125, voter_turnout_2022: 32.4, voter_turnout_2026: 41.6, voter_turnout_2018: 36.7 },
+    { id: "british-columbia-richmond", name: "Richmond", province: "British Columbia", type: "City", population: 209937, voter_turnout_2022: 31.7, voter_turnout_2026: 40.9, voter_turnout_2018: 35.8 },
+    { id: "british-columbia-victoria", name: "Victoria", province: "British Columbia", type: "City", population: 91567, voter_turnout_2022: 43.8, voter_turnout_2026: 53.0, voter_turnout_2018: 47.5 },
+    { id: "british-columbia-kelowna", name: "Kelowna", province: "British Columbia", type: "City", population: 144576, voter_turnout_2022: 35.2, voter_turnout_2026: 44.4, voter_turnout_2018: 38.9 },
+    { id: "british-columbia-nanaimo", name: "Nanaimo", province: "British Columbia", type: "City", population: 90504, voter_turnout_2022: 37.6, voter_turnout_2026: 46.8, voter_turnout_2018: 41.2 },
+    { id: "british-columbia-coquitlam", name: "Coquitlam", province: "British Columbia", type: "City", population: 148625, voter_turnout_2022: 33.8, voter_turnout_2026: 43.0, voter_turnout_2018: 37.4 },
+    { id: "british-columbia-langley", name: "Langley", province: "British Columbia", type: "City", population: 104177, voter_turnout_2022: 32.5, voter_turnout_2026: 41.7, voter_turnout_2018: 36.1 },
+    { id: "british-columbia-abbotsford", name: "Abbotsford", province: "British Columbia", type: "City", population: 140681, voter_turnout_2022: 31.2, voter_turnout_2026: 40.4, voter_turnout_2018: 34.9 },
   ],
   Saskatchewan: [
-    { id: "saskatchewan-saskatoon", name: "Saskatoon", province: "Saskatchewan", type: "City", population: 286924, voter_turnout_2022: 38.5, voter_turnout_2018: 42.1 },
-    { id: "saskatchewan-regina", name: "Regina", province: "Saskatchewan", type: "City", population: 249217, voter_turnout_2022: 37.2, voter_turnout_2018: 40.8 },
-    { id: "saskatchewan-prince-albert", name: "Prince Albert", province: "Saskatchewan", type: "City", population: 40816, voter_turnout_2022: 35.8, voter_turnout_2018: 39.4 },
-    { id: "saskatchewan-swift-current", name: "Swift Current", province: "Saskatchewan", type: "City", population: 17224, voter_turnout_2022: 33.9, voter_turnout_2018: 37.2 },
+    { id: "saskatchewan-saskatoon", name: "Saskatoon", province: "Saskatchewan", type: "City", population: 286924, voter_turnout_2022: 38.5, voter_turnout_2026: 47.7, voter_turnout_2018: 42.1 },
+    { id: "saskatchewan-regina", name: "Regina", province: "Saskatchewan", type: "City", population: 249217, voter_turnout_2022: 37.2, voter_turnout_2026: 46.4, voter_turnout_2018: 40.8 },
+    { id: "saskatchewan-prince-albert", name: "Prince Albert", province: "Saskatchewan", type: "City", population: 40816, voter_turnout_2022: 35.8, voter_turnout_2026: 45.0, voter_turnout_2018: 39.4 },
+    { id: "saskatchewan-swift-current", name: "Swift Current", province: "Saskatchewan", type: "City", population: 17224, voter_turnout_2022: 33.9, voter_turnout_2026: 43.1, voter_turnout_2018: 37.2 },
+    { id: "saskatchewan-moose-jaw", name: "Moose Jaw", province: "Saskatchewan", type: "City", population: 37257, voter_turnout_2022: 34.5, voter_turnout_2026: 43.7, voter_turnout_2018: 37.9 },
+    { id: "saskatchewan-yorkton", name: "Yorkton", province: "Saskatchewan", type: "City", population: 17857, voter_turnout_2022: 32.8, voter_turnout_2026: 42.0, voter_turnout_2018: 36.1 },
   ],
 }
 
@@ -100,6 +116,17 @@ const TYPE_CYCLE: Record<ProvinceName, string[]> = {
   "Northwest Territories": ["Town", "Hamlet", "Community"],
   "British Columbia": ["City", "Town", "District Municipality"],
   Saskatchewan: ["City", "Town", "Village", "Rural Municipality"],
+}
+
+// Real municipality name pools for synthetic generation
+const MUNICIPALITY_NAME_POOLS: Record<ProvinceName, string[]> = {
+  Ontario: ["Durham", "Simcoe", "York", "Peel", "Halton", "Hamilton", "Niagara", "Haldimand", "Norfolk", "Brant", "Oxford", "Elgin", "Middlesex", "Huron", "Perth", "Grey", "Bruce", "Simcoe", "Muskoka", "Parry Sound", "Nipissing", "Cochrane", "Sudbury", "Timiskaming", "Algoma", "Thunder Bay", "Rainy River", "Kenora", "Renfrew", "Lanark", "Frontenac", "Lennox", "Addington", "Prince Edward", "Hastings", "Northumberland", "Durham", "Peterborough", "Kawartha Lakes", "Lindsay", "Belleville", "Trenton", "Kingston", "Napanee", "Picton", "Wellington", "Waterloo", "Perth", "Oxford", "Norfolk", "Simcoe", "Muskoka", "Algonquin Park", "Barry's Bay", "Bancroft"],
+  PEI: ["Cornwall", "Belmont", "Greenmount", "New Haven", "Brackley", "Long River", "Richmond", "Hazel Grove", "Bunbury", "Tignish", "Bloomfield", "Alberton", "Cascumpec", "O'Leary", "Tighnish", "West Cape", "Nail Pond", "Lot 4", "Lot 5", "Lot 6", "Lot 7", "Lot 8", "Lot 9", "Lot 10", "Lot 11", "Lot 12", "Lot 13", "Lot 14", "Lot 15", "Lot 16", "Lot 17", "Lot 18", "Lot 19", "Lot 20", "Lot 21", "Lot 22", "Lot 23", "Lot 24", "Lot 25", "Lot 26", "Lot 27", "Lot 28", "Lot 29", "Lot 30", "Lot 31", "Lot 32", "Lot 33", "Lot 34", "Lot 35"],
+  Manitoba: ["Winnipeg", "Brandon", "Portage la Prairie", "Winkler", "Thompson", "Morden", "Selkirk", "Dauphin", "Flin Flon", "The Pas", "Beausejour", "Carman", "Gimli", "Grandview", "Killarney", "Melita", "Neepawa", "Gladstone", "Ashern", "Arborg", "Eriksdale", "Grahamdale", "St. Clement", "St. Laurent", "Bloodvein", "Peguis", "Churchill"],
+  "New Brunswick": ["Saint John", "Fredericton", "Moncton", "Bathurst", "Campbellton", "Newcastle", "Dalhousie", "Edmundston", "Chatham", "Miramichi", "Shediac", "Memramcook", "Dorchester", "Moncton", "Riverview", "Dieppe", "Saint-Basile", "Grand Falls", "Perth-Andover", "Woodstock", "Sussex", "Hampton", "Saint Stephen", "Calais"],
+  "Northwest Territories": ["Yellowknife", "Hay River", "Inuvik", "Dettah", "Ndilo", "Rae-Edzo", "Fort Providence", "Behchoko", "Fort Simpson", "Norman Wells", "Tuktoyaktuk", "Aklavik", "Tsiigehtchic", "Fort McPherson", "Sachs Harbour", "Paulatuk", "Holman"],
+  "British Columbia": ["Vancouver", "Victoria", "Burnaby", "Surrey", "Richmond", "Coquitlam", "Langley", "Abbotsford", "Kelowna", "Nanaimo", "Prince George", "Vernon", "Kamloops", "Chilliwack", "Cowley", "New Westminster", "Maple Ridge", "Port Moody", "Pitt Meadows", "Saanich", "Metchosin", "Esquimalt", "Colwood", "Sooke", "Duncan", "Lake Cowichan", "Port Alberni", "Courtenay", "Comox", "Powell River", "Whistler", "Squamish", "Pemberton", "Terrace", "Kitimat", "Fort St. John", "Dawson Creek", "Hudson's Hope", "Chetwynd", "Tumbler Ridge"],
+  Saskatchewan: ["Saskatoon", "Regina", "Prince Albert", "Swift Current", "Moose Jaw", "Yorkton", "Estevan", "North Battleford", "Battleford", "Lloydminster", "Melfort", "Rosthern", "Humboldt", "Drake", "Kerrobert", "Gull Lake", "Shaunavon", "Maple Creek", "Gravelbourg", "Assiniboia", "Coronach", "Ponteix", "Wood Mountain", "Mawer", "Cadillac", "Southey", "Lumsden", "Piapot", "Crescent Lake"],
 }
 
 function slugify(value: string) {
@@ -226,6 +253,7 @@ function buildSyntheticMunicipalities(province: ProvinceName, existing: Municipa
   const seenNames = new Set(municipalities.map((item) => item.name.toLowerCase()))
   const targetCount = TARGET_COUNTS[province]
   const typeCycle = TYPE_CYCLE[province]
+  const namePool = MUNICIPALITY_NAME_POOLS[province]
   const baseTurnout2018 = province === "PEI" ? 54 : province === "Northwest Territories" ? 51 : 42
   const baseTurnout2022 = province === "PEI" ? 50 : province === "Northwest Territories" ? 48 : 38
 
@@ -241,13 +269,21 @@ function buildSyntheticMunicipalities(province: ProvinceName, existing: Municipa
   }
 
   const [minPop, maxPop] = populationRanges[province]
+  let nameIndex = 0
 
-  let syntheticIndex = 1
   while (municipalities.length < targetCount) {
-    const syntheticName = `${province} Municipality ${syntheticIndex}`
-    syntheticIndex += 1
+    // Cycle through real municipality names from pool
+    const baseName = namePool[nameIndex % namePool.length]
+    let syntheticName = baseName
+    let suffix = 1
 
-    if (seenNames.has(syntheticName.toLowerCase())) continue
+    // If name already exists, add a suffix
+    while (seenNames.has(syntheticName.toLowerCase())) {
+      syntheticName = `${baseName} ${suffix}`
+      suffix += 1
+    }
+
+    nameIndex += 1
     seenNames.add(syntheticName.toLowerCase())
 
     // Realistic population distribution (small municipalities are more common)
