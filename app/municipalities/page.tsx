@@ -118,9 +118,6 @@ function renderMunicipalityCard(municipality: MunicipalityView, projectionLabel 
               <span className="font-bold text-blue-300 text-lg">{millennialTurnout.toFixed(1)}%</span>
             </div>
           )}
-          <p className="text-xs text-white/70 mt-2 italic">
-            Cohort rates derived from federal/provincial election analysis. Gen Z typically 72% of municipal average, Millennials 88%.
-          </p>
         </div>
 
         {/* Projection */}
