@@ -77,10 +77,10 @@ function renderMunicipalityCard(municipality: MunicipalityView, projectionLabel 
           {municipality.type}{municipality.population ? ` • Population: ${municipality.population.toLocaleString()}` : ""}
         </CardDescription>
         {eligibleVoters && (
-          <div className="text-xs text-white/50 mt-2 space-y-1">
-            <div>📊 Source: Statistics Canada Census 2021</div>
-            <div>🗳️ Election Data: Elections Canada & Provincial Records</div>
-            <div>Eligible Voters: ~{eligibleVoters.toLocaleString()}</div>
+          <div className="text-xs text-white/70 mt-2 space-y-1 bg-white/5 border border-white/10 rounded p-2">
+            <div className="font-semibold text-white">📊 Source: Statistics Canada Census 2021</div>
+            <div className="font-semibold text-white">🗳️ Election Data: Elections Canada & Provincial Records</div>
+            <div className="text-white/80">Eligible Voters: ~{eligibleVoters.toLocaleString()}</div>
           </div>
         )}
       </CardHeader>
@@ -103,22 +103,22 @@ function renderMunicipalityCard(municipality: MunicipalityView, projectionLabel 
         {/* Gen Z & Millennial Breakdown */}
         <div className="space-y-2 pt-2 border-t border-white/10">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold text-white/60">Verified Demographic Turnout</span>
-            <span className="text-xs px-2 py-0.5 bg-green-950/50 border border-green-500/50 rounded text-green-400 font-medium">Real Data</span>
+            <span className="text-xs uppercase tracking-wider font-bold text-white">Verified Demographic Turnout</span>
+            <span className="text-xs px-2 py-0.5 bg-green-950/50 border border-green-500 rounded text-green-300 font-bold">Real Data</span>
           </div>
           {genZTurnout !== undefined && (
-            <div className="flex justify-between items-center text-sm py-2 px-2 bg-cyan-950/30 rounded border border-cyan-500/20">
-              <span className="text-white/70">Gen Z (born 1997-2012, age 12-27)</span>
-              <span className="font-semibold text-cyan-400">{genZTurnout.toFixed(1)}%</span>
+            <div className="flex justify-between items-center text-sm py-2 px-3 bg-cyan-950/40 rounded border border-cyan-500/40">
+              <span className="text-white font-semibold">Gen Z (born 1997-2012, age 12-27)</span>
+              <span className="font-bold text-cyan-300 text-lg">{genZTurnout.toFixed(1)}%</span>
             </div>
           )}
           {millennialTurnout !== undefined && (
-            <div className="flex justify-between items-center text-sm py-2 px-2 bg-blue-950/30 rounded border border-blue-500/20">
-              <span className="text-white/70">Millennials (born 1981-1996, age 28-43)</span>
-              <span className="font-semibold text-blue-400">{millennialTurnout.toFixed(1)}%</span>
+            <div className="flex justify-between items-center text-sm py-2 px-3 bg-blue-950/40 rounded border border-blue-500/40">
+              <span className="text-white font-semibold">Millennials (born 1981-1996, age 28-43)</span>
+              <span className="font-bold text-blue-300 text-lg">{millennialTurnout.toFixed(1)}%</span>
             </div>
           )}
-          <p className="text-xs text-white/40 mt-2 italic">
+          <p className="text-xs text-white/70 mt-2 italic">
             Cohort rates derived from federal/provincial election analysis. Gen Z typically 72% of municipal average, Millennials 88%.
           </p>
         </div>
@@ -251,27 +251,27 @@ export default async function MunicipalitiesPage() {
               Real voter data from {totalMunicipalities} municipalities showing Gen Z (born 1997-2012) and Millennial (born 1981-1996) turnout patterns across Canada.
             </p>
           </div>
-          <div className="bg-white/5 border-t border-white/10 p-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs text-white/60">
-              <div>
-                <span className="font-semibold text-white/80">📊 Population Data</span>
-                <p>Statistics Canada Census 2021</p>
-                <a href="https://www12.statcan.gc.ca/census-recensement/2021/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-xs">View Source</a>
+          <div className="bg-white/10 border-t border-white/20 p-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-xs">
+              <div className="space-y-2">
+                <span className="font-bold text-white block">📊 Population Data</span>
+                <p className="text-white/80">Statistics Canada Census 2021</p>
+                <a href="https://www12.statcan.gc.ca/census-recensement/2021/" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 font-semibold inline-block">View Source ↗</a>
               </div>
-              <div>
-                <span className="font-semibold text-white/80">🗳️ Federal Turnout</span>
-                <p>Elections Canada 2018, 2022</p>
-                <a href="https://www.elections.ca/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-xs">View Source</a>
+              <div className="space-y-2">
+                <span className="font-bold text-white block">🗳️ Federal Turnout</span>
+                <p className="text-white/80">Elections Canada 2018, 2022</p>
+                <a href="https://www.elections.ca/" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 font-semibold inline-block">View Source ↗</a>
               </div>
-              <div>
-                <span className="font-semibold text-white/80">📍 Provincial Data</span>
-                <p>Official provincial election commissions</p>
-                <span className="text-green-400 font-semibold">Verified ✓</span>
+              <div className="space-y-2">
+                <span className="font-bold text-white block">📍 Provincial Data</span>
+                <p className="text-white/80">Official provincial election commissions</p>
+                <span className="text-green-300 font-bold inline-block">✓ Verified</span>
               </div>
-              <div>
-                <span className="font-semibold text-white/80">📈 2026 Projections</span>
-                <p>Gen Z & Millennial mobilization +9.2%</p>
-                <p className="text-white/40 mt-1">Simulation based on digital engagement strategies</p>
+              <div className="space-y-2">
+                <span className="font-bold text-white block">📈 2026 Projections</span>
+                <p className="text-white/80">Gen Z & Millennial mobilization +9.2%</p>
+                <p className="text-white/70 text-xs">Simulation based on digital engagement</p>
               </div>
             </div>
           </div>
