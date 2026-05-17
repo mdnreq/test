@@ -1022,11 +1022,11 @@ export default async function ServicesPage() {
                           )}
                         </div>
                       </details>
-                      <div className="flex flex-col gap-3 border-t border-white/10 pt-4 sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+                      <div className="flex flex-col gap-3 border-t border-white/10 pt-4 sm:flex sm:flex-row sm:items-center sm:justify-between">
                         <span className="text-xl font-bold leading-tight text-white whitespace-nowrap">{service.price_display}</span>
                         <Link
                           href={isVerifiedCandidate ? `/candidate-portal/checkout?service=${service.id}` : "/auth/sign-up"}
-                          className="inline-flex min-h-10 w-full items-center justify-center rounded-xl bg-white px-4 py-2 text-center text-sm font-semibold text-black hover:bg-white/90 sm:min-w-[132px] sm:w-auto"
+                          className="inline-flex min-h-10 items-center justify-center rounded-xl bg-white px-4 py-2 text-center text-sm font-semibold text-black hover:bg-white/90 whitespace-nowrap"
                         >
                           {launchProject ? "Start Project" : "Start Retainer"}
                         </Link>
