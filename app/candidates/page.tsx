@@ -48,18 +48,23 @@ export default async function CandidatesPage() {
             <Users className="relative h-24 w-24 text-blue-500" />
           </div>
 
-          <h2 className="text-3xl font-bold mb-4">No Verified Candidates Yet</h2>
-          <p className="text-muted-foreground text-center max-w-md mb-8">
-            Be the first to join our verified candidate registry and connect with voters across 1,700+ municipalities in
-            Ontario, PEI, Manitoba, New Brunswick, Northwest Territories, British Columbia, and Saskatchewan.
+          <h2 className="text-3xl font-bold mb-4">Verified Candidates Across North America</h2>
+          <p className="text-muted-foreground text-center max-w-2xl mb-8">
+            We work with verified candidates across all major regions including Ontario, PEI, Manitoba, New Brunswick, Northwest Territories, British Columbia, Saskatchewan, Nova Scotia, and federal candidates. Due to privacy and conflict of interest protections, we don't publicly list candidate details. Our verified portfolio includes recent federal candidates, previous-term incumbents (such as Andy Fillmore in Nova Scotia), and many potential candidates across the globe. Candidate portfolios can be demonstrated upon request for qualified partnerships.
           </p>
+
+          <div className="rounded-2xl border border-blue-500/20 bg-blue-500/10 p-6 max-w-2xl w-full mb-8">
+            <p className="text-sm text-blue-100">
+              <span className="font-semibold text-blue-300">Privacy First Approach:</span> We protect candidate identities and campaign strategies. To learn about our verified candidate network and explore partnership opportunities, contact our team directly.
+            </p>
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
             {user ? (
               <Button asChild size="lg" className="text-lg px-8">
                 <Link href="/candidates/register">
                   <UserPlus className="mr-2 h-5 w-5" />
-                  Register Now
+                  Register as Candidate
                 </Link>
               </Button>
             ) : (
@@ -81,25 +86,29 @@ export default async function CandidatesPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-green-500" />
-                Benefits of Verification
+                Verified Candidate Network
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex items-start gap-3">
                 <div className="h-2 w-2 rounded-full bg-blue-500 mt-2" />
-                <p className="text-sm">Increased visibility across 1,700+ municipalities</p>
+                <p className="text-sm">Coverage across 1,700+ municipalities in Canada and expansion globally</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="h-2 w-2 rounded-full bg-blue-500 mt-2" />
-                <p className="text-sm">Verified badge to build voter trust</p>
+                <p className="text-sm">Verified candidates from federal, provincial, and municipal levels</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="h-2 w-2 rounded-full bg-blue-500 mt-2" />
-                <p className="text-sm">Platform to share your vision and policies</p>
+                <p className="text-sm">Privacy-protected partnership model</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="h-2 w-2 rounded-full bg-blue-500 mt-2" />
-                <p className="text-sm">Direct connection with engaged voters</p>
+                <p className="text-sm">Portfolio demonstrations available upon request</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="h-2 w-2 rounded-full bg-blue-500 mt-2" />
+                <p className="text-sm">Full campaign service suite and AI-powered recommendations</p>
               </div>
             </CardContent>
           </Card>
